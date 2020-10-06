@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: inherit;
 } 
 body{
-  background-color: #E5E5E5;
+  background-color: ${({ theme }) => theme.color.mercury};
   font-family: 'Poppins', sans-serif;
 }
 `;
