@@ -1,7 +1,10 @@
 import React from "react";
+import Navigation from "./common/Navbar";
 
 function App() {
-  return <>nanana</>;
+  return <>
+  <Navigation/>
+  </>;
 }
 
 export default App;
