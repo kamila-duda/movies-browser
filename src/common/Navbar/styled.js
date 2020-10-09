@@ -11,6 +11,7 @@ export const StyledNavbar = styled.nav`
   justify-content: center;
   padding: 10px;
 `;
+
 export const StyledNavWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -19,27 +20,30 @@ export const StyledNavWrapper = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
 `;
+
 export const StyledNav = styled.div`
   width: 40%;
   display: flex;
   align-items: center;
-  @media (max-width: ${({ theme }) => theme.breakpoint.medium}) {
+  @media (max-width: ${({ theme }) => theme.media.tablet}) {
     width: 60%;
   }
-  @media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
     width: 100%;
     justify-content: space-between;
   }
 `;
+
 export const StyledIcon = styled.img`
   height: 23px;
   width: 30px;
   margin: 0 10px;
-  @media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
     width: 14px;
     height: 14px;
   }
 `;
+
 export const StyledTitle = styled.h1`
   color: ${({ theme }) => theme.color.white};
   font-weight: 500;
@@ -47,24 +51,26 @@ export const StyledTitle = styled.h1`
   letter-spacing: -1.5px;
   margin: 0;
   display: flex;
-  @media (max-width: ${({ theme }) => theme.breakpoint.medium}) {
+  @media (max-width: ${({ theme }) => theme.media.tablet}) {
     font-size: 18px;
   }
-  @media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
     font-size: 13px;
     flex-grow: 1;
   }
 `;
+
 export const NavigationList = styled.ul`
   list-style: none;
   display: flex;
   justify-content: center;
   margin: 0;
   width: max-content;
-  @media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
     padding: 0;
   }
 `;
+
 export const NavigationListItem = styled.li`
   padding: 10px;
   flex-grow: 0;
@@ -87,7 +93,7 @@ export const Link = styled.a`
     box-sizing: border-box;
     border-radius: 24px;
   }
-  @media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
     font-size: 12px;
   }
 `;

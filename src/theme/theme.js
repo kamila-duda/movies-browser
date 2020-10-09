@@ -1,4 +1,13 @@
 export const theme = {
+    fontSize: {
+        xxSmall: "10px",
+        xSmall: "13px",
+        small: "14px",
+        normal: "16px",
+        medium: "22px",
+        large: "36px",
+        xLarge: "64px", 
+    },
     color: {
      white: "#FFFFFF",
      mercury: "#E5E5E5",//background
@@ -8,10 +17,17 @@ export const theme = {
      scienceBlue: "0044CC",//button w error
      black: "#000000",
     },
-    breakpoint: {
-        extraSmall: "575.98px",
-        small: "767.98px",
-        medium: '991.98px',
-        large: "1199.98px",
-    }
+    media: {
+        extraMobile: "575.98px",
+        mobile: "767.98px",
+        tablet: '991.98px',
+        desktop: "1199.98px",
+    },
+/*     shadows: {
+        lighter:"",
+        light: "",
+        normal: "",
+        dark: "",
+        darker: "",
+    }, */
  };
