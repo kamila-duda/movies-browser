@@ -1,10 +1,11 @@
 import styled, { css } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const ButtonWrapper = styled.div`
     max-width:525px;
     display:flex;
     justify-content:center;
-    align-items:center;
+		align-items:center;
 `;
 
 export const StyledButton = styled.button`
@@ -27,18 +28,12 @@ export const StyledButton = styled.button`
 
     ${({ last }) => last && css`
         margin-right:0px;
-    `}
-`;
-
-export const Arrow = styled.span`
-    margin-right:8px;
-    font-size:20px;
-    font-weight:600;
-    color:${({ theme }) => theme.color.blue};
-
-    ${({ noActive }) => noActive && css`
-        color:${({ theme }) => theme.color.darkedGray};
-    `}
+		`}
+		
+		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+			margin: 0px 8px 0px 0px;
+			padding:8px 12px;
+			}
 `;
 
 export const PageCounter = styled.p`
@@ -49,7 +44,10 @@ export const PageCounter = styled.p`
     font-weight: normal;
     font-size: 16px;
     line-height: 150%;
-    
+		
+		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+			margin: 0px 4px 0px 0px;
+			}
 `;
 
 export const Quantity = styled.span`
@@ -58,5 +56,42 @@ export const Quantity = styled.span`
     margin-right:8px;
     font-weight: 600;
     font-size: 16px;
-    line-height: 150%;
+		line-height: 150%;
+		
+		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+			margin-left:2px;
+    	margin-right:2px;
+			}
+`;
+
+export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+    margin-right:8px;
+    font-size:20px;
+    font-weight:600;
+    color:${({ theme }) => theme.color.blue};
+
+    ${({ noActive }) => noActive && css`
+        color:${({ theme }) => theme.color.darkedGray};
+		`}
+
+		${({ forMobile }) => forMobile && css`
+        display:none;
+		`}
+
+		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+			margin-right:0px;
+
+			${({ noActive }) => noActive && css`
+        color:${({ theme }) => theme.color.darkedGray};
+		`}
+			${({ forMobile }) => forMobile && css`
+        display:inline;
+		`}
+			}
+`;
+
+export const PaginationText = styled.span`
+		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+				display:none;
+			}
 `;
