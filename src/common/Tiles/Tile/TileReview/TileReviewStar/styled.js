@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-const TileReviewStar = styled.img`
+export const StyledTileReviewStar = styled.img`
     max-width: 100%;
     object-fit: contain;
-    height: auto; 
+    margin-top: -2px;
     margin-right: 12px;
 `;
-
-export default TileReviewStar;
