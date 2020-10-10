@@ -20,16 +20,12 @@ const StyledTilesContainer = styled.div`
 const Tiles = () => {
     return (
         <StyledTilesContainer>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
+            <Tile poster header subheader tags />
+            <Tile poster header subheader tags review />
+            <Tile poster header subheader tags review />
+            <Tile poster header subheader tags review />
+            <Tile poster header subheader tags review />
+            <Tile poster header subheader tags review />
         </StyledTilesContainer>
     );
 };

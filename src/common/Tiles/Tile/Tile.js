@@ -18,14 +18,14 @@ const StyledTile = styled.div`
     box-shadow: 0px 4px 12px rgba(186, 199, 213, 0.5);
 `;
 
-const Tile = () => {
+const Tile = ({ poster, header, subheader, tags, review }) => {
     return (
         <StyledTile>
-            <TilePoster src={Poster}/>
-            <TileHeader>Mulan</TileHeader>
-            <TileSubHeader>2020</TileSubHeader>
-            <TileTags/>
-            <TileReview/>
+            { poster && <TilePoster src={Poster}/> }
+            { header && <TileHeader>Title</TileHeader> }
+            { subheader && <TileSubHeader>1990</TileSubHeader>}
+            { tags && <TileTags/> }  
+            { review && <TileReview/> }          
         </StyledTile>
     );
 };
