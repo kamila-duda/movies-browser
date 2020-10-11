@@ -16,7 +16,7 @@ export const StyledNavWrapper = styled.div`
   align-items: center;
   max-width: 1350px;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
 `;
 export const StyledNav = styled.div`
