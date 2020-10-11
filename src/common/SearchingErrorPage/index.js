@@ -1,5 +1,6 @@
 import React from "react";
 import searchErrorImage from "assets/images/svg/Picture.svg"
+
 import { Wrapper, HeaderTitle, StyledImage } from "./styled"
 
 const SearchingErrorPage = () => {
