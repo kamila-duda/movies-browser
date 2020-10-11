@@ -30,7 +30,7 @@ export const StyledButton = styled.button`
         margin-right:0px;
 		`}
 		
-		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+		@media (max-width: ${({ theme }) => theme.media.mobile}) {
 			margin: 0px 8px 0px 0px;
 			padding:8px 12px;
 			}
@@ -45,7 +45,7 @@ export const PageCounter = styled.p`
     font-size: 16px;
     line-height: 150%;
 		
-		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+		@media (max-width: ${({ theme }) => theme.media.mobile}) {
 			margin: 0px 4px 0px 0px;
 			}
 `;
@@ -58,7 +58,7 @@ export const Quantity = styled.span`
     font-size: 16px;
 		line-height: 150%;
 		
-		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+		@media (max-width: ${({ theme }) => theme.media.mobile}) {
 			margin-left:2px;
     	margin-right:2px;
 			}
@@ -78,7 +78,7 @@ export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
         display:none;
 		`}
 
-		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+		@media (max-width: ${({ theme }) => theme.media.mobile}) {
 			margin-right:0px;
 
 			${({ noActive }) => noActive && css`
@@ -91,7 +91,7 @@ export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
 `;
 
 export const PaginationText = styled.span`
-		@media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+		@media (max-width: ${({ theme }) => theme.media.mobile}) {
 				display:none;
 			}
 `;
