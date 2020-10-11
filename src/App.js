@@ -1,15 +1,20 @@
 import React from "react";
 import Navigation from "common/Navbar";
+import Tiles from "common/Tiles";
 import Container from "common/Container";
 import Pagination from "common/Pagination";
 
-function App() {
-  return <>
-    <Navigation />
-    <Container>
-      <Pagination />
-    </Container>
-  </>;
-}
+const App = () => {
+  return ( 
+    <>
+      <Navigation/>
+      <Container>
+        <Tiles/>
+        <Pagination/>
+       </Container>
+
+    </>
+  ); 
+};
 
 export default App;

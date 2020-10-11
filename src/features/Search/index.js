@@ -1,5 +1,5 @@
 import React from "react";
-import search from "images/Search.svg";
+import search from "assets/images/svg/Search.svg";
 import { StyledIcon, StyledInput, StyledLabel } from "./styled";
 
 const Search = () => {

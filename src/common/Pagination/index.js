@@ -14,6 +14,7 @@ const Pagination = () => {
             <StyledButton noActive>
                 <StyledFontAwesomeIcon noActive icon={faAngleLeft} />
                 <PaginationText>Previous</PaginationText>
+
             </StyledButton>
             <PageCounter>
                 Page

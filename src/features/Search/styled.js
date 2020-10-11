@@ -8,7 +8,7 @@ export const StyledLabel = styled.label`
   background: ${({ theme }) => theme.color.white};
   border: 1px solid ${({ theme }) => theme.color.mystic};
   border-radius: 33px;
-  @media (max-width: ${({ theme }) => theme.breakpoint.small}) {
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
     margin: 5px;
     flex-grow: 1;
   }
@@ -23,7 +23,7 @@ export const StyledInput = styled.input`
   border: none;
   font-size: 16px;
   flex-grow: 0.8;
-  @media (max-width: ${({ theme }) => theme.breakpoint.medium}) {
+  @media (max-width: ${({ theme }) => theme.media.tablet}) {
     font-size: 13px;
   }
 `;
