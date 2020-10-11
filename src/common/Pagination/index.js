@@ -1,16 +1,19 @@
 import React from "react";
-import { ButtonWrapper, StyledButton, Arrow, PageCounter, Quantity } from "./styled";
+import { ButtonWrapper, StyledButton, PageCounter, Quantity, StyledFontAwesomeIcon, PaginationText } from "./styled";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 const Pagination = () => {
     return (
         <ButtonWrapper>
             <StyledButton noActive>
-                <Arrow noActive>{"<"}</Arrow>
-                First
+                <StyledFontAwesomeIcon noActive icon={faAngleLeft} />
+                <StyledFontAwesomeIcon noActive forMobile icon={faAngleLeft} />
+                <PaginationText>First</PaginationText>
             </StyledButton>
             <StyledButton noActive>
-                <Arrow noActive>{"<"}</Arrow>
-                Previous
+                <StyledFontAwesomeIcon noActive icon={faAngleLeft} />
+                <PaginationText>Previous</PaginationText>
             </StyledButton>
             <PageCounter>
                 Page
@@ -19,12 +22,13 @@ const Pagination = () => {
                 <Quantity>500</Quantity>
             </PageCounter>
             <StyledButton>
-                <Arrow>{">"}</Arrow>
-                Next
+                <StyledFontAwesomeIcon  icon={faAngleRight} />
+                <PaginationText>Next</PaginationText>
             </StyledButton>
             <StyledButton last>
-                <Arrow>{">"}</Arrow>
-                Last
+                <StyledFontAwesomeIcon icon={faAngleRight} />
+                <StyledFontAwesomeIcon forMobile icon={faAngleRight} />
+                <PaginationText>Last</PaginationText>
             </StyledButton>
         </ButtonWrapper>
     )
