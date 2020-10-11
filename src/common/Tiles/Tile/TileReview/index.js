@@ -3,7 +3,7 @@ import { StyledTileReviewRating } from "common/Tiles/Tile/TileReview/TileReviewR
 import { StyledTileReviewStar }  from "common/Tiles/Tile/TileReview/TileReviewStar/styled";
 import { StyledTileReviewUserRatings }  from "common/Tiles/Tile/TileReview/TileReviewUserRatings/styled";
 import { StyledTileReview }  from "common/Tiles/Tile/TileReview/styled";
-import StarIcon from "assets/images/star.svg";
+import StarIcon from "assets/images/svg/star.svg";
 
 const TileReview = () => {
   return (

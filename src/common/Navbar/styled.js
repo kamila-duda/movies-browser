@@ -11,7 +11,6 @@ export const StyledNavbar = styled.nav`
   justify-content: center;
   padding: 10px;
 `;
-
 export const StyledNavWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -20,7 +19,6 @@ export const StyledNavWrapper = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
 `;
-
 export const StyledNav = styled.div`
   width: 40%;
   display: flex;
@@ -33,7 +31,6 @@ export const StyledNav = styled.div`
     justify-content: space-between;
   }
 `;
-
 export const StyledIcon = styled.img`
   height: 23px;
   width: 30px;
@@ -43,7 +40,6 @@ export const StyledIcon = styled.img`
     height: 14px;
   }
 `;
-
 export const StyledTitle = styled.h1`
   color: ${({ theme }) => theme.color.white};
   font-weight: 500;
@@ -59,7 +55,6 @@ export const StyledTitle = styled.h1`
     flex-grow: 1;
   }
 `;
-
 export const NavigationList = styled.ul`
   list-style: none;
   display: flex;
@@ -70,7 +65,6 @@ export const NavigationList = styled.ul`
     padding: 0;
   }
 `;
-
 export const NavigationListItem = styled.li`
   padding: 10px;
   flex-grow: 0;

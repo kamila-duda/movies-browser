@@ -17,6 +17,7 @@ export const theme = {
       waterloo: "#7E839A",//pasek search, szary opis w kafelkach
       stormGray: "#74788B",//szary opis w dużym kaflu
       scienceBlue: "#0044CC",//button w error
+      pattensBlue: "D6E4FF",
       black: "#000000",
     },
     media: {

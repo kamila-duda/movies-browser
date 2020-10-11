@@ -7,8 +7,8 @@ import { StyledTileDescription } from "common/Tiles/Tile/TileDescription/styled"
 import TileTags from "common/Tiles/Tile/TileTags";
 import TileReview from "common/Tiles/Tile/TileReview";
 import TileDetails from "common/Tiles/Tile/TileDetails";
-import Poster from "assets/images/poster.jpg";
-import NoPoster from "assets/images/NoPoster.svg";
+import Poster from "assets/images/jpg/poster.jpg";
+import NoPoster from "assets/images/svg/NoPoster.svg";
 
 const Tile  = (
     { 
