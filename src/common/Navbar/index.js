@@ -9,7 +9,7 @@ import {
   StyledNav,
   StyledTitle,
 } from "./styled";
-import camera from "images/Video.svg";
+import camera from "assets/images/svg/Video.svg";
 import Search from "features/Search";
 
 const Navigation = () => {
