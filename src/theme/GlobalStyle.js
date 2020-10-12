@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: inherit;
     } 
       body {
-        background-color: ${({ theme }) => theme.color.mercury};
+        background-color: ${({ theme }) => theme.color.whisper};
         font-family: 'Poppins', sans-serif;
     }
 `;

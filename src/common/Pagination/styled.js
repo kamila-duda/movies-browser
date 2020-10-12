@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const ButtonWrapper = styled.div`
     max-width:525px;
+    margin-top:40px;
+    margin-left:auto;
+    margin-right:auto;
     display:flex;
     justify-content:center;
 		align-items:center;
@@ -22,7 +25,7 @@ export const StyledButton = styled.button`
     justify-content:center;
     align-items:center;
 
-    ${({ noActive }) => noActive && css`
+    ${({ noactive }) => noactive && css`
         background-color:${({ theme }) => theme.color.gray};
     `}
 
@@ -70,21 +73,21 @@ export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
     font-weight:600;
     color:${({ theme }) => theme.color.blue};
 
-    ${({ noActive }) => noActive && css`
+    ${({ noactive }) => noactive && css`
         color:${({ theme }) => theme.color.darkedGray};
 		`}
 
-		${({ forMobile }) => forMobile && css`
+		${({ formobile }) => formobile && css`
         display:none;
 		`}
 
 		@media (max-width: ${({ theme }) => theme.media.mobile}) {
 			margin-right:0px;
 
-			${({ noActive }) => noActive && css`
+			${({ noactive }) => noactive && css`
         color:${({ theme }) => theme.color.darkedGray};
 		`}
-			${({ forMobile }) => forMobile && css`
+			${({ formobile }) => formobile && css`
         display:inline;
 		`}
 			}
