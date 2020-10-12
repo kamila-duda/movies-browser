@@ -28,16 +28,15 @@ const Tile  = (
           }
         </TileInnerWrapper>
         <TileInnerWrapper flex>
-          { header && <StyledTileHeader>Mulan</StyledTileHeader> }
-          { subheader && <StyledTileSubHeader>2020</StyledTileSubHeader> }
-          { tags && <TileTags/> }  
-          { review && <TileReview/> } 
-          { details && <TileDetails/> } 
-          { description && 
+          { header? <StyledTileHeader>{header}</StyledTileHeader> : "" }
+          { subheader? <StyledTileSubHeader>{subheader}</StyledTileSubHeader>: "" }
+          { tags? <TileTags/> : ""}  
+          { review? <TileReview/> : "" } 
+          { details? <TileDetails/> :"" } 
+          { description? 
           <StyledTileDescription>
-            A young Chinese maiden disguises herself as a male warrior
-            in order to save her father.
-          </StyledTileDescription> }
+            {description}
+          </StyledTileDescription>: "" }
         </TileInnerWrapper>         
       </StyledTile>
     );

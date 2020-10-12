@@ -1,16 +1,12 @@
 import React from "react";
 import Tile from "common/Tiles/Tile";
-import { StyledTilesContainer } from "common/Tiles/styled";
+import { StyledTilesContainer, StyledTitle } from "common/Tiles/styled";
 
-const Tiles = () => {
+const Tiles = ({ title, body }) => {
   return (
     <StyledTilesContainer>
-      <Tile poster header subheader tags review />
-      <Tile poster header subheader tags review />
-      <Tile poster header subheader tags review />
-      <Tile poster header subheader tags review />
-      <Tile poster header subheader tags review />
-      <Tile poster header subheader tags review />
+      <StyledTitle>{title}</StyledTitle>
+      {body}
     </StyledTilesContainer>
   );
 };
