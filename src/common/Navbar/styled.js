@@ -10,6 +10,7 @@ export const StyledNavbar = styled.nav`
   display: flex;
   justify-content: center;
   padding: 10px;
+  z-index: 100;
 `;
 export const StyledNavWrapper = styled.div`
   display: flex;
