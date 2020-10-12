@@ -4,6 +4,7 @@ import Tile from "common/Tiles/Tile";
 import React from "react";
 import moviePoster from "assets/images/jpg/poster.jpg";
 import starIcon from "assets/images/svg/star.svg";
+import Pagination from "common/Pagination";
 
 const MovieListPage = () => {
   const movie = {
@@ -30,6 +31,7 @@ const MovieListPage = () => {
           />
         }
       />
+      <Pagination/>
     </Container>
   );
 };
