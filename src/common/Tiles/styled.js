@@ -29,5 +29,6 @@ export const StyledTitle = styled.h2`
   font-size: 36px;
   font-weight: 600;
   justify-self: start;
+  margin: 0px;
   grid-column: 1 / -1;
 `;
