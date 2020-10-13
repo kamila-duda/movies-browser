@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledNavbar = styled.nav`
@@ -67,22 +68,19 @@ export const NavigationList = styled.ul`
   }
 `;
 export const NavigationListItem = styled.li`
-  padding: 10px;
   flex-grow: 0;
   margin: 10px;
-  border: 1px solid transparent;
-  &:hover {
-    border: 1px solid ${({ theme }) => theme.color.white};
-    border-radius: 29px;
-  }
 `;
 
-export const Link = styled.a`
+export const StyledNavLink = styled(NavLink).attrs(() => ({
+  activeClassName: "active",
+}))`
   color: ${({ theme }) => theme.color.white};
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
+  padding: 10px;
   &.active {
     border: 1px solid ${({ theme }) => theme.color.white};
     box-sizing: border-box;
