@@ -8,7 +8,7 @@ export const MovieBanner = styled.section`
   padding-top:0px;
   padding-bottom:0px;
   font-style: normal;
-  background: linear-gradient(90deg, rgba(0,0,0,1) 17%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 83%);
+  background-color: ${({ theme }) => theme.color.black};
   color:${({ theme }) => theme.color.white};
   display:flex;
   justify-content:center;
@@ -23,6 +23,16 @@ export const Container = styled.div`
   position:relative;
   padding-left:20px;
   padding-right:20px;
+
+  &::after{
+    content: ""; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    box-shadow: inset 0px 0px 54px 74px rgba(0,0,0,1);
+  }
 `;
 
 export const StyledImage = styled.img`
@@ -34,6 +44,7 @@ export const MovieHeader = styled.header`
   left: -1%;
   bottom:0px;
   margin-left:10px;
+  z-index:10;
 `;
 
 export const MovieTitle = styled.h1`
