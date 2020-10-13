@@ -21,7 +21,11 @@ export const StyledTile = styled.div`
     flex-direction: row;
   }
 `;
-
+export const StyledTileSubHeader = styled.h3`
+  font-size: ${({ theme }) => theme.fontSize.normal};
+  color: ${({ theme }) => theme.color.stormGray};
+  font-weight: 400;
+`;
 export const TileInnerWrapper = styled.div`
   margin: 0;
   padding: 0;
@@ -34,3 +38,4 @@ export const TileInnerWrapper = styled.div`
       justify-content: flex-start;
     `}
 `;
+
