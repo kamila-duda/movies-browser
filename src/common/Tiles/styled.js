@@ -17,6 +17,7 @@ export const StyledTilesContainer = styled.div`
     people &&
     css`
       grid-template-columns: repeat(6, minmax(208px, 1fr));
+      grid-gap: 20px;
       @media (max-width: ${({ theme }) => theme.media.tablet}) {
         grid-template-columns: repeat(4, 1fr);
       }
