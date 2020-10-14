@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const MovieBanner = styled.section`
   max-width:100%;
-  margin-top:80px;
+  margin-top:60px;
   padding:10px;
   padding-top:0px;
   padding-bottom:0px;
@@ -14,7 +14,7 @@ export const MovieBanner = styled.section`
   justify-content:center;
   
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    margin-top:130px;
+    margin-top:108px;
 			}
 `;
 
@@ -32,6 +32,14 @@ export const Container = styled.div`
     width: 100%; 
     height: 100%; 
     box-shadow: inset 0px 0px 54px 74px rgba(0,0,0,1);
+
+    @media (max-width: ${({ theme }) => theme.media.mobile}) {
+      box-shadow: inset 0px 0px 18px 30px rgba(0,0,0,1);
+		}
+
+    @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+      box-shadow: inset 0px 0px 10px 20px rgba(0,0,0,1);
+		}
   }
 `;
 
