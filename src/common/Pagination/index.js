@@ -6,13 +6,13 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 const Pagination = () => {
     return (
         <ButtonWrapper>
-            <StyledButton noActive>
-                <StyledFontAwesomeIcon noActive icon={faAngleLeft} />
-                <StyledFontAwesomeIcon noActive forMobile icon={faAngleLeft} />
+            <StyledButton noactive={"noactive"}>
+                <StyledFontAwesomeIcon noactive={"noactive"} icon={faAngleLeft} />
+                <StyledFontAwesomeIcon noactive={"noactive"} formobile={"formobile"} icon={faAngleLeft} />
                 <PaginationText>First</PaginationText>
             </StyledButton>
-            <StyledButton noActive>
-                <StyledFontAwesomeIcon noActive icon={faAngleLeft} />
+            <StyledButton noactive={"noactive"}>
+                <StyledFontAwesomeIcon noactive={"noactive"} icon={faAngleLeft} />
                 <PaginationText>Previous</PaginationText>
 
             </StyledButton>
@@ -28,7 +28,7 @@ const Pagination = () => {
             </StyledButton>
             <StyledButton last>
                 <StyledFontAwesomeIcon icon={faAngleRight} />
-                <StyledFontAwesomeIcon forMobile icon={faAngleRight} />
+                <StyledFontAwesomeIcon formobile={"formobile"} icon={faAngleRight} />
                 <PaginationText>Last</PaginationText>
             </StyledButton>
         </ButtonWrapper>

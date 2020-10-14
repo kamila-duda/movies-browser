@@ -1,10 +1,11 @@
 import React from "react";
+import { toMoviesList, toPeopleList } from "routes";
 import {
   NavigationList,
   NavigationListItem,
   StyledIcon,
   StyledNavbar,
-  Link,
+  StyledNavLink,
   StyledNavWrapper,
   StyledNav,
   StyledTitle,
@@ -21,10 +22,10 @@ const Navigation = () => {
           <StyledTitle>Movie Browser</StyledTitle>
           <NavigationList>
             <NavigationListItem>
-              <Link>Movies</Link>
+              <StyledNavLink to={toMoviesList()}>Movies</StyledNavLink>
             </NavigationListItem>
             <NavigationListItem>
-              <Link>People</Link>
+              <StyledNavLink to={toPeopleList()}>People</StyledNavLink>
             </NavigationListItem>
           </NavigationList>
         </StyledNav>
