@@ -30,12 +30,12 @@ export const ErrorMessage = styled.p`
 `;
 
 export const HomePageButton = styled.button`
-    background-color:${({ theme }) => theme.color.scienceBlue};
-    color:${({ theme }) => theme.color.white};
-    border:none;
+    background-color: ${({ theme }) => theme.color.scienceBlue};
+    color: ${({ theme }) => theme.color.white};
+    border: none;
     border-radius: 5px;
     padding: 16px 24px;
-    font-family: Open Sans;
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
@@ -43,6 +43,6 @@ export const HomePageButton = styled.button`
     transition: 0.5s filter;
 
     &:hover{
-        filter:brightness(110%);
+        filter: brightness(110%);
     }
 `;

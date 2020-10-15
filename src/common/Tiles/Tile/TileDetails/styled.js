@@ -7,4 +7,8 @@ export const StyledTileDetails= styled.ul`
     font-weight: 300;
     line-height: 1.6;
     padding: 0;
+
+    & .tile__details--blackColor {
+        color: ${({ theme }) => theme.color.black};
+    }
 `;
