@@ -38,4 +38,19 @@ export const TileInnerWrapper = styled.div`
       justify-content: flex-start;
     `}
 `;
-
+export const StyledTilePoster = styled.img`
+  max-width: 100%;
+  object-fit: cover;
+  height: 434px;
+  @media (max-width: ${({ theme }) => theme.media.smartfon}) {
+    height: 169px;
+  }
+  ${({ people }) =>
+    people &&
+    css`
+      height: 265px;
+      @media (max-width: ${({ theme }) => theme.media.smartfon}) {
+        height: 178px;
+      }
+    `}
+`;

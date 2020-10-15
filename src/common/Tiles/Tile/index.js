@@ -3,9 +3,9 @@ import {
   StyledTile,
   StyledTileSubHeader,
   TileInnerWrapper,
+  StyledTilePoster,
 } from "common/Tiles/Tile/styled";
 import { StyledTileHeader } from "common/Tiles/Tile/TileHeader/styled";
-import { StyledTilePoster } from "common/Tiles/Tile/TilePoster/styled";
 import { StyledTileDescription } from "common/Tiles/Tile/TileDescription/styled";
 import TileReview from "common/Tiles/Tile/TileReview";
 import TileDetails from "common/Tiles/Tile/TileDetails";

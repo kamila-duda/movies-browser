@@ -1,49 +1,47 @@
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import React, { useEffect, useState } from "react";
-import moviePoster from "assets/images/jpg/poster.jpg";
-import starIcon from "assets/images/svg/star.svg";
+import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
-//import { getPopularMovies } from "./getPopularMovies";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchPopularMovies,
+  selectLoading,
+  selectMovies,
+} from "features/moviesSlice";
+import Spinner from "features/Spinner";
 
 const MovieListPage = () => {
-  const baseURL = "http://image.tmdb.org/t/p/w500";
-
-  const [movies, setMovies] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetch("/movies-browser/popularMovies.json")
-      .then((response) => response.json())
-      .then((response) => setMovies(response.results))
-      .catch((error) => console.error(error));
+    dispatch(fetchPopularMovies());
   }, []);
-  // const movie = {
-  //   poster: moviePoster,
-  //   header: "Mulan",
-  //   subheader: "2020",
-  //   tags: ["film", "film"],
-  //   review: starIcon,
-  //   description:
-  //     "A young Chinese maiden disguises herself as a male warrior in order to save her father",
-  // };
-  //console.log(movies[9])
+
+  const baseURL = "http://image.tmdb.org/t/p/w500";
+  const movies = useSelector(selectMovies);
+  const title = "Popular movies";
+  const loading = useSelector(selectLoading);
   return (
     <Container>
-      <Tiles
-        title="Popular movies"
-        body={movies.map((movie) => (
-          <Tile
-          key={movie.id}
-            poster={`${baseURL}${movie.poster_path}`}
-            header={movie.title}
-            subheader={movie.release_date}
-            tags={movie.genre_ids}
-            voteAverage={movie.vote_average}
-            review={movie.vote_count}
-          />
-        ))}
-      />
-      <Pagination />
+      {loading ? (
+        <Tiles title="Search results for ..." body={<Spinner />} />
+      ) : (
+        <Tiles
+          title={title}
+          body={movies.map((movie) => (
+            <Tile
+              key={movie.id}
+              poster={`${baseURL}${movie.poster_path}`}
+              header={movie.title}
+              subheader={movie.release_date}
+              tags={movie.genre_ids}
+              voteAverage={movie.vote_average}
+              review={movie.vote_count}
+            />
+          ))}
+        />
+      )}
+      {loading ? "" : <Pagination />}
     </Container>
   );
 };
