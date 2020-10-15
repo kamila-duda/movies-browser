@@ -1,15 +1,16 @@
 import React from "react";
-import { StyledTileTags } from "common/Tiles/Tile/TileTags/styled";
-import { StyledTileTag } from "common/Tiles/Tile/TileTags/TileTag/styled";
+import { StyledTileTag, StyledTileTags } from "./styled";
+import {genres} from "genre"
 
-const TileTags = () => {
-    return (
-        <StyledTileTags>
-            <StyledTileTag>Action</StyledTileTag>
-            <StyledTileTag>Adventure</StyledTileTag>
-            <StyledTileTag>Drama</StyledTileTag>
-        </StyledTileTags>
-    );
+const TileTags = ({ tags }) => {
+    console.log(genres[0].name)
+  return (
+    <StyledTileTags>
+      {tags.map((tag) => (
+        <StyledTileTag key={tag}>{genres.find(({id})=>id===tag).name}</StyledTileTag>
+      ))}
+    </StyledTileTags>
+  );
 };
 
 export default TileTags;
