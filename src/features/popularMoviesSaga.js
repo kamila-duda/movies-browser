@@ -1,11 +1,19 @@
 import { takeEvery, call, put, delay } from "redux-saga/effects";
-import { getPopularMovies, getGenres, getMovieCredits } from "features/getDataApi";
+import {
+  getPopularMovies,
+  getGenres,
+  getMovieCredits,
+} from "features/getDataApi";
 import {
   fetchPopularMovies,
   fetchPopularMoviesError,
   fetchPopularMoviesSuccess,
   fetchGenres,
-  fetchMovieCredits
+  fetchMovieCredits,
+  fetchMovieCreditsSuccess,
+  fetchMovieCreditsError,
+  getMovieById,
+  selectMovieId,
 } from "./moviesSlice";
 
 function* fetchPopularMoviesHandler() {
@@ -25,13 +33,14 @@ function* fetchGenresHandler() {
   } catch (error) {
     yield call(alert, "Upss, nie pobrano gatunków");
   }
-};
-function* fetchMovieCreditsHandler({payload: movieId}) {
+}
+function* fetchMovieCreditsHandler() {
   try {
-const credits = yield call(getMovieCredits,movieId);
-yield put(fetchMovieCredits(credits))
+    const credits = yield call(getMovieCredits(selectMovieId()));
+    yield put(fetchMovieCreditsSuccess(credits));
   } catch (error) {
-      yield call(alert, "Upss, nie można załadować widoku");
+    yield put(fetchMovieCreditsError());
+    yield call(alert, "Upss, nie można załadować widoku");
   }
 }
 export function* watchFetchPopularMovies() {

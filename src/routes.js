@@ -1,3 +1,3 @@
-export const toMoviesList = () => "/popular-movies";
-export const toMovieDetails = () => "/popular-movies/MovieDetails";
-export const toPeopleList = () => "/popular-people";
+export const toMoviesList = () => "/movies";
+export const toMovieDetails = ({id} = {id: ":id"}) => `/movies/${id}`;
+export const toPeopleList = () => "/people";

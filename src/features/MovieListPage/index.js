@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchGenres,
+  fetchMovie,
   fetchPopularMovies,
   selectCurrentPage,
   selectLoading,
@@ -19,10 +19,8 @@ const MovieListPage = () => {
   const dispatch = useDispatch();
   const currentPage = useSelector(selectCurrentPage)
   
- 
   const baseURL = "http://image.tmdb.org/t/p/w500";
   const movies = useSelector(selectMovies);
-  console.log(movies)
   useEffect(() => {
     dispatch(fetchPopularMovies());
   }, [dispatch, currentPage]);
@@ -36,7 +34,7 @@ const MovieListPage = () => {
         <Tiles
           title={title}
           body={movies.map((movie) => (
-            <StyledLink to={toMovieDetails}>
+            <StyledLink to={toMovieDetails({ id: movie.id })} onClick={()=>{dispatch(fetchMovie(movie))}}>
             <Tile
               key={movie.id}
               poster={`${baseURL}${movie.poster_path}`}

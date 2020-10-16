@@ -1,23 +1,21 @@
 import React from "react";
 import { MovieBanner, Container, StyledImage, MovieHeader, MovieTitle, RatingHeader, StyledStarImage, Rating, Votes } from "./styled";
-import backgroundImage from "assets/images/png/HeroBaner.png"
 import star from "assets/images/svg/star.svg"
 
-const HeroBanner = ({backdrop}) => {
+const HeroBanner = ({backdrop, movieTitle, vote_average, vote}) => {
   return (
     <MovieBanner>
       <Container>
         <StyledImage src={backdrop} alt="MovieBanner" />
         <MovieHeader>
-          <MovieTitle>Mulan long title</MovieTitle>
+  <MovieTitle>{movieTitle}</MovieTitle>
           <RatingHeader>
             <div>
               <StyledStarImage src={star} />
-              <Rating>7,8</Rating>
-              / 10
+              <Rating>{vote_average}/10</Rating>
            </div>
             <Votes>
-              335 votes
+              {vote} votes
             </Votes>
           </RatingHeader>
         </MovieHeader>
