@@ -31,7 +31,7 @@ const MovieListPage = () => {
         <Tiles
           title={title}
           body={movies.map((movie) => (
-            <StyledLink to={toMovieDetails}>
+            <StyledLink to={toMovieDetails} onClick={()=>dispatch(fetchMovieDetails(movie.id))}>
             <Tile
               key={movie.id}
               poster={`${baseURL}${movie.poster_path}`}

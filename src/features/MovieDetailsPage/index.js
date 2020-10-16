@@ -64,7 +64,6 @@ const MovieDetailsPage = () => {
 					detailsYear={movie.year}
 					detailsProduction={movie.productionCountries}
 					detailsReleaseDate={movie.releaseDate}
-					tags={movie.tags}
 					detalReview={movie.detalReview}
 					description={movie.description}
 				/>
