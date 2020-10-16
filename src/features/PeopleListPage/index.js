@@ -12,7 +12,7 @@ const PeopleListPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPopularPeople());
-  }, []);
+  }, [dispatch]);
   const peopleList = true;
   const baseURL = "http://image.tmdb.org/t/p/w500";
   const people = useSelector(selectPeople);
