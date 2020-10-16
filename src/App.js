@@ -6,6 +6,7 @@ import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { toMoviesList, toPeopleList, toMovieDetails } from "./routes";
 import MovieDetailsPage from "features/MovieDetailsPage";
 
+
 const App = () => {
   return (
     <HashRouter>

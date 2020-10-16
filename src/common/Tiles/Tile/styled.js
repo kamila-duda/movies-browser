@@ -31,7 +31,6 @@ export const StyledTile = styled.div`
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     display:flex;
     flex-direction: column;
-    
   }
 `;
 
