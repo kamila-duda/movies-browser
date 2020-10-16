@@ -1,18 +1,21 @@
-import { takeEvery, call, put, delay, select } from "redux-saga/effects";
-import { fetchPopularMovies, setMovies, selectMovies } from "features/moviesSlice";
-import { getPopularMovies } from "features/MovieListPage/getPopularMovies";
+import { takeEvery, call, put } from "redux-saga/effects";
+import { fetchData, setConfigurationParameters, setGenres, setMovies } from "features/moviesSlice";
+import { getDataApi } from "./getDataApi";
 
-function* fetchPopularMoviesHandler() {
+function* fetchDataMoviesHandler() {
   try {
-    console.log("Cały czas pracuję?")
-    const popularMovies = yield call(getPopularMovies);
+    const configurations = yield call(getDataApi, "configurationData")
+    yield put(setConfigurationParameters(configurations));
+    const genresList = yield call(getDataApi, "genresData")
+    yield put(setGenres(genresList));
+    const popularMovies = yield call(getDataApi, "popularMoviesData")
     yield put(setMovies(popularMovies));
   } catch (error) {
     yield call(alert, "Coś poszło nie tak!");
   }
 }
 
-export function* watchMoviesAction() {
-  yield takeEvery(fetchPopularMovies.type, fetchPopularMoviesHandler);
+export function* watchFetchingAction() {
+  yield takeEvery(fetchData.type, fetchDataMoviesHandler);
 
 }
