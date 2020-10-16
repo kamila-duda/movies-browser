@@ -7,6 +7,8 @@ import {
   StyledDetails,
 } from "common/Tiles/Tile/styled";
 import { StyledTileHeader } from "common/Tiles/Tile/TileHeader/styled";
+import { StyledTileSubHeader, StyledDetails } from "common/Tiles/Tile/TileSubHeader/styled";
+import { StyledTilePoster } from "common/Tiles/Tile/TilePoster/styled";
 import { StyledTileDescription } from "common/Tiles/Tile/TileDescription/styled";
 import TileReview from "common/Tiles/Tile/TileReview";
 import TileDetails from "common/Tiles/Tile/TileDetails";
@@ -30,6 +32,7 @@ const Tile = ({
   detalReview,
   peopleList,
 }) => {
+
   return (
     <StyledTile horizontal={horizontal} people={peopleList === true ? "people" : ""}>
     <TileInnerWrapper>

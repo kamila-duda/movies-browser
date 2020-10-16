@@ -23,6 +23,7 @@ export const StyledInput = styled.input`
   border: none;
   font-size: 16px;
   flex-grow: 0.8;
+  width: 75%;
   @media (max-width: ${({ theme }) => theme.media.tablet}) {
     font-size: 13px;
   }
