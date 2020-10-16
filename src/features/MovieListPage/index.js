@@ -4,14 +4,16 @@ import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
 import Pagination from "common/Pagination";
-import { fetchData, selectConfigurationParameters, selectResults } from "features/moviesSlice";
+import Spinner from "features/Spinner/index";
+import ConnectionErrorPage from "common/ConnectionErrorPage"
+import { fetchData, selectConfigurationParameters, selectError, selectLoading, selectResults } from "features/moviesSlice";
 
 const MovieListPage = () => {
   const popularMovies = useSelector(selectResults);
   const dispatch = useDispatch();
   const images = useSelector(selectConfigurationParameters);
   const posterSize = "w500";
-
+  const loadingState = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(fetchData());
@@ -34,14 +36,22 @@ const MovieListPage = () => {
     }
     return "";
   };
-
-  return (
+  if (loadingState === false) {
+    return (
+      <Container>
+        <Tiles
+          title="Popular movies"
+          body={generatePopularMoviesList()}
+        />
+        <Pagination />
+      </Container>
+    );
+  } return (
     <Container>
       <Tiles
-        title="Popular movies"
-        body={generatePopularMoviesList()}
+        title="Trwa pobieranie danych"
+        body={<Spinner />}
       />
-      <Pagination />
     </Container>
   );
 };
