@@ -5,5 +5,4 @@ export const StyledLink = styled(Link)`
   text-decoration:none;
   display:block;
   color:${({ theme }) => theme.color.black};
-
 `;

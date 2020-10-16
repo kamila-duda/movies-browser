@@ -1,24 +1,41 @@
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import React from "react";
-import peoplePoster from "assets/images/png/posterPeople.png";
+import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPopularPeople, selectPeople } from "features/peopleSlice";
+import { selectLoading } from "features/peopleSlice";
+import Spinner from "features/Spinner";
 
 const PeopleListPage = () => {
-  const people = {
-    poster: peoplePoster,
-    header: "Liu Yifei",
-  };
-  console.log(people.poster);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchPopularPeople());
+  }, []);
+  const peopleList = true;
+  const baseURL = "http://image.tmdb.org/t/p/w500";
+  const people = useSelector(selectPeople);
+  const title = "Popular people";
+  const loading = useSelector(selectLoading);
   return (
     <Container>
-      <Tiles
-        peopleList={true}
-        title="Popular people"
-        body={<Tile poster={people.poster} header={people.header} />}
-      />
-      <Pagination />
+      {loading ? (
+        <Tiles title="Search results for ..." body={<Spinner />} />
+      ) : (
+        <Tiles
+          peopleList={peopleList}
+          title={title}
+          body={people.map((person) => (
+            <Tile
+              key={person.id}
+              poster={`${baseURL}${person.profile_path}`}
+              header={person.name}
+            />
+          ))}
+        />
+      )}
+      {loading ? "" : <Pagination />}
     </Container>
   );
 };
