@@ -3,14 +3,15 @@ import {
   StyledTile,
   StyledTileSubHeader,
   TileInnerWrapper,
+  StyledTilePoster,
+  StyledDetails,
 } from "common/Tiles/Tile/styled";
 import { StyledTileHeader } from "common/Tiles/Tile/TileHeader/styled";
-import { StyledTilePoster } from "common/Tiles/Tile/TilePoster/styled";
 import { StyledTileDescription } from "common/Tiles/Tile/TileDescription/styled";
 import TileReview from "common/Tiles/Tile/TileReview";
-import TileDetails from "common/Tiles/Tile/TileDetails";
 import NoPoster from "assets/images/svg/NoPoster.svg";
 import TileTags from "./TileTags";
+import TileDetails from "./TileDetails";
 
 const Tile = ({
   poster,
@@ -21,37 +22,62 @@ const Tile = ({
   details,
   description,
   voteAverage,
+  horizontal,
+  detailsTitle,
+  detailsYear,
+  detailsProduction,
+  detailsReleaseDate,
+  detalReview,
+  peopleList,
 }) => {
+
   return (
-    <StyledTile>
-      <TileInnerWrapper>
-        {poster ? (
-          <StyledTilePoster src={poster} />
-        ) : (
+    <StyledTile horizontal={horizontal} people={peopleList === true ? "people" : ""}>
+    <TileInnerWrapper>
+      {poster ? (
+        <StyledTilePoster src={poster} />
+      ) : (
           <StyledTilePoster src={NoPoster} />
         )}
-      </TileInnerWrapper>
-      <TileInnerWrapper flex>
-        {header ? <StyledTileHeader>{header}</StyledTileHeader> : ""}
-        {subheader ? (
-          <StyledTileSubHeader>{subheader}</StyledTileSubHeader>
-        ) : (
+    </TileInnerWrapper>
+    <TileInnerWrapper flex people={peopleList === true ? "people" : ""}>
+      {header ? <StyledTileHeader>{header}</StyledTileHeader> : ""}
+      {detailsTitle ? <StyledTileHeader detailsPage >{detailsTitle}</StyledTileHeader> : ""}
+      {subheader ? (
+        <StyledTileSubHeader >{subheader}</StyledTileSubHeader>
+      ) : (
           ""
         )}
-        {tags ? <TileTags tags={tags} /> : ""}
-        {review || voteAverage ? (
-          <TileReview review={review} voteAverage={voteAverage} />
-        ) : (
+      {detailsYear ? (
+        <StyledTileSubHeader detailsPage>{detailsYear}</StyledTileSubHeader>
+      ) : (
           ""
         )}
-        {details ? <TileDetails /> : ""}
-        {description ? (
-          <StyledTileDescription>{description}</StyledTileDescription>
-        ) : (
+      {detailsProduction ? (
+        <StyledTileSubHeader details>Production:<StyledDetails>{detailsProduction}</StyledDetails></StyledTileSubHeader>
+      ) : (
           ""
         )}
-      </TileInnerWrapper>
-    </StyledTile>
+      {detailsReleaseDate ? (
+        <StyledTileSubHeader details>Release date:<StyledDetails>{detailsReleaseDate}</StyledDetails></StyledTileSubHeader>
+      ) : (
+          ""
+        )}
+      {tags ? <TileTags tags={tags} /> : ""}
+      {review || voteAverage ? (
+        <TileReview review={review} voteAverage={voteAverage} />
+      ) : (
+        ""
+      )}
+      {detalReview ? <TileReview detailsPage={"detailsPage"} /> : ""}
+      {details ? <TileDetails /> : ""}
+      {description ? (
+        <StyledTileDescription>{description}</StyledTileDescription>
+      ) : (
+          ""
+        )}
+    </TileInnerWrapper>
+  </StyledTile>
   );
 };
 
