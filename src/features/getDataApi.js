@@ -1,57 +1,31 @@
-import {apiKey} from "../apiKey";
-export const getPopularMovies = async () => {
-  try {
-    const response = await fetch("/movies-browser/popularMovies.json");
+import { apiKey } from "features/apiKey";
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    const movies = await response.json();
-    return movies;
-  } catch (error) {
-    console.error("ups");
-  }
+const language = "en-US";
+const page = 1; //tutaj będzie się to zmieniało we właściwym miejscu dynamicznie
+const movieId = 1; //tutaj będzie się to zmieniało we właściwym miejscu dynamicznie
+const dataToFetch = {
+  configurationData: `
+  https://api.themoviedb.org/3/configuration?api_key=${apiKey}`,
+  genresData: `
+  https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language==${language}`,
+  popularMoviesData: `
+  https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}&page=${page}`,
+  movieCreditsData: `
+  https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`,
+  popularPeopleData: `
+  https://api.themoviedb.org/3/person/popular?api_key=${apiKey}&language=${language}&page=${page}`,
 };
-export const getGenres = async () => {
+
+export const getDataApi = async (dataType) => {
   try {
-    const response = await fetch("/movies-browser/genre.json");
+    const response = await fetch(dataToFetch[dataType]);
 
     if (!response.ok) {
       throw new Error(response.statusText);
     }
 
-    const genres = await response.json();
-    return genres;
-  } catch (error) {
-    console.error("ups");
-  }
-};
-export const getPopularPeople = async () => {
-  try {
-    const response = await fetch("/movies-browser/popularPeople.json");
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    const people = await response.json();
-    return people;
-  } catch (error) {
-    console.error("ups");
-  }
-};
-export const getMovieCredits = async (movieId) => {
-  try {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`);
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    const credits = await response.json();
-    console.log(credits)
-    return credits;
+    const fetchedData = await response.json();
+    return fetchedData;
   } catch (error) {
     console.error("ups");
   }
