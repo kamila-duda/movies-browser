@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
 import Pagination from "common/Pagination";
-import { fetchPopularMovies, selectResults } from "features/moviesSlice";
-//import { getPopularMovies } from "./getPopularMovies";
+import { fetchData, selectConfigurationParameters, selectResults } from "features/moviesSlice";
 
 const MovieListPage = () => {
   const popularMovies = useSelector(selectResults);
-  console.log(popularMovies);
   const dispatch = useDispatch();
-  const baseURL = "http://image.tmdb.org/t/p/w500";
+  const images = useSelector(selectConfigurationParameters);
+  const posterSize = "w500";
+
 
   useEffect(() => {
-    dispatch(fetchPopularMovies())
+    dispatch(fetchData());
   }, []);
 
   const generatePopularMoviesList = () => {
@@ -23,7 +23,7 @@ const MovieListPage = () => {
         popularMovies.map((movie) => (
           <Tile
             key={movie.id}
-            poster={`${baseURL}${movie.poster_path}`}
+            poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
             header={movie.title}
             subheader={movie.release_date}
             tags={movie.genre_ids}
