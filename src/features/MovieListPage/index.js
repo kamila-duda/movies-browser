@@ -10,6 +10,8 @@ import {
   selectMovies,
 } from "features/moviesSlice";
 import Spinner from "features/Spinner";
+import { StyledLink } from "./styled";
+import { toMovieDetails } from "routes";
 
 const MovieListPage = () => {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ const MovieListPage = () => {
         <Tiles
           title={title}
           body={movies.map((movie) => (
+            <StyledLink to={toMovieDetails}>
             <Tile
               key={movie.id}
               poster={`${baseURL}${movie.poster_path}`}
@@ -38,6 +41,7 @@ const MovieListPage = () => {
               voteAverage={movie.vote_average}
               review={movie.vote_count}
             />
+            </StyledLink>
           ))}
         />
       )}
