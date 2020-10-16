@@ -3,24 +3,15 @@ import HeroBanner from "common/HeroBanner";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import moviePoster from "assets/images/jpg/poster.jpg";
-import starIcon from "assets/images/svg/star.svg"
 import peoplePoster from "assets/images/png/posterPeople.png";
+import { useSelector } from "react-redux";
+import { selectMovies } from "features/moviesSlice";
 
 const MovieDetailsPage = () => {
-	const movie = {
-		poster: moviePoster,
-		header: "Mulan",
-		year: "2020",
-		productionCountries: "China, United States of Amercia",
-		releaseDate: "24.10.2020",
-		tags: ["film", "film"],
-		detalReview: starIcon,
-		description:
-			`A young Chinese maiden disguises herself as a male warrior in order to save her father. 
-      Disguises herself as a male warrior in order to save her father. 
-      A young Chinese maiden disguises herself as a male warrior in order to save her father.`,
-	};
+	const movies = useSelector(selectMovies);
+	const movie = movies[1];
+	const baseURL = "http://image.tmdb.org/t/p/w500";
+	const backdropURL = "http://image.tmdb.org/t/p/original";
 
 	const people = [
 		{
@@ -55,17 +46,17 @@ const MovieDetailsPage = () => {
 
 	return (
 		<>
-			<HeroBanner />
+			<HeroBanner backdrop={`${backdropURL}${movie.backdrop_path}`}/>
 			<Container detailsPage={true}>
 				<Tile
 					horizontal={"horizontal"}
-					poster={movie.poster}
-					detailsTitle={movie.header}
-					detailsYear={movie.year}
-					detailsProduction={movie.productionCountries}
-					detailsReleaseDate={movie.releaseDate}
-					detalReview={movie.detalReview}
-					description={movie.description}
+					poster={`${baseURL}${movie.poster_path}`}
+					detailsTitle={movie.title}
+					detailsYear={movie.release_date}
+					detailsReleaseDate={movie.release_date}
+					tags={movie.genre_ids}
+					detalReview={movie.vote_count}
+					description={movie.overview}
 				/>
 
 				<Tiles

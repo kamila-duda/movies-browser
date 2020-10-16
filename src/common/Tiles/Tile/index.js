@@ -9,9 +9,9 @@ import {
 import { StyledTileHeader } from "common/Tiles/Tile/TileHeader/styled";
 import { StyledTileDescription } from "common/Tiles/Tile/TileDescription/styled";
 import TileReview from "common/Tiles/Tile/TileReview";
-import TileDetails from "common/Tiles/Tile/TileDetails";
 import NoPoster from "assets/images/svg/NoPoster.svg";
 import TileTags from "./TileTags";
+import TileDetails from "./TileDetails";
 
 const Tile = ({
   poster,

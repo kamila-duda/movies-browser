@@ -8,3 +8,8 @@ export const StyledTileDetails= styled.ul`
     line-height: 1.6;
     padding: 0;
 `;
+export const StyledTileRelease = styled.li`
+    & .tile__release {
+        color: ${({ theme }) => theme.color.black};
+    }
+`;

@@ -3,11 +3,11 @@ import { MovieBanner, Container, StyledImage, MovieHeader, MovieTitle, RatingHea
 import backgroundImage from "assets/images/png/HeroBaner.png"
 import star from "assets/images/svg/star.svg"
 
-const HeroBanner = () => {
+const HeroBanner = ({backdrop}) => {
   return (
     <MovieBanner>
       <Container>
-        <StyledImage src={backgroundImage} alt="MovieBanner" />
+        <StyledImage src={backdrop} alt="MovieBanner" />
         <MovieHeader>
           <MovieTitle>Mulan long title</MovieTitle>
           <RatingHeader>
