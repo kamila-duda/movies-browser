@@ -5,6 +5,9 @@ import React from "react";
 import moviePoster from "assets/images/jpg/poster.jpg";
 import starIcon from "assets/images/svg/star.svg";
 import Pagination from "common/Pagination";
+import { Link } from 'react-router-dom';
+import { toMovieDetails } from "routes";
+import { StyledLink } from "./styled"
 
 const MovieListPage = () => {
   const movie = {
@@ -21,17 +24,19 @@ const MovieListPage = () => {
       <Tiles
         title="Popular movies"
         body={
-          <Tile
-            poster={movie.poster}
-            header={movie.header}
-            subheader={movie.subheader}
-            tags={movie.tags}
-            review={movie.review}
-            description={movie.description}
-          />
+          <StyledLink to={toMovieDetails}>
+            <Tile
+              poster={movie.poster}
+              header={movie.header}
+              subheader={movie.subheader}
+              tags={movie.tags}
+              review={movie.review}
+              description={movie.description}
+            />
+          </StyledLink>
         }
       />
-      <Pagination/>
+      <Pagination />
     </Container>
   );
 };

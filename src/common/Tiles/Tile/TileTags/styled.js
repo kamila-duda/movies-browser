@@ -6,7 +6,8 @@ export const StyledTileTags = styled.ul`
     flex-wrap: wrap;
     list-style: none;
     font-size: ${({ theme }) => theme.fontSize.small};
-    margin: 0;
+    margin: 16px 0px 0px 0px;
     padding: 0 0 20px 0;
+    
 `;
 
