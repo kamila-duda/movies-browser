@@ -1,66 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import HeroBanner from "common/HeroBanner";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import peoplePoster from "assets/images/png/posterPeople.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-  fetchMovieCredits,
   selectCast,
+  selectCrew,
+  selectImages,
   selectMovie,
-  setMovieId,
+  selectMovieProduction,
 } from "features/moviesSlice";
+import noneProfile from "assets/images/png/noneProfile.png";
 import { useParams } from "react-router-dom";
 
 const MovieDetailsPage = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  useEffect(() => {
-	dispatch(fetchMovieCredits())
-	dispatch(setMovieId
-		(id));
-  }, [dispatch]);
   const movie = useSelector(selectMovie);
-
-  const baseURL = "http://image.tmdb.org/t/p/w500";
-  const backdropURL = "http://image.tmdb.org/t/p/original";
-  const casts = useSelector(selectCast);
-  const people = [
-    {
-      poster: peoplePoster,
-      header: "Liu Yifei",
-    },
-    {
-      poster: peoplePoster,
-      header: "Liu Yifei",
-    },
-    {
-      poster: peoplePoster,
-      header: "Liu Yifei",
-    },
-    {
-      poster: peoplePoster,
-      header: "Liu Yifei",
-    },
-    {
-      poster: peoplePoster,
-      header: "Liu Yifei",
-    },
-    {
-      poster: peoplePoster,
-      header: "Liu Yifei",
-    },
-    {
-      poster: peoplePoster,
-      header: "Liu Yifei",
-    },
-  ];
-
+  const images = useSelector(selectImages);
+  const posterSize = "w500";
+  const backdropSize = "original";
+  const cast = useSelector(selectCast);
+  const crew = useSelector(selectCrew);
+  const movieProduction = useSelector(selectMovieProduction);
   return (
     <>
       <HeroBanner
-        backdrop={`${backdropURL}${movie.backdrop_path}`}
+        backdrop={`${images["base_url"]}/${backdropSize}${movie.backdrop_path}`}
         movieTitle={movie.title}
         vote_average={movie.vote_average}
         vote={movie.vote_count}
@@ -68,24 +34,30 @@ const MovieDetailsPage = () => {
       <Container detailsPage={true}>
         <Tile
           horizontal={"horizontal"}
-          poster={`${baseURL}${movie.poster_path}`}
+          poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
           detailsTitle={movie.title}
-          detailsYear={movie.release_date}
+          detailsYear={movie.release_date.substring(0, 4)}
+          detailsProduction={movieProduction === [] ? "" : movieProduction}
           detailsReleaseDate={movie.release_date}
           tags={movie.genre_ids}
-          detalReview={movie.vote_count}
+          voteAverage={movie.vote_average}
+          review={movie.vote_count}
           description={movie.overview}
         />
 
         <Tiles
           peopleList={true}
           title="Cast"
-          body={casts.map((cast) => (
+          body={cast.map((actor) => (
             <Tile
               peopleList={true}
-              poster={cast.profile_path}
-              header={cast.name}
-              subheader={cast.character}
+              poster={
+                actor.profile_path === null
+                  ? noneProfile
+                  : `${images["base_url"]}/${posterSize}${actor.profile_path}`
+              }
+              header={actor.name}
+              subheader={actor.character}
             />
           ))}
         />
@@ -93,12 +65,16 @@ const MovieDetailsPage = () => {
         <Tiles
           peopleList={true}
           title="Crew"
-          body={people.map((person) => (
+          body={crew.map((crewmate) => (
             <Tile
               peopleList={true}
-              poster={person.poster}
-              header={person.header}
-              subheader={"Mulan"}
+              poster={
+                crewmate.profile_path === null
+                  ? noneProfile
+                  : `${images["base_url"]}/${posterSize}${crewmate.profile_path}`
+              }
+              header={crewmate.name}
+              subheader={crewmate.job}
             />
           ))}
         />
