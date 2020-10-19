@@ -5,7 +5,9 @@ export const moviesSlice = createSlice({
   initialState: {
     movies: [],
     movie: {},
+    configurations: {},
     movieId: null,
+    movieProduction: "",
     genres: [],
     cast: [],
     crew: [],
@@ -25,28 +27,37 @@ export const moviesSlice = createSlice({
       state.movies = [];
       state.loading = false;
     },
+    setConfigurations: (state, { payload: configurationsFile }) => {
+      state.configurations = configurationsFile;
+    },
     fetchGenres: (state, { payload: genres }) => {
       state.genres = genres.genres;
     },
     setCurrentPage: (state, { payload: movies }) => {
       state.currentPage = movies.page;
     },
-    fetchMovie: (state, { payload: movie }) => {
+    fetchMovieDetails: (state, { payload: movie }) => {
+      console.log(movie);
+      state.movieId = movie.id;
       state.movie = movie;
-    },
-    fetchMovieCredits: (state) => {
+      state.cast = [];
+      state.crew = [];
+      state.movieProduction = "";
       state.loading = true;
     },
-    fetchMovieCreditsSuccess: (state, { payload: credicts }) => {
-      state.cast = credicts.cast;
-      state.crew = credicts.crew;
+    fetchMovieDetailsSuccess: (state, { payload: details }) => {
+      state.loading = false;
+      state.cast = details.credits.cast;
+      if (details.production_countries.length > 0) {
+        state.movieProduction = details.production_countries;
+      } else {
+        state.movieProduction = [{ name: "brak danych" }];
+      }
+      state.crew = details.credits.crew;
     },
-    fetchMovieCreditsError: (state) => {
+    fetchMovieDetailsError: (state) => {
       state.loading = false;
     },
-    setMovieId: (state, {payload: id}) => {
-      state.movieId = id;
-    }
   },
 });
 
@@ -54,24 +65,29 @@ export const {
   fetchPopularMovies,
   fetchPopularMoviesSuccess,
   fetchPopularMoviesError,
+  setConfigurations,
   fetchGenres,
   setCurrentPage,
-  fetchMovie,
-  fetchMovieCredits,
-  fetchMovieCreditsSuccess,
-  fetchMovieCreditsError,
-  setMovieId,
+  fetchMovieDetails,
+  fetchMovieDetailsSuccess,
+  fetchMovieDetailsError,
 } = moviesSlice.actions;
 
 const selectMoviesState = (state) => state.movies;
 export const selectMovies = (state) => selectMoviesState(state).movies;
 export const selectLoading = (state) => selectMoviesState(state).loading;
 export const selectGenres = (state) => selectMoviesState(state).genres;
+export const selectConfigurations = (state) =>
+  selectMoviesState(state).configurations;
+export const selectImages = (state) => selectConfigurations(state).images;
 export const selectMovie = (state) => selectMoviesState(state).movie;
 export const selectMovieId = (state) => selectMoviesState(state).movieId;
+export const selectMovieProduction = (state) =>
+  selectMoviesState(state).movieProduction;
 export const selectCast = (state) => selectMoviesState(state).cast;
 export const selectCrew = (state) => selectMoviesState(state).crew;
-export const selectCurrentPage=(state)=>selectMoviesState(state).currentPage;
+export const selectCurrentPage = (state) =>
+  selectMoviesState(state).currentPage;
 export const getMovieById = (state, movieId) =>
   selectMovies(state).find(({ id }) => id === movieId);
 

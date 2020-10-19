@@ -30,54 +30,67 @@ const Tile = ({
   detalReview,
   peopleList,
 }) => {
-
   return (
-    <StyledTile horizontal={horizontal} people={peopleList === true ? "people" : ""}>
-    <TileInnerWrapper>
-      {poster ? (
-        <StyledTilePoster src={poster} />
-      ) : (
+    <StyledTile
+      horizontal={horizontal}
+      people={peopleList === true ? "people" : ""}
+    >
+      <TileInnerWrapper>
+        {poster ? (
+          <StyledTilePoster src={poster} />
+        ) : (
           <StyledTilePoster src={NoPoster} />
         )}
-    </TileInnerWrapper>
-    <TileInnerWrapper flex people={peopleList === true ? "people" : ""}>
-      {header ? <StyledTileHeader>{header}</StyledTileHeader> : ""}
-      {detailsTitle ? <StyledTileHeader detailsPage >{detailsTitle}</StyledTileHeader> : ""}
-      {subheader ? (
-        <StyledTileSubHeader >{subheader}</StyledTileSubHeader>
-      ) : (
+      </TileInnerWrapper>
+      <TileInnerWrapper flex people={peopleList === true ? "people" : ""}>
+        {header ? <StyledTileHeader>{header}</StyledTileHeader> : ""}
+        {detailsTitle ? (
+          <StyledTileHeader detailsPage>{detailsTitle}</StyledTileHeader>
+        ) : (
           ""
         )}
-      {detailsYear ? (
-        <StyledTileSubHeader detailsPage>{detailsYear}</StyledTileSubHeader>
-      ) : (
+        {subheader ? (
+          <StyledTileSubHeader>{subheader}</StyledTileSubHeader>
+        ) : (
           ""
         )}
-      {detailsProduction ? (
-        <StyledTileSubHeader details>Production:<StyledDetails>{detailsProduction}</StyledDetails></StyledTileSubHeader>
-      ) : (
+        {detailsYear ? (
+          <StyledTileSubHeader detailsPage>{detailsYear}</StyledTileSubHeader>
+        ) : (
           ""
         )}
-      {detailsReleaseDate ? (
-        <StyledTileSubHeader details>Release date:<StyledDetails>{detailsReleaseDate}</StyledDetails></StyledTileSubHeader>
-      ) : (
+        {detailsProduction ? (
+          <StyledTileSubHeader details>
+            Production:
+            {detailsProduction.map((country) => (
+              <StyledDetails>{country.name},</StyledDetails>
+            ))}
+          </StyledTileSubHeader>
+        ) : (
           ""
         )}
-      {tags ? <TileTags tags={tags} /> : ""}
-      {review || voteAverage ? (
-        <TileReview review={review} voteAverage={voteAverage} />
-      ) : (
-        ""
-      )}
-      {detalReview ? <TileReview detailsPage={"detailsPage"} /> : ""}
-      {details ? <TileDetails /> : ""}
-      {description ? (
-        <StyledTileDescription>{description}</StyledTileDescription>
-      ) : (
+        {detailsReleaseDate ? (
+          <StyledTileSubHeader details>
+            Release date:<StyledDetails>{detailsReleaseDate}</StyledDetails>
+          </StyledTileSubHeader>
+        ) : (
           ""
         )}
-    </TileInnerWrapper>
-  </StyledTile>
+        {tags ? <TileTags tags={tags} /> : ""}
+        {review || voteAverage ? (
+          <TileReview review={review} voteAverage={voteAverage} />
+        ) : (
+          ""
+        )}
+        {detalReview ? <TileReview detailsPage={"detailsPage"} /> : ""}
+        {details ? <TileDetails /> : ""}
+        {description ? (
+          <StyledTileDescription>{description}</StyledTileDescription>
+        ) : (
+          ""
+        )}
+      </TileInnerWrapper>
+    </StyledTile>
   );
 };
 

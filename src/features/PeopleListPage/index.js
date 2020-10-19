@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPopularPeople, selectPeople } from "features/peopleSlice";
 import { selectLoading } from "features/peopleSlice";
 import Spinner from "features/Spinner";
+import { nanoid } from "@reduxjs/toolkit";
 
 const PeopleListPage = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const PeopleListPage = () => {
           title={title}
           body={people.map((person) => (
             <Tile
-              key={person.id}
+              key={nanoid}
               poster={`${baseURL}${person.profile_path}`}
               header={person.name}
             />

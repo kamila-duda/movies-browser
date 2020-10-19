@@ -5,9 +5,10 @@ import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchMovie,
+  fetchMovieDetails,
   fetchPopularMovies,
   selectCurrentPage,
+  selectImages,
   selectLoading,
   selectMovies,
 } from "features/moviesSlice";
@@ -17,9 +18,10 @@ import { toMovieDetails } from "routes";
 
 const MovieListPage = () => {
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage)
-  
-  const baseURL = "http://image.tmdb.org/t/p/w500";
+  const currentPage = useSelector(selectCurrentPage);
+
+  const images = useSelector(selectImages);
+  const posterSize = "w500";
   const movies = useSelector(selectMovies);
   useEffect(() => {
     dispatch(fetchPopularMovies());
@@ -34,16 +36,20 @@ const MovieListPage = () => {
         <Tiles
           title={title}
           body={movies.map((movie) => (
-            <StyledLink to={toMovieDetails({ id: movie.id })} onClick={()=>{dispatch(fetchMovie(movie))}}>
-            <Tile
+            <StyledLink
               key={movie.id}
-              poster={`${baseURL}${movie.poster_path}`}
-              header={movie.title}
-              subheader={movie.release_date}
-              tags={movie.genre_ids}
-              voteAverage={movie.vote_average}
-              review={movie.vote_count}
-            />
+              to={toMovieDetails}
+              onClick={() => dispatch(fetchMovieDetails(movie))}
+            >
+              <Tile
+                key={movie.id}
+                poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
+                header={movie.title}
+                subheader={movie.release_date.substring(0, 4)}
+                tags={movie.genre_ids}
+                voteAverage={movie.vote_average}
+                review={movie.vote_count}
+              />
             </StyledLink>
           ))}
         />

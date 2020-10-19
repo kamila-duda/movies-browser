@@ -2,19 +2,20 @@ import { takeEvery, call, put, delay } from "redux-saga/effects";
 import {
   getPopularMovies,
   getGenres,
-  getMovieCredits,
+  getMovieDetails,
+  getConfigurationData,
 } from "features/getDataApi";
 import {
   fetchPopularMovies,
   fetchPopularMoviesError,
   fetchPopularMoviesSuccess,
   fetchGenres,
-  fetchMovieCredits,
-  fetchMovieCreditsSuccess,
-  fetchMovieCreditsError,
-  getMovieById,
-  selectMovieId,
+  fetchMovieDetails,
+  fetchMovieDetailsSuccess,
+  fetchMovieDetailsError,
+  setConfigurations,
 } from "./moviesSlice";
+import store from "store";
 
 function* fetchPopularMoviesHandler() {
   try {
@@ -26,6 +27,14 @@ function* fetchPopularMoviesHandler() {
     yield call(alert, "Upss, coś poszło nie tak");
   }
 }
+function* fetchConfigurationsFile() {
+  try {
+    const configurationsFile = yield call(getConfigurationData);
+    yield put(setConfigurations(configurationsFile));
+  } catch (error) {
+    yield call(alert, "Upss, nie pobrano gatunków");
+  }
+}
 function* fetchGenresHandler() {
   try {
     const genres = yield call(getGenres);
@@ -34,17 +43,20 @@ function* fetchGenresHandler() {
     yield call(alert, "Upss, nie pobrano gatunków");
   }
 }
-function* fetchMovieCreditsHandler() {
+function* fetchMovieDetailsHandler() {
   try {
-    const credits = yield call(getMovieCredits(selectMovieId()));
-    yield put(fetchMovieCreditsSuccess(credits));
+    const movieId = store.getState().movies.movieId;
+    const details = yield call(getMovieDetails, movieId);
+    console.log(details);
+    yield put(fetchMovieDetailsSuccess(details));
   } catch (error) {
-    yield put(fetchMovieCreditsError());
-    yield call(alert, "Upss, nie można załadować widoku");
+    yield put(fetchMovieDetailsError());
+    yield call(alert, error);
   }
 }
 export function* watchFetchPopularMovies() {
   yield takeEvery(fetchPopularMovies.type, fetchPopularMoviesHandler);
+  yield takeEvery(fetchPopularMovies.type, fetchConfigurationsFile);
   yield takeEvery(fetchPopularMovies.type, fetchGenresHandler);
-  yield takeEvery(fetchMovieCredits.type, fetchMovieCreditsHandler);
+  yield takeEvery(fetchMovieDetails.type, fetchMovieDetailsHandler);
 }
