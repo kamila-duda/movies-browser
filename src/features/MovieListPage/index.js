@@ -1,16 +1,16 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchPopularMovies,
   selectCurrentPage,
-  selectImages,
   selectLoading,
   selectMovies,
 } from "features/moviesSlice";
+import { selectImages } from "features/configurationsSlice"
 import Spinner from "features/Spinner";
 import { StyledLink } from "./styled";
 import { toMovieDetails } from "routes";
