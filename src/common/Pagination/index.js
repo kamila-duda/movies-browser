@@ -1,20 +1,16 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { ButtonWrapper, StyledButton, PageCounter, Quantity, StyledFontAwesomeIcon, PaginationText } from "./styled";
-import {
-  selectCurrentPage,
-  selectTotalPages,
+
+const Pagination = ({
+  currentPage,
+  lastPage,
   setCurrentPageFirst,
   decreaseCurrentPage,
   increaseCurrentPage,
-  setCurrentPageLast
-} from "features/moviesSlice";
-
-const Pagination = () => {
-  const currentPage = useSelector(selectCurrentPage);
-  const lastPage = useSelector(selectTotalPages);
+  setCurrentPageLast }) => {
   const dispatch = useDispatch();
   return (
     <ButtonWrapper>
