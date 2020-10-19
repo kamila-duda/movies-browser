@@ -1,6 +1,5 @@
 import { apiKey } from "../apiKey";
 const language = "en-US";
-const page = 1; //tutaj będzie się to zmieniało we właściwym miejscu dynamicznie
 
 export const getConfigurationData = async () => {
   try {
@@ -19,7 +18,7 @@ export const getConfigurationData = async () => {
   }
 };
 
-export const getPopularMovies = async () => {
+export const getPopularMovies = async (page = 1) => {
   try {
     const response = await fetch(`
     https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}&page=${page}`,
@@ -51,7 +50,7 @@ export const getGenres = async () => {
     console.error("ups");
   }
 };
-export const getPopularPeople = async () => {
+export const getPopularPeople = async (page = 1) => {
   try {
     const response = await fetch(`
     https://api.themoviedb.org/3/person/popular?api_key=${apiKey}&language=${language}&page=${page}`
