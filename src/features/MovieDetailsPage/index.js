@@ -7,10 +7,12 @@ import { useSelector } from "react-redux";
 import {
   selectCast,
   selectCrew,
-  selectImages,
   selectMovie,
   selectMovieProduction,
 } from "features/moviesSlice";
+import {
+  selectImages,
+} from "features/configurationSlice";
 import noneProfile from "assets/images/png/noneProfile.png";
 import { useParams } from "react-router-dom";
 

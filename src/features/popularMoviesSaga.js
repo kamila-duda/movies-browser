@@ -13,8 +13,10 @@ import {
   fetchMovieDetails,
   fetchMovieDetailsSuccess,
   fetchMovieDetailsError,
-  setConfigurations,
 } from "./moviesSlice";
+import {
+  setConfigurations,
+} from "./configurationSlice";
 import store from "store";
 
 function* fetchPopularMoviesHandler() {
@@ -47,7 +49,6 @@ function* fetchMovieDetailsHandler() {
   try {
     const movieId = store.getState().movies.movieId;
     const details = yield call(getMovieDetails, movieId);
-    console.log(details);
     yield put(fetchMovieDetailsSuccess(details));
   } catch (error) {
     yield put(fetchMovieDetailsError());

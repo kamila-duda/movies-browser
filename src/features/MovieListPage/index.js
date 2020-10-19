@@ -8,10 +8,12 @@ import {
   fetchMovieDetails,
   fetchPopularMovies,
   selectCurrentPage,
-  selectImages,
   selectLoading,
   selectMovies,
 } from "features/moviesSlice";
+import {
+  selectImages,
+} from "features/configurationSlice";
 import Spinner from "features/Spinner";
 import { StyledLink } from "./styled";
 import { toMovieDetails } from "routes";
