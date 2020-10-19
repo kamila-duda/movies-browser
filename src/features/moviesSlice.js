@@ -5,6 +5,7 @@ export const moviesSlice = createSlice({
   initialState: {
     movies: [],
     movie: {},
+    configurations: {},
     genres: [28],
     cast: [],
     crew: [],
@@ -16,9 +17,10 @@ export const moviesSlice = createSlice({
       state.movies = [];
       state.loading = true;
     },
+    setConfigurations: (state, { payload: configurationsFile }) => {
+      state.configurations = configurationsFile;
+    },
     fetchPopularMoviesSuccess: (state, { payload: movies }) => {
-      console.log(state.movies)
-     console.log(movies)
       state.movies = movies.results;
       state.loading = false;
     },
@@ -27,7 +29,6 @@ export const moviesSlice = createSlice({
       state.loading = false;
     },
     fetchGenres: (state, { payload: genres }) => {
-      console.log(state)
       state.genres = genres.genres;
     },
     setCurrentPage: (state, { payload: movies }) => {
@@ -61,6 +62,7 @@ export const {
   fetchPopularMoviesSuccess,
   fetchPopularMoviesError,
   fetchGenres,
+  setConfigurations,
   setCurrentPage,
   fetchMovie,
   fetchMovieSuccess,
@@ -74,9 +76,11 @@ const selectMoviesState = (state) => state.movies;
 export const selectMovies = (state) => selectMoviesState(state).movies;
 export const selectLoading = (state) => selectMoviesState(state).loading;
 export const selectGenres = (state) => selectMoviesState(state).genres;
+export const selectConfigurations = (state) => selectMoviesState(state).configurations;
+export const selectImages = (state) => selectConfigurations(state).images;
 export const selectMovie = (state) => selectMoviesState(state).movie;
 export const selectCast = (state) => selectMoviesState(state).cast;
 export const selectCrew = (state) => selectMoviesState(state).crew;
-export const selectCurrentPage=(state)=>selectMoviesState(state).currentPage;
+export const selectCurrentPage = (state) => selectMoviesState(state).currentPage;
 
 export default moviesSlice.reducer;

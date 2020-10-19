@@ -1,11 +1,12 @@
 import { takeEvery, call, put, delay } from "redux-saga/effects";
-import { getPopularMovies, getGenres, getMovieCredits } from "features/getDataApi";
+import { getPopularMovies, getGenres, getMovieCredits, getConfigurationData } from "features/getDataApi";
 import {
   fetchPopularMovies,
   fetchPopularMoviesError,
   fetchPopularMoviesSuccess,
   fetchGenres,
-  fetchMovieCredits
+  fetchMovieCredits,
+  setConfigurations
 } from "./moviesSlice";
 
 function* fetchPopularMoviesHandler() {
@@ -26,16 +27,26 @@ function* fetchGenresHandler() {
     yield call(alert, "Upss, nie pobrano gatunków");
   }
 };
-function* fetchMovieCreditsHandler({payload: movieId}) {
+
+function* fetchConfigurationsFile() {
   try {
-const credits = yield call(getMovieCredits,movieId);
-yield put(fetchMovieCredits(credits))
+    const configurationsFile = yield call(getConfigurationData);
+    yield put(setConfigurations(configurationsFile));
   } catch (error) {
-      yield call(alert, "Upss, nie można załadować widoku");
+    yield call(alert, "Upss, nie pobrano gatunków");
+  }
+};
+function* fetchMovieCreditsHandler({ payload: movieId }) {
+  try {
+    const credits = yield call(getMovieCredits, movieId);
+    yield put(fetchMovieCredits(credits))
+  } catch (error) {
+    yield call(alert, "Upss, nie można załadować widoku");
   }
 }
 export function* watchFetchPopularMovies() {
   yield takeEvery(fetchPopularMovies.type, fetchPopularMoviesHandler);
   yield takeEvery(fetchPopularMovies.type, fetchGenresHandler);
+  yield takeEvery(fetchPopularMovies.type, fetchConfigurationsFile);
   yield takeEvery(fetchMovieCredits.type, fetchMovieCreditsHandler);
 }
