@@ -1,41 +1,65 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPopularPeople, selectPeople } from "features/peopleSlice";
-import { selectLoading } from "features/peopleSlice";
 import Spinner from "features/Spinner";
+import {
+  fetchPopularPeople,
+  selectCurrentPage,
+  selectPeople,
+  selectTotalPages,
+  increaseCurrentPage,
+  decreaseCurrentPage,
+  setCurrentPageFirst,
+  setCurrentPageLast,
+} from "features/peopleSlice";
+import { selectLoading } from "features/peopleSlice";
+import { selectImages } from "features/configurationsSlice";
 
 const PeopleListPage = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchPopularPeople());
-  }, [dispatch]);
-  const peopleList = true;
-  const baseURL = "http://image.tmdb.org/t/p/w500";
   const people = useSelector(selectPeople);
+  const dispatch = useDispatch();
+  const images = useSelector(selectImages);
+  const posterSize = "w500";
   const title = "Popular people";
   const loading = useSelector(selectLoading);
+  const currentPage = useSelector(selectCurrentPage);
+  const lastPage = useSelector(selectTotalPages);
+  const peopleList = true;
+
+  useEffect(() => {
+    dispatch(fetchPopularPeople({ payload: currentPage }));
+  }, [dispatch, currentPage]);
+
   return (
     <Container>
       {loading ? (
         <Tiles title="Search results for ..." body={<Spinner />} />
       ) : (
-        <Tiles
-          peopleList={peopleList}
-          title={title}
-          body={people.map((person) => (
-            <Tile
-              key={person.id}
-              poster={`${baseURL}${person.profile_path}`}
-              header={person.name}
-            />
-          ))}
+          <Tiles
+            peopleList={peopleList}
+            title={title}
+            body={people.map((person) => (
+              <Tile
+                key={person.id}
+                poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
+                header={person.name}
+              />
+            ))}
+          />
+        )}
+      {loading ? "" :
+        <Pagination
+          currentPage={currentPage}
+          lastPage={lastPage}
+          setCurrentPageFirst={setCurrentPageFirst}
+          decreaseCurrentPage={decreaseCurrentPage}
+          increaseCurrentPage={increaseCurrentPage}
+          setCurrentPageLast={setCurrentPageLast}
         />
-      )}
-      {loading ? "" : <Pagination />}
+      }
     </Container>
   );
 };
