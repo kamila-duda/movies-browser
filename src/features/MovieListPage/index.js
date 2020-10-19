@@ -23,7 +23,7 @@ const MovieListPage = () => {
   const movies = useSelector(selectMovies);
 
   useEffect(() => {
-    dispatch(fetchPopularMovies());
+    dispatch(fetchPopularMovies({ payload: currentPage }));
   }, [dispatch, currentPage]);
 
   const title = "Popular movies";
@@ -49,8 +49,7 @@ const MovieListPage = () => {
               </StyledLink>
             ))}
           />
-        )}
-      {loading ? "" : <Pagination />}
+        )}      {loading ? "" : <Pagination />}
     </Container>
   );
 };
