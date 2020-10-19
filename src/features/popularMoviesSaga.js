@@ -9,10 +9,10 @@ import {
   setConfigurations
 } from "./moviesSlice";
 
-function* fetchPopularMoviesHandler() {
+function* fetchPopularMoviesHandler({ payload }) {
   try {
     yield delay(500);
-    const movies = yield call(getPopularMovies);
+    const movies = yield call(getPopularMovies, payload.payload);
     yield put(fetchPopularMoviesSuccess(movies));
   } catch (error) {
     yield put(fetchPopularMoviesError());
