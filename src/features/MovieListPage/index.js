@@ -7,8 +7,13 @@ import Pagination from "common/Pagination";
 import {
   fetchPopularMovies,
   selectCurrentPage,
+  selectTotalPages,
   selectLoading,
   selectMovies,
+  increaseCurrentPage,
+  decreaseCurrentPage,
+  setCurrentPageFirst,
+  setCurrentPageLast,
 } from "features/moviesSlice";
 import { selectImages } from "features/configurationsSlice"
 import Spinner from "features/Spinner";
@@ -17,10 +22,12 @@ import { toMovieDetails } from "routes";
 
 const MovieListPage = () => {
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage)
+  const currentPage = useSelector(selectCurrentPage);
+  const lastPage = useSelector(selectTotalPages);
   const images = useSelector(selectImages);
-  const posterSize = "w500";
   const movies = useSelector(selectMovies);
+  const posterSize = "w500";
+
 
   useEffect(() => {
     dispatch(fetchPopularMovies({ payload: currentPage }));
@@ -49,7 +56,17 @@ const MovieListPage = () => {
               </StyledLink>
             ))}
           />
-        )}      {loading ? "" : <Pagination />}
+        )}
+      {loading ? "" :
+        <Pagination
+          currentPage={currentPage}
+          lastPage={lastPage}
+          setCurrentPageFirst={setCurrentPageFirst}
+          decreaseCurrentPage={decreaseCurrentPage}
+          increaseCurrentPage={increaseCurrentPage}
+          setCurrentPageLast={setCurrentPageLast}
+        />
+      }
     </Container>
   );
 };
