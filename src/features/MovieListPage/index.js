@@ -5,6 +5,7 @@ import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
 import Pagination from "common/Pagination";
 import {
+  fetchMovieDetails,
   fetchPopularMovies,
   selectCurrentPage,
   selectTotalPages,
@@ -27,8 +28,6 @@ const MovieListPage = () => {
   const images = useSelector(selectImages);
   const movies = useSelector(selectMovies);
   const posterSize = "w500";
-
-
   useEffect(() => {
     dispatch(fetchPopularMovies({ payload: currentPage }));
   }, [dispatch, currentPage]);
@@ -40,25 +39,30 @@ const MovieListPage = () => {
       {loading ? (
         <Tiles title="Search results for ..." body={<Spinner />} />
       ) : (
-          <Tiles
-            title={title}
-            body={movies.map((movie) => (
-              <StyledLink key={movie.id} to={toMovieDetails}>
-                <Tile
-                  key={movie.id}
-                  poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
-                  header={movie.title}
-                  subheader={movie.release_date}
-                  tags={movie.genre_ids}
-                  voteAverage={movie.vote_average}
-                  review={movie.vote_count}
-                />
-              </StyledLink>
-            ))}
-          />
-        )}
-      {loading ? "" :
-        <Pagination
+        <Tiles
+          title={title}
+          body={movies.map((movie) => (
+            <StyledLink
+              key={movie.id}
+              to={toMovieDetails}
+              onClick={() => dispatch(fetchMovieDetails(movie))}
+            >
+              <Tile
+                key={movie.id}
+                poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
+                header={movie.title}
+                subheader={movie.release_date.substring(0, 4)}
+                tags={movie.genre_ids}
+                voteAverage={movie.vote_average}
+                review={movie.vote_count}
+              />
+            </StyledLink>
+          ))}
+        />
+      )}
+
+      {loading ? "" : 
+ <Pagination
           currentPage={currentPage}
           lastPage={lastPage}
           setCurrentPageFirst={setCurrentPageFirst}
@@ -66,7 +70,7 @@ const MovieListPage = () => {
           increaseCurrentPage={increaseCurrentPage}
           setCurrentPageLast={setCurrentPageLast}
         />
-      }
+}
     </Container>
   );
 };

@@ -5,7 +5,9 @@ export const moviesSlice = createSlice({
   initialState: {
     movies: [],
     movie: {},
-    genres: [28],
+    movieId: null,
+    movieProduction: "",
+    genres: [],
     cast: [],
     crew: [],
     loading: true,
@@ -39,26 +41,27 @@ export const moviesSlice = createSlice({
     setCurrentPageLast: (state, { payload: lastPage }) => {
       state.currentPage = lastPage;
     },
-    fetchMovie: (state) => {
-      state.loading = true;
-    },
-    fetchMovieSuccess: (state, { payload: movie }) => {
+    fetchMovieDetails: (state, { payload: movie }) => {
+      state.movieId = movie.id;
       state.movie = movie;
-      state.loading = false;
-    },
-    fetchMovieError: (state) => {
-      state.loading = false;
-    },
-    fetchMovieCredits: (state) => {
+      state.cast = [];
+      state.crew = [];
+      state.movieProduction = "";
       state.loading = true;
     },
-    fetchMovieCreditsSuccess: (state, { payload: credicts }) => {
-      state.cast = credicts.cast;
-      state.crew = credicts.crew;
-    },
-    fetchMovieCreditsError: (state) => {
+    fetchMovieDetailsSuccess: (state, { payload: details }) => {
       state.loading = false;
-    }
+      state.cast = details.credits.cast;
+      if (details.production_countries.length > 0) {
+        state.movieProduction = details.production_countries;
+      } else {
+        state.movieProduction = [{ name: "brak danych" }];
+      }
+      state.crew = details.credits.crew;
+    },
+    fetchMovieDetailsError: (state) => {
+      state.loading = false;
+    },
   },
 });
 
@@ -71,12 +74,10 @@ export const {
   decreaseCurrentPage,
   setCurrentPageFirst,
   setCurrentPageLast,
-  fetchMovie,
-  fetchMovieSuccess,
-  fetchMovieError,
-  fetchMovieCredits,
-  fetchMovieCreditsSuccess,
-  fetchMovieCreditsError,
+  setCurrentPage,
+  fetchMovieDetails,
+  fetchMovieDetailsSuccess,
+  fetchMovieDetailsError,
 } = moviesSlice.actions;
 
 const selectMoviesState = (state) => state.movies;
@@ -85,8 +86,15 @@ export const selectTotalPages = (state) => selectMoviesState(state).movies.total
 export const selectLoading = (state) => selectMoviesState(state).loading;
 export const selectGenres = (state) => selectMoviesState(state).genres;
 export const selectMovie = (state) => selectMoviesState(state).movie;
+export const selectMovieId = (state) => selectMoviesState(state).movieId;
+export const selectMovieProduction = (state) =>
+  selectMoviesState(state).movieProduction;
 export const selectCast = (state) => selectMoviesState(state).cast;
 export const selectCrew = (state) => selectMoviesState(state).crew;
-export const selectCurrentPage = (state) => selectMoviesState(state).currentPage;
+export const selectCurrentPage = (state) =>
+  selectMoviesState(state).currentPage;
+export const getMovieById = (state, movieId) =>
+  selectMovies(state).find(({ id }) => id === movieId);
+
 
 export default moviesSlice.reducer;

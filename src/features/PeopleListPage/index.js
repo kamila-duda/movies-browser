@@ -14,9 +14,12 @@ import {
   decreaseCurrentPage,
   setCurrentPageFirst,
   setCurrentPageLast,
+  fetchPersonDetails,
 } from "features/peopleSlice";
 import { selectLoading } from "features/peopleSlice";
 import { selectImages } from "features/configurationsSlice";
+import { StyledLink } from "features/MovieListPage/styled";
+import { toPersonDetails } from "routes";
 
 const PeopleListPage = () => {
   const people = useSelector(selectPeople);
@@ -38,19 +41,23 @@ const PeopleListPage = () => {
       {loading ? (
         <Tiles title="Search results for ..." body={<Spinner />} />
       ) : (
-          <Tiles
-            peopleList={peopleList}
-            title={title}
-            body={people.map((person) => (
-              <Tile
-                key={person.id}
-                poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
-                header={person.name}
-              />
-            ))}
-          />
-        )}
-      {loading ? "" :
+        <Tiles
+          peopleList={peopleList}
+          title={title}
+          body={people.map((person) => (
+            <StyledLink
+              key={person.id}
+              to={toPersonDetails}
+              onClick={() => dispatch(fetchPersonDetails(person))}
+            >
+            <Tile
+              key={nanoid}
+              poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
+              header={person.name}
+            />
+            </StyledLink>
+          ))}
+ {loading ? "" :
         <Pagination
           currentPage={currentPage}
           lastPage={lastPage}

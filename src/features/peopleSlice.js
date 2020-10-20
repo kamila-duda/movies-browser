@@ -6,6 +6,8 @@ export const peopleSlice = createSlice({
     people: [],
     loading: true,
     currentPage: 1,
+    person: [],
+    personId: null,
   },
   reducers: {
     fetchPopularPeople: (state) => {
@@ -33,6 +35,19 @@ export const peopleSlice = createSlice({
       state.currentPage = lastPage;
     },
   }
+    fetchPersonDetails: (state, { payload: person }) => {
+      state.personId = person.id;
+      state.person = person;
+      state.loading = true;
+    },
+    fetchPersonDetailsSuccess: (state, { payload: details }) => {
+      state.loading = false;
+      state.details = details;
+    },
+    fetchPersonDetailsError: (state) => {
+      state.loading = false;
+    },
+  },
 });
 
 export const {
@@ -43,6 +58,10 @@ export const {
   decreaseCurrentPage,
   setCurrentPageFirst,
   setCurrentPageLast
+  fetchPersonDetails,
+  fetchPersonDetailsSuccess,
+  fetchPersonDetailsError,
+  setCurrentPage,
 } = peopleSlice.actions;
 
 const selectPeopleState = (state) => state.people;
@@ -50,5 +69,6 @@ export const selectPeople = (state) => selectPeopleState(state).people.results;
 export const selectLoading = (state) => selectPeopleState(state).loading;
 export const selectTotalPages = (state) => selectPeopleState(state).people.total_pages;
 export const selectCurrentPage = (state) => selectPeopleState(state).currentPage;
+export const selectPerson = (state) => selectPeopleState(state).person;
 
 export default peopleSlice.reducer;
