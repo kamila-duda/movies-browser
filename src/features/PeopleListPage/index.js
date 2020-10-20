@@ -50,15 +50,18 @@ const PeopleListPage = () => {
               to={toPersonDetails}
               onClick={() => dispatch(fetchPersonDetails(person))}
             >
-            <Tile
-              key={person.name}
-              poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
-              header={person.name}
-            />
+              <Tile
+                key={person.name}
+                poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
+                header={person.name}
+              />
             </StyledLink>
           ))}
-          />)}
- {loading ? "" :
+        />
+      )}
+      {loading ? (
+        ""
+      ) : (
         <Pagination
           currentPage={currentPage}
           lastPage={lastPage}
@@ -67,7 +70,7 @@ const PeopleListPage = () => {
           increaseCurrentPage={increaseCurrentPage}
           setCurrentPageLast={setCurrentPageLast}
         />
-      }
+      )}
     </Container>
   );
 };

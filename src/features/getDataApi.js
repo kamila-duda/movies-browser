@@ -12,7 +12,6 @@ export const getConfigurationData = async () => {
 
     const configurationFile = await response.json();
     return configurationFile;
-
   } catch (error) {
     console.error("ups");
   }
@@ -35,7 +34,9 @@ export const getPopularMovies = async (page = 1) => {
 };
 export const getGenres = async () => {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language==${language}`);
+    const response = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language==${language}`
+    );
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -79,13 +80,12 @@ export const getMovieDetails = async (movieId) => {
 export const getPersonDetails = async (personId) => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${personId}?api_key=${apiKey}&language=en-US&append_to_response=movie_credits`
+      `https://api.themoviedb.org/3/person/${personId}?api_key=${apiKey}&language=en-US&append_to_response=movie_credits`
     );
     if (!response.ok) {
       throw new Error(response.statusText);
     }
     const details = await response.json();
-    console.log(details)
     return details;
   } catch (error) {
     console.error("ups");

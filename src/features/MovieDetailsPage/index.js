@@ -3,7 +3,7 @@ import HeroBanner from "common/HeroBanner";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectCast,
   selectCrew,
@@ -11,12 +11,18 @@ import {
   selectMovieProduction,
 } from "features/moviesSlice";
 import {
+  fetchPersonDetails,
+} from "features/peopleSlice";
+import {
   selectImages,
 } from "features/configurationSlice";
 import noneProfile from "assets/images/png/noneProfile.png";
 import { useParams } from "react-router-dom";
+import { StyledLink } from "features/MovieListPage/styled";
+import { toPersonDetails } from "routes";
 
 const MovieDetailsPage = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const movie = useSelector(selectMovie);
   const images = useSelector(selectImages);
@@ -50,17 +56,23 @@ const MovieDetailsPage = () => {
         <Tiles
           peopleList={true}
           title="Cast"
-          body={cast.map((actor) => (
+          body={cast.map((person) => (
+            <StyledLink
+              key={person.id}
+              to={toPersonDetails({ id: person.id })}
+              onClick={() => dispatch(fetchPersonDetails(person))}
+            >
             <Tile
               peopleList={true}
               poster={
-                actor.profile_path === null
+                person.profile_path === null
                   ? noneProfile
-                  : `${images["base_url"]}/${posterSize}${actor.profile_path}`
+                  : `${images["base_url"]}/${posterSize}${person.profile_path}`
               }
-              header={actor.name}
-              subheader={actor.character}
+              header={person.name}
+              subheader={person.character}
             />
+            </StyledLink>
           ))}
         />
 

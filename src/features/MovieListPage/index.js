@@ -16,7 +16,8 @@ import {
   setCurrentPageFirst,
   setCurrentPageLast,
 } from "features/moviesSlice";
-import { selectImages } from "features/configurationSlice"
+import { selectImages } from "features/configurationSlice";
+import nonePoster from "assets/images/png/nonePoster.png";
 import Spinner from "features/Spinner";
 import { StyledLink } from "./styled";
 import { toMovieDetails } from "routes";
@@ -44,14 +45,18 @@ const MovieListPage = () => {
           body={movies.map((movie) => (
             <StyledLink
               key={movie.id}
-              to={toMovieDetails}
+              to={toMovieDetails({ id: movie.id })}
               onClick={() => dispatch(fetchMovieDetails(movie))}
             >
               <Tile
                 key={movie.id}
-                poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
+                poster={
+                  movie.poster_path === null
+                    ? nonePoster
+                    : `${images["base_url"]}/${posterSize}${movie.poster_path}`
+                }
                 header={movie.title}
-                subheader={movie.release_date.substring(0, 4)}
+                subheader={movie.release_date? movie.release_date.substring(0, 4) : ""}
                 tags={movie.genre_ids}
                 voteAverage={movie.vote_average}
                 review={movie.vote_count}
@@ -61,8 +66,10 @@ const MovieListPage = () => {
         />
       )}
 
-      {loading ? "" : 
- <Pagination
+      {loading ? (
+        ""
+      ) : (
+        <Pagination
           currentPage={currentPage}
           lastPage={lastPage}
           setCurrentPageFirst={setCurrentPageFirst}
@@ -70,7 +77,7 @@ const MovieListPage = () => {
           increaseCurrentPage={increaseCurrentPage}
           setCurrentPageLast={setCurrentPageLast}
         />
-}
+      )}
     </Container>
   );
 };

@@ -29,6 +29,8 @@ const Tile = ({
   detailsReleaseDate,
   detalReview,
   peopleList,
+  placeOfBirth,
+  birthday,
 }) => {
   return (
     <StyledTile
@@ -56,6 +58,21 @@ const Tile = ({
         )}
         {detailsYear ? (
           <StyledTileSubHeader detailsPage>{detailsYear}</StyledTileSubHeader>
+        ) : (
+          ""
+        )}
+        {birthday ? (
+          <StyledTileSubHeader details>
+            Birthday:<StyledDetails>{birthday}</StyledDetails>
+          </StyledTileSubHeader>
+        ) : (
+          ""
+        )}
+        {placeOfBirth ? (
+          <StyledTileSubHeader details>
+            Place of birth:
+              <StyledDetails>{placeOfBirth}</StyledDetails>
+          </StyledTileSubHeader>
         ) : (
           ""
         )}
