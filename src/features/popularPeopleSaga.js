@@ -10,10 +10,10 @@ import {
 } from "./peopleSlice";
 import store from "store";
 
-function* fetchPopularPeopleHandler() {
+function* fetchPopularPeopleHandler({ payload }) {
   try {
     yield delay(500);
-    const people = yield call(getPopularPeople);
+    const people = yield call(getPopularPeople, payload.payload);
     yield put(fetchPopularPeopleSuccess(people));
   } catch (error) {
     yield put(fetchPopularPeopleError());

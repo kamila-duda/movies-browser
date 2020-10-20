@@ -18,11 +18,8 @@ export const moviesSlice = createSlice({
       state.movies = [];
       state.loading = true;
     },
-    setConfigurations: (state, { payload: configurationsFile }) => {
-      state.configurations = configurationsFile;
-    },
     fetchPopularMoviesSuccess: (state, { payload: movies }) => {
-      state.movies = movies.results;
+      state.movies = movies;
       state.loading = false;
     },
     fetchPopularMoviesError: (state) => {
@@ -32,8 +29,17 @@ export const moviesSlice = createSlice({
     fetchGenres: (state, { payload: genres }) => {
       state.genres = genres.genres;
     },
-    setCurrentPage: (state, { payload: movies }) => {
-      state.currentPage = movies.page;
+    increaseCurrentPage: (state) => {
+      state.currentPage = ++state.currentPage;
+    },
+    decreaseCurrentPage: (state) => {
+      state.currentPage = --state.currentPage;
+    },
+    setCurrentPageFirst: (state) => {
+      state.currentPage = 1;
+    },
+    setCurrentPageLast: (state, { payload: lastPage }) => {
+      state.currentPage = lastPage;
     },
     fetchMovieDetails: (state, { payload: movie }) => {
       state.movieId = movie.id;
@@ -64,7 +70,10 @@ export const {
   fetchPopularMoviesSuccess,
   fetchPopularMoviesError,
   fetchGenres,
-  setConfigurations,
+  increaseCurrentPage,
+  decreaseCurrentPage,
+  setCurrentPageFirst,
+  setCurrentPageLast,
   setCurrentPage,
   fetchMovieDetails,
   fetchMovieDetailsSuccess,
@@ -72,11 +81,10 @@ export const {
 } = moviesSlice.actions;
 
 const selectMoviesState = (state) => state.movies;
-export const selectMovies = (state) => selectMoviesState(state).movies;
+export const selectMovies = (state) => selectMoviesState(state).movies.results;
+export const selectTotalPages = (state) => selectMoviesState(state).movies.total_pages;
 export const selectLoading = (state) => selectMoviesState(state).loading;
 export const selectGenres = (state) => selectMoviesState(state).genres;
-export const selectConfigurations = (state) => selectMoviesState(state).configurations;
-export const selectImages = (state) => selectConfigurations(state).images;
 export const selectMovie = (state) => selectMoviesState(state).movie;
 export const selectMovieId = (state) => selectMoviesState(state).movieId;
 export const selectMovieProduction = (state) =>

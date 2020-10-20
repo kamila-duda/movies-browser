@@ -1,28 +1,41 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPopularPeople, selectPeople, fetchPersonDetails } from "features/peopleSlice";
-import { selectLoading } from "features/peopleSlice";
 import Spinner from "features/Spinner";
-import { nanoid } from "@reduxjs/toolkit";
-import { selectImages } from "features/configurationSlice";
+import {
+  fetchPopularPeople,
+  selectCurrentPage,
+  selectPeople,
+  selectTotalPages,
+  increaseCurrentPage,
+  decreaseCurrentPage,
+  setCurrentPageFirst,
+  setCurrentPageLast,
+  fetchPersonDetails,
+} from "features/peopleSlice";
+import { selectLoading } from "features/peopleSlice";
+import { selectImages } from "features/configurationsSlice";
 import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
 
 const PeopleListPage = () => {
+  const people = useSelector(selectPeople);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchPopularPeople());
-  }, [dispatch]);
-  const peopleList = true;
   const images = useSelector(selectImages);
   const posterSize = "w500";
-  const people = useSelector(selectPeople);
   const title = "Popular people";
   const loading = useSelector(selectLoading);
+  const currentPage = useSelector(selectCurrentPage);
+  const lastPage = useSelector(selectTotalPages);
+  const peopleList = true;
+
+  useEffect(() => {
+    dispatch(fetchPopularPeople({ payload: currentPage }));
+  }, [dispatch, currentPage]);
+
   return (
     <Container>
       {loading ? (
@@ -44,9 +57,16 @@ const PeopleListPage = () => {
             />
             </StyledLink>
           ))}
+ {loading ? "" :
+        <Pagination
+          currentPage={currentPage}
+          lastPage={lastPage}
+          setCurrentPageFirst={setCurrentPageFirst}
+          decreaseCurrentPage={decreaseCurrentPage}
+          increaseCurrentPage={increaseCurrentPage}
+          setCurrentPageLast={setCurrentPageLast}
         />
-      )}
-      {loading ? "" : <Pagination />}
+      }
     </Container>
   );
 };

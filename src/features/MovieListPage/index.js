@@ -1,32 +1,35 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMovieDetails,
   fetchPopularMovies,
   selectCurrentPage,
+  selectTotalPages,
   selectLoading,
   selectMovies,
+  increaseCurrentPage,
+  decreaseCurrentPage,
+  setCurrentPageFirst,
+  setCurrentPageLast,
 } from "features/moviesSlice";
-import {
-  selectImages,
-} from "features/configurationSlice";
+import { selectImages } from "features/configurationsSlice"
 import Spinner from "features/Spinner";
 import { StyledLink } from "./styled";
 import { toMovieDetails } from "routes";
 
 const MovieListPage = () => {
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage)
+  const currentPage = useSelector(selectCurrentPage);
+  const lastPage = useSelector(selectTotalPages);
   const images = useSelector(selectImages);
-  const posterSize = "w500";
   const movies = useSelector(selectMovies);
-  
+  const posterSize = "w500";
   useEffect(() => {
-    dispatch(fetchPopularMovies());
+    dispatch(fetchPopularMovies({ payload: currentPage }));
   }, [dispatch, currentPage]);
 
   const title = "Popular movies";
@@ -58,7 +61,16 @@ const MovieListPage = () => {
         />
       )}
 
-      {loading ? "" : <Pagination />}
+      {loading ? "" : 
+ <Pagination
+          currentPage={currentPage}
+          lastPage={lastPage}
+          setCurrentPageFirst={setCurrentPageFirst}
+          decreaseCurrentPage={decreaseCurrentPage}
+          increaseCurrentPage={increaseCurrentPage}
+          setCurrentPageLast={setCurrentPageLast}
+        />
+}
     </Container>
   );
 };

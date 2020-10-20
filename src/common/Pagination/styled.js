@@ -25,8 +25,18 @@ export const StyledButton = styled.button`
     justify-content:center;
     align-items:center;
 
-    ${({ noactive }) => noactive && css`
+    &:hover{
+        cursor:pointer;
+        background-color:${({ theme }) => theme.color.spindle};
+    }
+
+    ${({ disabled }) => disabled && css`
         background-color:${({ theme }) => theme.color.gray};
+
+        &:hover{
+        cursor:default;
+        background-color:${({ theme }) => theme.color.gray};
+    }
     `}
 
     ${({ last }) => last && css`
@@ -73,7 +83,7 @@ export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
     font-weight:600;
     color:${({ theme }) => theme.color.blue};
 
-    ${({ noactive }) => noactive && css`
+    ${({ disabled }) => disabled && css`
         color:${({ theme }) => theme.color.darkedGray};
 		`}
 
@@ -84,7 +94,7 @@ export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
 		@media (max-width: ${({ theme }) => theme.media.mobile}) {
 			margin-right:0px;
 
-			${({ noactive }) => noactive && css`
+			${({ disabled }) => disabled && css`
         color:${({ theme }) => theme.color.darkedGray};
 		`}
 			${({ formobile }) => formobile && css`
