@@ -5,12 +5,16 @@ import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchMovieDetails,
   fetchPopularMovies,
   selectCurrentPage,
   selectImages,
   selectLoading,
   selectMovies,
 } from "features/moviesSlice";
+import {
+  selectImages,
+} from "features/configurationSlice";
 import Spinner from "features/Spinner";
 import { StyledLink } from "./styled";
 import { toMovieDetails } from "routes";
@@ -21,7 +25,7 @@ const MovieListPage = () => {
   const images = useSelector(selectImages);
   const posterSize = "w500";
   const movies = useSelector(selectMovies);
-
+  
   useEffect(() => {
     dispatch(fetchPopularMovies());
   }, [dispatch, currentPage]);
@@ -33,23 +37,28 @@ const MovieListPage = () => {
       {loading ? (
         <Tiles title="Search results for ..." body={<Spinner />} />
       ) : (
-          <Tiles
-            title={title}
-            body={movies.map((movie) => (
-              <StyledLink key={movie.id} to={toMovieDetails}>
-                <Tile
-                  key={movie.id}
-                  poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
-                  header={movie.title}
-                  subheader={movie.release_date}
-                  tags={movie.genre_ids}
-                  voteAverage={movie.vote_average}
-                  review={movie.vote_count}
-                />
-              </StyledLink>
-            ))}
-          />
-        )}
+        <Tiles
+          title={title}
+          body={movies.map((movie) => (
+            <StyledLink
+              key={movie.id}
+              to={toMovieDetails}
+              onClick={() => dispatch(fetchMovieDetails(movie))}
+            >
+              <Tile
+                key={movie.id}
+                poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
+                header={movie.title}
+                subheader={movie.release_date.substring(0, 4)}
+                tags={movie.genre_ids}
+                voteAverage={movie.vote_average}
+                review={movie.vote_count}
+              />
+            </StyledLink>
+          ))}
+        />
+      )}
+
       {loading ? "" : <Pagination />}
     </Container>
   );

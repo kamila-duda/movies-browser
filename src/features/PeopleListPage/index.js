@@ -4,9 +4,13 @@ import Tile from "common/Tiles/Tile";
 import React, { useEffect } from "react";
 import Pagination from "common/Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPopularPeople, selectPeople } from "features/peopleSlice";
+import { fetchPopularPeople, selectPeople, fetchPersonDetails } from "features/peopleSlice";
 import { selectLoading } from "features/peopleSlice";
 import Spinner from "features/Spinner";
+import { nanoid } from "@reduxjs/toolkit";
+import { selectImages } from "features/configurationSlice";
+import { StyledLink } from "features/MovieListPage/styled";
+import { toPersonDetails } from "routes";
 
 const PeopleListPage = () => {
   const dispatch = useDispatch();
@@ -14,7 +18,8 @@ const PeopleListPage = () => {
     dispatch(fetchPopularPeople());
   }, [dispatch]);
   const peopleList = true;
-  const baseURL = "http://image.tmdb.org/t/p/w500";
+  const images = useSelector(selectImages);
+  const posterSize = "w500";
   const people = useSelector(selectPeople);
   const title = "Popular people";
   const loading = useSelector(selectLoading);
@@ -27,11 +32,17 @@ const PeopleListPage = () => {
           peopleList={peopleList}
           title={title}
           body={people.map((person) => (
-            <Tile
+            <StyledLink
               key={person.id}
-              poster={`${baseURL}${person.profile_path}`}
+              to={toPersonDetails}
+              onClick={() => dispatch(fetchPersonDetails(person))}
+            >
+            <Tile
+              key={nanoid}
+              poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
               header={person.name}
             />
+            </StyledLink>
           ))}
         />
       )}

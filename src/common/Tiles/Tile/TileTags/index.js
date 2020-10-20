@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StyledTileTag, StyledTileTags } from "./styled";
 import { selectGenres } from "features/moviesSlice";
 import { useSelector } from "react-redux";

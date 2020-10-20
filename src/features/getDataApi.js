@@ -5,25 +5,23 @@ const page = 1; //tutaj będzie się to zmieniało we właściwym miejscu dynami
 export const getConfigurationData = async () => {
   try {
     const response = await fetch(`
-    https://api.themoviedb.org/3/configuration?api_key=${apiKey}`,
-    );
+    https://api.themoviedb.org/3/configuration?api_key=${apiKey}`);
 
     if (!response.ok) {
       throw new Error(response.statusText);
     }
 
-    const movies = await response.json();
-    return movies;
+    const configurationFile = await response.json();
+    return configurationFile;
+
   } catch (error) {
     console.error("ups");
   }
 };
-
 export const getPopularMovies = async () => {
   try {
     const response = await fetch(`
-    https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}&page=${page}`,
-    );
+    https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}&page=${page}`);
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -37,9 +35,7 @@ export const getPopularMovies = async () => {
 };
 export const getGenres = async () => {
   try {
-    const response = await fetch(`
-    https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language==${language}`
-    );
+    const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language==${language}`);
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -54,8 +50,7 @@ export const getGenres = async () => {
 export const getPopularPeople = async () => {
   try {
     const response = await fetch(`
-    https://api.themoviedb.org/3/person/popular?api_key=${apiKey}&language=${language}&page=${page}`
-    );
+    https://api.themoviedb.org/3/person/popular?api_key=${apiKey}&language=${language}&page=${page}`);
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -67,16 +62,31 @@ export const getPopularPeople = async () => {
     console.error("ups");
   }
 };
-export const getMovieCredits = async (movieId) => {
+export const getMovieDetails = async (movieId) => {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`);
-
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US&append_to_response=credits`
+    );
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-
-    const credits = await response.json();
-    return credits;
+    const details = await response.json();
+    return details;
+  } catch (error) {
+    console.error("ups");
+  }
+};
+export const getPersonDetails = async (personId) => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${personId}?api_key=${apiKey}&language=en-US&append_to_response=movie_credits`
+    );
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const details = await response.json();
+    console.log(details)
+    return details;
   } catch (error) {
     console.error("ups");
   }

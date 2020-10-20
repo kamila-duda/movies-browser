@@ -8,9 +8,17 @@ import StarIcon from "assets/images/svg/star.svg";
 const TileReview = ({ review, voteAverage, detailsPage }) => {
   return (
     <StyledTileReview>
-      <StyledTileReviewStar detailsPage={detailsPage} src={StarIcon} alt="test" />
-      <StyledTileReviewRating detailsPage={detailsPage}>{voteAverage}</StyledTileReviewRating>
-      <StyledTileReviewUserRatings detailsPage={detailsPage}>{review} votes </StyledTileReviewUserRatings>
+      <StyledTileReviewStar
+        detailsPage={detailsPage}
+        src={StarIcon}
+        alt="test"
+      />
+      <StyledTileReviewRating detailsPage={detailsPage}>
+        {voteAverage}/10
+      </StyledTileReviewRating>
+      <StyledTileReviewUserRatings detailsPage={detailsPage}>
+        {review} votes{" "}
+      </StyledTileReviewUserRatings>
     </StyledTileReview>
   );
 };
