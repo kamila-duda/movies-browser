@@ -8,6 +8,7 @@ import {
   fetchMovieDetails,
   fetchPopularMovies,
   selectCurrentPage,
+  selectImages,
   selectLoading,
   selectMovies,
 } from "features/moviesSlice";
@@ -20,14 +21,15 @@ import { toMovieDetails } from "routes";
 
 const MovieListPage = () => {
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage);
-
+  const currentPage = useSelector(selectCurrentPage)
   const images = useSelector(selectImages);
   const posterSize = "w500";
   const movies = useSelector(selectMovies);
+  
   useEffect(() => {
     dispatch(fetchPopularMovies());
   }, [dispatch, currentPage]);
+
   const title = "Popular movies";
   const loading = useSelector(selectLoading);
   return (
@@ -56,6 +58,7 @@ const MovieListPage = () => {
           ))}
         />
       )}
+
       {loading ? "" : <Pagination />}
     </Container>
   );

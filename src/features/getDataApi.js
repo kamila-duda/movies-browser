@@ -13,6 +13,7 @@ export const getConfigurationData = async () => {
 
     const configurationFile = await response.json();
     return configurationFile;
+
   } catch (error) {
     console.error("ups");
   }
@@ -34,8 +35,7 @@ export const getPopularMovies = async () => {
 };
 export const getGenres = async () => {
   try {
-    const response = await fetch(`
-    https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language==${language}`);
+    const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language==${language}`);
 
     if (!response.ok) {
       throw new Error(response.statusText);
