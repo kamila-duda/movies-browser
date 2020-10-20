@@ -51,12 +51,13 @@ const PeopleListPage = () => {
               onClick={() => dispatch(fetchPersonDetails(person))}
             >
             <Tile
-              key={nanoid}
+              key={person.name}
               poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
               header={person.name}
             />
             </StyledLink>
           ))}
+          />)}
  {loading ? "" :
         <Pagination
           currentPage={currentPage}

@@ -34,7 +34,6 @@ export const peopleSlice = createSlice({
     setCurrentPageLast: (state, { payload: lastPage }) => {
       state.currentPage = lastPage;
     },
-  }
     fetchPersonDetails: (state, { payload: person }) => {
       state.personId = person.id;
       state.person = person;
@@ -57,7 +56,7 @@ export const {
   increaseCurrentPage,
   decreaseCurrentPage,
   setCurrentPageFirst,
-  setCurrentPageLast
+  setCurrentPageLast,
   fetchPersonDetails,
   fetchPersonDetailsSuccess,
   fetchPersonDetailsError,
