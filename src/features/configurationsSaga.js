@@ -1,8 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { getConfigurationData } from "features/getDataApi";
-import { setConfigurations } from "./configurationsSlice";
+import { setConfigurations } from "./configurationSlice";
 import { fetchPopularMovies } from "./moviesSlice";
-import { fetchPopularPeople } from "./peopleSlice";
 
 function* fetchConfigurationsHandler() {
   try {
@@ -15,5 +14,4 @@ function* fetchConfigurationsHandler() {
 
 export function* watchFetchConfigurationsFile() {
   yield takeEvery(fetchPopularMovies.type, fetchConfigurationsHandler);
-  yield takeEvery(fetchPopularPeople.type, fetchConfigurationsHandler);
 }

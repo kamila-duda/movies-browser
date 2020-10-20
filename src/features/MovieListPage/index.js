@@ -16,7 +16,7 @@ import {
   setCurrentPageFirst,
   setCurrentPageLast,
 } from "features/moviesSlice";
-import { selectImages } from "features/configurationsSlice"
+import { selectImages } from "features/configurationSlice"
 import Spinner from "features/Spinner";
 import { StyledLink } from "./styled";
 import { toMovieDetails } from "routes";

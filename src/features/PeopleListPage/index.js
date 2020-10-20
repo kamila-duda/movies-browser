@@ -17,7 +17,7 @@ import {
   fetchPersonDetails,
 } from "features/peopleSlice";
 import { selectLoading } from "features/peopleSlice";
-import { selectImages } from "features/configurationsSlice";
+import { selectImages } from "features/configurationSlice";
 import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
 
