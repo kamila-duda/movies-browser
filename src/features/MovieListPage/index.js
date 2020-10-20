@@ -8,7 +8,6 @@ import {
   fetchMovieDetails,
   fetchPopularMovies,
   selectCurrentPage,
-  selectImages,
   selectLoading,
   selectMovies,
 } from "features/moviesSlice";
