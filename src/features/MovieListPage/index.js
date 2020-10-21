@@ -44,7 +44,7 @@ const MovieListPage = () => {
   if (isError) {
     return (
       <Container>
-        <ConnectionErrorPage />
+        <ConnectionErrorPage pageType="movies" />
       </Container>
     )
   }
