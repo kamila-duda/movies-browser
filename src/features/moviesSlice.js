@@ -11,6 +11,7 @@ export const moviesSlice = createSlice({
     cast: [],
     crew: [],
     loading: true,
+    isError: false,
     currentPage: 1,
   },
   reducers: {
@@ -20,10 +21,6 @@ export const moviesSlice = createSlice({
     },
     fetchPopularMoviesSuccess: (state, { payload: movies }) => {
       state.movies = movies;
-      state.loading = false;
-    },
-    fetchPopularMoviesError: (state) => {
-      state.movies = [];
       state.loading = false;
     },
     fetchGenres: (state, { payload: genres }) => {
@@ -56,7 +53,8 @@ export const moviesSlice = createSlice({
       }
       state.crew = details.credits.crew;
     },
-    fetchMovieDetailsError: (state) => {
+    setError: (state) => {
+      state.isError = true;
       state.loading = false;
     },
   },
@@ -65,7 +63,6 @@ export const moviesSlice = createSlice({
 export const {
   fetchPopularMovies,
   fetchPopularMoviesSuccess,
-  fetchPopularMoviesError,
   fetchGenres,
   increaseCurrentPage,
   decreaseCurrentPage,
@@ -74,7 +71,7 @@ export const {
   setCurrentPage,
   fetchMovieDetails,
   fetchMovieDetailsSuccess,
-  fetchMovieDetailsError,
+  setError,
 } = moviesSlice.actions;
 
 const selectMoviesState = (state) => state.movies;
@@ -82,6 +79,7 @@ export const selectMovies = (state) => selectMoviesState(state).movies.results;
 export const selectTotalPages = (state) =>
   selectMoviesState(state).movies.total_pages;
 export const selectLoading = (state) => selectMoviesState(state).loading;
+export const selectIsError = (state) => selectMoviesState(state).isError;
 export const selectGenres = (state) => selectMoviesState(state).genres;
 export const selectMovie = (state) => selectMoviesState(state).movie;
 export const selectMovieId = (state) => selectMoviesState(state).movieId;
