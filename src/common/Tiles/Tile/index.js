@@ -31,6 +31,7 @@ const Tile = ({
   peopleList,
   placeOfBirth,
   birthday,
+  genresId
 }) => {
   return (
     <StyledTile
@@ -94,6 +95,7 @@ const Tile = ({
           ""
         )}
         {tags ? <TileTags tags={tags} /> : ""}
+        {genresId ? <TileTags genresId={genresId} /> : ""}
         {review || voteAverage ? (
           <TileReview review={review} voteAverage={voteAverage} />
         ) : (

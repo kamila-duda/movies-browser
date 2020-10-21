@@ -1,21 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeroBanner from "common/HeroBanner";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchMovieDetails,
   selectCast,
   selectCrew,
   selectMovie,
   selectMovieProduction,
 } from "features/moviesSlice";
-import {
-  fetchPersonDetails,
-} from "features/peopleSlice";
-import {
-  selectImages,
-} from "features/configurationSlice";
+import { fetchPersonDetails } from "features/peopleSlice";
 import noneProfile from "assets/images/png/noneProfile.png";
 import { useParams } from "react-router-dom";
 import { StyledLink } from "features/MovieListPage/styled";
@@ -25,16 +21,26 @@ const MovieDetailsPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const movie = useSelector(selectMovie);
-  const images = useSelector(selectImages);
+  const images = "http://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const backdropSize = "original";
+  console.log(movie);
+  console.log(movie.genres);
   const cast = useSelector(selectCast);
   const crew = useSelector(selectCrew);
   const movieProduction = useSelector(selectMovieProduction);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchMovieDetails(id));
+    }
+  }, [id]);
+  console.log(movie);
+  console.log(movie.genres);
   return (
     <>
       <HeroBanner
-        backdrop={`${images["base_url"]}/${backdropSize}${movie.backdrop_path}`}
+        backdrop={`${images}${backdropSize}${movie.backdrop_path}`}
         movieTitle={movie.title}
         vote_average={movie.vote_average}
         vote={movie.vote_count}
@@ -42,12 +48,12 @@ const MovieDetailsPage = () => {
       <Container detailsPage={true}>
         <Tile
           horizontal={"horizontal"}
-          poster={`${images["base_url"]}/${posterSize}${movie.poster_path}`}
+          poster={`${images}${posterSize}${movie.poster_path}`}
           detailsTitle={movie.title}
-          detailsYear={movie.release_date.substring(0, 4)}
+          // detailsYear={movie.release_date.substring(0, 4)}
           detailsProduction={movieProduction === [] ? "" : movieProduction}
           detailsReleaseDate={movie.release_date}
-          tags={movie.genre_ids}
+          genresId={movie.genres}
           voteAverage={movie.vote_average}
           review={movie.vote_count}
           description={movie.overview}
@@ -60,18 +66,18 @@ const MovieDetailsPage = () => {
             <StyledLink
               key={person.id}
               to={toPersonDetails({ id: person.id })}
-              onClick={() => dispatch(fetchPersonDetails(person))}
+              onClick={() => dispatch(fetchPersonDetails(person.id))}
             >
-            <Tile
-              peopleList={true}
-              poster={
-                person.profile_path === null
-                  ? noneProfile
-                  : `${images["base_url"]}/${posterSize}${person.profile_path}`
-              }
-              header={person.name}
-              subheader={person.character}
-            />
+              <Tile
+                peopleList={true}
+                poster={
+                  person.profile_path === null
+                    ? noneProfile
+                    : `${images}${posterSize}${person.profile_path}`
+                }
+                header={person.name}
+                subheader={person.character}
+              />
             </StyledLink>
           ))}
         />
@@ -85,7 +91,7 @@ const MovieDetailsPage = () => {
               poster={
                 crewmate.profile_path === null
                   ? noneProfile
-                  : `${images["base_url"]}/${posterSize}${crewmate.profile_path}`
+                  : `${images}${posterSize}${crewmate.profile_path}`
               }
               header={crewmate.name}
               subheader={crewmate.job}

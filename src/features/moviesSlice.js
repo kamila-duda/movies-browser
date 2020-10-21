@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { genres } from "./../genre";
 export const moviesSlice = createSlice({
   name: "movies",
   initialState: {
@@ -7,7 +7,7 @@ export const moviesSlice = createSlice({
     movie: {},
     movieId: null,
     movieProduction: "",
-    genres: [],
+    genres: genres,
     cast: [],
     crew: [],
     loading: true,
@@ -41,16 +41,13 @@ export const moviesSlice = createSlice({
     setCurrentPageLast: (state, { payload: lastPage }) => {
       state.currentPage = lastPage;
     },
-    fetchMovieDetails: (state, { payload: movie }) => {
-      state.movieId = movie.id;
-      state.movie = movie;
-      state.cast = [];
-      state.crew = [];
-      state.movieProduction = "";
+    fetchMovieDetails: (state, { payload: movieId }) => {
+      state.movieId = movieId;
       state.loading = true;
     },
     fetchMovieDetailsSuccess: (state, { payload: details }) => {
       state.loading = false;
+      state.movie = details;
       state.cast = details.credits.cast;
       if (details.production_countries.length > 0) {
         state.movieProduction = details.production_countries;
@@ -82,7 +79,8 @@ export const {
 
 const selectMoviesState = (state) => state.movies;
 export const selectMovies = (state) => selectMoviesState(state).movies.results;
-export const selectTotalPages = (state) => selectMoviesState(state).movies.total_pages;
+export const selectTotalPages = (state) =>
+  selectMoviesState(state).movies.total_pages;
 export const selectLoading = (state) => selectMoviesState(state).loading;
 export const selectGenres = (state) => selectMoviesState(state).genres;
 export const selectMovie = (state) => selectMoviesState(state).movie;
@@ -93,8 +91,5 @@ export const selectCast = (state) => selectMoviesState(state).cast;
 export const selectCrew = (state) => selectMoviesState(state).crew;
 export const selectCurrentPage = (state) =>
   selectMoviesState(state).currentPage;
-export const getMovieById = (state, movieId) =>
-  selectMovies(state).find(({ id }) => id === movieId);
-
 
 export default moviesSlice.reducer;

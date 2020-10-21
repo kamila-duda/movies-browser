@@ -10,11 +10,9 @@ export const peopleSlice = createSlice({
     personId: null,
     personCast: [],
     personCrew: [],
-    details: {},
   },
   reducers: {
     fetchPopularPeople: (state) => {
-      state.people = [];
       state.loading = true;
     },
     fetchPopularPeopleSuccess: (state, { payload: people }) => {
@@ -37,14 +35,13 @@ export const peopleSlice = createSlice({
     setCurrentPageLast: (state, { payload: lastPage }) => {
       state.currentPage = lastPage;
     },
-    fetchPersonDetails: (state, { payload: person }) => {
-      state.personId = person.id;
-      state.person = person;
+    fetchPersonDetails: (state, { payload: personId }) => {
+      state.personId = personId;
       state.loading = true;
     },
     fetchPersonDetailsSuccess: (state, { payload: details }) => {
-      state.details = details;
       state.loading = false;
+      state.person = details;
       state.personCast = details.movie_credits.cast;
       if (details.movie_credits.crew.length > 0) {
         state.personCrew = details.movie_credits.crew;
@@ -80,5 +77,4 @@ export const selectCurrentPage = (state) =>
 export const selectPerson = (state) => selectPeopleState(state).person;
 export const selectPersonCast = (state) => selectPeopleState(state).personCast;
 export const selectPersonCrew = (state) => selectPeopleState(state).personCrew;
-export const selectPersonDetails = (state) => selectPeopleState(state).details;
 export default peopleSlice.reducer;

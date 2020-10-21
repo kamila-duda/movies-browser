@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
 import { useDispatch, useSelector } from "react-redux";
-import { selectImages } from "features/configurationSlice";
 import nonePoster from "assets/images/png/nonePoster.png";
 import { useParams } from "react-router-dom";
 import {
+  fetchPersonDetails,
   selectPerson,
   selectPersonCast,
   selectPersonCrew,
-  selectPersonDetails,
 } from "features/peopleSlice";
 import { fetchMovieDetails } from "features/moviesSlice";
 import { StyledLink } from "features/MovieListPage/styled";
@@ -20,21 +19,25 @@ const PersonDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const person = useSelector(selectPerson);
-  const images = useSelector(selectImages);
+  const images = "http://image.tmdb.org/t/p/";
   const posterSize = "w500";
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchPersonDetails(id));
+    }
+  }, [dispatch, id]);
   const personCast = useSelector(selectPersonCast);
   const personCrew = useSelector(selectPersonCrew);
-  const personDetails = useSelector(selectPersonDetails);
   return (
     <>
       <Container detailsPage={true}>
         <Tile
           horizontal={"horizontal"}
-          poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
+          poster={`${images}${posterSize}${person.profile_path}`}
           detailsTitle={person.name}
-          placeOfBirth={personDetails.place_of_birth}
-          birthday={personDetails.birthday}
-          description={personDetails.biography}
+          placeOfBirth={person.place_of_birth}
+          birthday={person.birthday}
+          description={person.biography}
         />
 
         <Tiles
@@ -44,14 +47,14 @@ const PersonDetailsPage = () => {
             <StyledLink
               key={movie.id}
               to={toMovieDetails({ id: movie.id })}
-              onClick={() => dispatch(fetchMovieDetails(movie))}
+              onClick={() => dispatch(fetchMovieDetails(movie.id))}
             >
               <Tile
                 peopleList={true}
                 poster={
                   movie.poster_path === null
                     ? nonePoster
-                    : `${images["base_url"]}/${posterSize}${movie.poster_path}`
+                    : `${images}${posterSize}${movie.poster_path}`
                 }
                 header={movie.title}
                 subheader={`${movie.character} (${
@@ -74,14 +77,14 @@ const PersonDetailsPage = () => {
               <StyledLink
                 key={movie.id}
                 to={toMovieDetails({ id: movie.id })}
-                onClick={() => dispatch(fetchMovieDetails(movie))}
+                onClick={() => dispatch(fetchMovieDetails(movie.id))}
               >
                 <Tile
                   peopleList={true}
                   poster={
                     movie.poster_path === null
                       ? nonePoster
-                      : `${images["base_url"]}/${posterSize}${movie.poster_path}`
+                      : `${images}${posterSize}${movie.poster_path}`
                   }
                   header={movie.title}
                   subheader={movie.character}
