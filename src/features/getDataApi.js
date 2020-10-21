@@ -17,10 +17,14 @@ export const getConfigurationData = async () => {
   }
 };
 
-export const getPopularMovies = async (page = 1) => {
+export const getPopularMovies = async ({ currentPage, query }) => {
   try {
-    const response = await fetch(`
-    https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}&page=${page}`);
+    const path = query
+      ? `
+    https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=${language}&query=${query}&page=${currentPage}`
+      : `
+    https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}&page=${currentPage}`;
+    const response = await fetch(path);
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -48,10 +52,14 @@ export const getGenres = async () => {
     console.error("ups");
   }
 };
-export const getPopularPeople = async (page = 1) => {
+export const getPopularPeople = async ({ currentPage, query }) => {
   try {
-    const response = await fetch(`
-    https://api.themoviedb.org/3/person/popular?api_key=${apiKey}&language=${language}&page=${page}`);
+    const path = query
+      ? `
+    https://api.themoviedb.org/3/search/person?api_key=${apiKey}&language=${language}&query=${query}&page=${currentPage}`
+      : `
+    https://api.themoviedb.org/3/person/popular?api_key=${apiKey}&language=${language}&page=${currentPage}`;
+    const response = await fetch(path);
 
     if (!response.ok) {
       throw new Error(response.statusText);

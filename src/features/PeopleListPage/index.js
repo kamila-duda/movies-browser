@@ -17,14 +17,16 @@ import {
   fetchPersonDetails,
 } from "features/peopleSlice";
 import { selectLoading } from "features/peopleSlice";
-import { selectImages } from "features/configurationSlice";
 import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
+import { useQueryParameter } from "features/Search/queryParameter";
+import { key } from "features/Search/searchQueryParameter";
 
 const PeopleListPage = () => {
+  const query = useQueryParameter(key);
   const people = useSelector(selectPeople);
   const dispatch = useDispatch();
-  const images = useSelector(selectImages);
+  const images = "http://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const title = "Popular people";
   const loading = useSelector(selectLoading);
@@ -33,8 +35,8 @@ const PeopleListPage = () => {
   const peopleList = true;
 
   useEffect(() => {
-    dispatch(fetchPopularPeople({ payload: currentPage }));
-  }, [dispatch, currentPage]);
+    dispatch(fetchPopularPeople({ currentPage, query }));
+  }, [dispatch, currentPage, query]);
 
   return (
     <Container>
@@ -47,12 +49,12 @@ const PeopleListPage = () => {
           body={people.map((person) => (
             <StyledLink
               key={person.id}
-              to={toPersonDetails}
-              onClick={() => dispatch(fetchPersonDetails(person))}
+              to={toPersonDetails({ id: person.id })}
+              onClick={() => dispatch(fetchPersonDetails(person.id))}
             >
               <Tile
                 key={person.name}
-                poster={`${images["base_url"]}/${posterSize}${person.profile_path}`}
+                poster={`${images}${posterSize}${person.profile_path}`}
                 header={person.name}
               />
             </StyledLink>
