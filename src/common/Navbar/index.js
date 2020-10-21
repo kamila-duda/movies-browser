@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { toMoviesList, toPeopleList } from "routes";
 import {
   NavigationList,
@@ -12,8 +13,13 @@ import {
 } from "./styled";
 import camera from "assets/images/svg/Video.svg";
 import Search from "features/Search";
+import { fetchPopularMovies } from "features/moviesSlice";
+import { fetchPopularPeople } from "features/peopleSlice";
+
 
 const Navigation = () => {
+  const dispatch = useDispatch();
+
   return (
     <StyledNavbar>
       <StyledNavWrapper>
@@ -22,10 +28,20 @@ const Navigation = () => {
           <StyledTitle>Movie Browser</StyledTitle>
           <NavigationList>
             <NavigationListItem>
-              <StyledNavLink to={toMoviesList()}>Movies</StyledNavLink>
+              <StyledNavLink
+                to={toMoviesList()}
+                onClick={() => dispatch(fetchPopularMovies())}
+              >
+                Movies
+              </StyledNavLink>
             </NavigationListItem>
             <NavigationListItem>
-              <StyledNavLink to={toPeopleList()}>People</StyledNavLink>
+              <StyledNavLink
+                to={toPeopleList()}
+                onClick={() => dispatch(fetchPopularPeople())}
+              >
+                People
+              </StyledNavLink>
             </NavigationListItem>
           </NavigationList>
         </StyledNav>
