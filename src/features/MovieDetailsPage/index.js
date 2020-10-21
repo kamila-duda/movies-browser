@@ -1,31 +1,35 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import HeroBanner from "common/HeroBanner";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMovieDetails,
   selectCast,
   selectCrew,
   selectMovie,
   selectMovieProduction,
+  selectLoading,
+  selectIsError
 } from "features/moviesSlice";
 import { fetchPersonDetails } from "features/peopleSlice";
 import noneProfile from "assets/images/png/noneProfile.png";
-import { useParams } from "react-router-dom";
 import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
+import ConnectionErrorPage from "common/ConnectionErrorPage";
+import Spinner from "features/Spinner";
 
 const MovieDetailsPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const movie = useSelector(selectMovie);
+  const loading = useSelector(selectLoading);
+  const isError = useSelector(selectIsError);
   const images = "http://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const backdropSize = "original";
-  console.log(movie);
-  console.log(movie.genres);
   const cast = useSelector(selectCast);
   const crew = useSelector(selectCrew);
   const movieProduction = useSelector(selectMovieProduction);
@@ -35,8 +39,21 @@ const MovieDetailsPage = () => {
       dispatch(fetchMovieDetails(id));
     }
   }, [id]);
-  console.log(movie);
-  console.log(movie.genres);
+
+  if (isError) {
+    return (
+      <Container>
+        <ConnectionErrorPage />
+      </Container>
+    )
+  };
+  if (loading) {
+    return (
+      <Container>
+        <Tiles title="Search results for movie details" body={<Spinner />} />
+      </Container>
+    )
+  };
   return (
     <>
       <HeroBanner
