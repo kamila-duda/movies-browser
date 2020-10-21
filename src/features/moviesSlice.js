@@ -22,6 +22,7 @@ export const moviesSlice = createSlice({
     fetchPopularMoviesSuccess: (state, { payload: movies }) => {
       state.movies = movies;
       state.loading = false;
+      state.isError = false;
     },
     fetchGenres: (state, { payload: genres }) => {
       state.genres = genres.genres;
