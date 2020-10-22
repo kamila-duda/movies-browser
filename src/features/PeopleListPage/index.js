@@ -23,6 +23,7 @@ import { toPersonDetails } from "routes";
 import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
+import noneProfile from "assets/images/png/noneProfile.png";
 
 const PeopleListPage = () => {
   const query = useQueryParameter(key);
@@ -65,7 +66,11 @@ const PeopleListPage = () => {
               >
                 <Tile
                   key={person.name}
-                  poster={`${images}${posterSize}${person.profile_path}`}
+                  poster={
+                    person.profile_path === null
+                      ? noneProfile
+                      : `${images}${posterSize}${person.profile_path}`
+                  }
                   header={person.name}
                 />
               </StyledLink>

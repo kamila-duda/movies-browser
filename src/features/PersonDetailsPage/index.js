@@ -11,7 +11,7 @@ import {
   selectPerson,
   selectPersonCast,
   selectPersonCrew,
-  selectIsError
+  selectIsError,
 } from "features/peopleSlice";
 import { fetchMovieDetails } from "features/moviesSlice";
 import { StyledLink } from "features/MovieListPage/styled";
@@ -41,15 +41,15 @@ const PersonDetailsPage = () => {
       <Container>
         <ConnectionErrorPage pageType="people" />
       </Container>
-    )
-  };
+    );
+  }
   if (loading) {
     return (
       <Container>
         <Tiles title="Search results for person details" body={<Spinner />} />
       </Container>
-    )
-  };
+    );
+  }
   return (
     <>
       <Container detailsPage={true}>
@@ -59,7 +59,7 @@ const PersonDetailsPage = () => {
           detailsTitle={person.name}
           placeOfBirth={person.place_of_birth}
           birthday={person.birthday}
-          description={person.biography}
+          description={person.biography ? person.biography : "This actor has not biography yet."}
         />
 
         <Tiles
@@ -72,17 +72,19 @@ const PersonDetailsPage = () => {
               onClick={() => dispatch(fetchMovieDetails(movie.id))}
             >
               <Tile
-                peopleList={true}
+                key={movie.id}
+                peopleList={false}
                 poster={
                   movie.poster_path === null
                     ? nonePoster
                     : `${images}${posterSize}${movie.poster_path}`
                 }
                 header={movie.title}
-                subheader={`${movie.character} (${movie.release_date
-                  ? movie.release_date.substring(0, 4)
-                  : "year not found"
-                  })`}
+                subheader={`${movie.character} (${
+                  movie.release_date
+                    ? movie.release_date.substring(0, 4)
+                    : "year not found"
+                })`}
                 tags={movie.genre_ids}
                 voteAverage={movie.vote_average}
                 review={movie.vote_count}
@@ -114,8 +116,8 @@ const PersonDetailsPage = () => {
             ))}
           />
         ) : (
-            ""
-          )}
+          ""
+        )}
       </Container>
     </>
   );
