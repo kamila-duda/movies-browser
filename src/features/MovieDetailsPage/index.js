@@ -20,7 +20,6 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
-import { nanoid } from "@reduxjs/toolkit";
 import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
 
@@ -52,7 +51,7 @@ const MovieDetailsPage = () => {
       history.push(`/movies?${searchParams.toString()}`);
     }
   }, [query, history, searchParams]);
-  
+
   if (isError) {
     return (
       <Container>
@@ -69,13 +68,13 @@ const MovieDetailsPage = () => {
   };
   return (
     <>
-    {movie.backdrop_path !== null ? 
-      (<HeroBanner
-        backdrop={`${images}${backdropSize}${movie.backdrop_path}`}
-        movieTitle={movie.title}
-        vote_average={movie.vote_average}
-        vote={movie.vote_count}
-      />) : ""}
+      {movie.backdrop_path !== null ?
+        (<HeroBanner
+          backdrop={`${images}${backdropSize}${movie.backdrop_path}`}
+          movieTitle={movie.title}
+          vote_average={movie.vote_average}
+          vote={movie.vote_count}
+        />) : ""}
       <Container detailsPage={true}>
         <Tile
           horizontal={"horizontal"}
@@ -121,7 +120,7 @@ const MovieDetailsPage = () => {
           title="Crew"
           body={crew.map((crewmate) => (
             <Tile
-              key={nanoid}
+              key={`${crewmate.name} as ${crewmate.job}`}
               peopleList={true}
               poster={
                 crewmate.profile_path === null
