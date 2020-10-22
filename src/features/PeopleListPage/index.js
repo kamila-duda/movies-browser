@@ -24,6 +24,8 @@ import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import noneProfile from "assets/images/png/noneProfile.png";
+import SearchingErrorPage from "common/SearchingErrorPage";
+import { selectResults } from "features/peopleSlice";
 
 const PeopleListPage = () => {
   const query = useQueryParameter(key);
@@ -32,6 +34,7 @@ const PeopleListPage = () => {
   const images = "http://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const title = "Popular people";
+  const results = useSelector(selectResults);
   const loading = useSelector(selectLoading);
   const isError = useSelector(selectIsError);
   const currentPage = useSelector(selectCurrentPage);
@@ -48,16 +51,23 @@ const PeopleListPage = () => {
         <ConnectionErrorPage pageType="people" />
       </Container>
     )
-  }
+  };
+  if (results===0 && query) {
+    return (
+      <Container>
+        <SearchingErrorPage query={query} />
+      </Container>
+    );
+  };
 
   return (
     <Container>
-      {loading ? (
-        <Tiles title="Search results for popular people" body={<Spinner />} />
+      {loading ? (query? (<Tiles title={`Search results for ${query}`} body={<Spinner />} />) : 
+      <Tiles title="Search results for popular people" body={<Spinner />} />
       ) : (
           <Tiles
             peopleList={peopleList}
-            title={title}
+            title={query? `Search results for "${query}" (${results})` : title}
             body={people.map((person) => (
               <StyledLink
                 key={person.id}

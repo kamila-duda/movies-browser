@@ -21,6 +21,7 @@ export const peopleSlice = createSlice({
       state.people = people;
       state.loading = false;
       state.isError = false;
+      state.results = people.total_results;
     },
     increaseCurrentPage: (state) => {
       state.currentPage = ++state.currentPage;
@@ -68,6 +69,7 @@ export const {
 
 const selectPeopleState = (state) => state.people;
 export const selectPeople = (state) => selectPeopleState(state).people.results;
+export const selectResults = (state) => selectPeopleState(state).results;
 export const selectLoading = (state) => selectPeopleState(state).loading;
 export const selectIsError = (state) => selectPeopleState(state).isError;
 export const selectTotalPages = (state) =>

@@ -24,6 +24,7 @@ export const moviesSlice = createSlice({
       state.movies = movies;
       state.loading = false;
       state.isError = false;
+      state.results = movies.total_results
     },
     fetchGenres: (state, { payload: genres }) => {
       state.genres = genres.genres;
@@ -78,6 +79,7 @@ export const {
 
 const selectMoviesState = (state) => state.movies;
 export const selectMovies = (state) => selectMoviesState(state).movies.results;
+export const selectResults = (state) => selectMoviesState(state).results;
 export const selectTotalPages = (state) =>
   selectMoviesState(state).movies.total_pages;
 export const selectLoading = (state) => selectMoviesState(state).loading;
