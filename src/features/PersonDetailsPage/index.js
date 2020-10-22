@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
@@ -18,6 +18,8 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toMovieDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
+import { useQueryParameter } from "features/Search/queryParameter";
+import { key } from "features/Search/searchQueryParameter";
 
 const PersonDetailsPage = () => {
   const { id } = useParams();
@@ -35,6 +37,17 @@ const PersonDetailsPage = () => {
       dispatch(fetchPersonDetails(id));
     }
   }, [dispatch, id]);
+
+  const query = useQueryParameter(key);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (query) {
+      history.push(`/people?${searchParams.toString()}`);
+    }
+  }, [query, history, searchParams]);
 
   if (isError) {
     return (
@@ -59,7 +72,11 @@ const PersonDetailsPage = () => {
           detailsTitle={person.name}
           placeOfBirth={person.place_of_birth}
           birthday={person.birthday}
-          description={person.biography ? person.biography : "This actor has not biography yet."}
+          description={
+            person.biography
+              ? person.biography
+              : "This actor has not biography yet."
+          }
         />
 
         <Tiles
