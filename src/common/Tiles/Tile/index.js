@@ -2,16 +2,15 @@ import React from "react";
 import {
   StyledTile,
   StyledTileSubHeader,
+  StyledTileHeader,
   TileInnerWrapper,
   StyledTilePoster,
   StyledDetails,
+  StyledTileDescription,
 } from "common/Tiles/Tile/styled";
-import { StyledTileHeader } from "common/Tiles/Tile/TileHeader/styled";
-import { StyledTileDescription } from "common/Tiles/Tile/TileDescription/styled";
 import TileReview from "common/Tiles/Tile/TileReview";
 import NoPoster from "assets/images/svg/NoPoster.svg";
 import TileTags from "./TileTags";
-import TileDetails from "./TileDetails";
 
 const Tile = ({
   poster,
@@ -19,7 +18,6 @@ const Tile = ({
   subheader,
   tags,
   review,
-  details,
   description,
   voteAverage,
   horizontal,
@@ -27,11 +25,10 @@ const Tile = ({
   detailsYear,
   detailsProduction,
   detailsReleaseDate,
-  detalReview,
   peopleList,
   placeOfBirth,
   birthday,
-  genresId
+  genresId,
 }) => {
   return (
     <StyledTile
@@ -72,7 +69,7 @@ const Tile = ({
         {placeOfBirth ? (
           <StyledTileSubHeader details>
             Place of birth:
-              <StyledDetails>{placeOfBirth}</StyledDetails>
+            <StyledDetails>{placeOfBirth}</StyledDetails>
           </StyledTileSubHeader>
         ) : (
           ""
@@ -81,7 +78,7 @@ const Tile = ({
           <StyledTileSubHeader details>
             Production:
             {detailsProduction.map((country) => (
-              <StyledDetails>{country.name},</StyledDetails>
+              <StyledDetails key={country.name}>{country.name},</StyledDetails>
             ))}
           </StyledTileSubHeader>
         ) : (
@@ -101,8 +98,6 @@ const Tile = ({
         ) : (
           ""
         )}
-        {detalReview ? <TileReview detailsPage={"detailsPage"} /> : ""}
-        {details ? <TileDetails /> : ""}
         {description ? (
           <StyledTileDescription>{description}</StyledTileDescription>
         ) : (

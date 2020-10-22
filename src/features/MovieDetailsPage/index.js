@@ -20,6 +20,8 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
+import { nanoid } from "@reduxjs/toolkit";
+
 
 const MovieDetailsPage = () => {
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ const MovieDetailsPage = () => {
     if (id) {
       dispatch(fetchMovieDetails(id));
     }
-  }, [id]);
+  }, [dispatch, id]);
 
   if (isError) {
     return (
@@ -67,7 +69,9 @@ const MovieDetailsPage = () => {
           horizontal={"horizontal"}
           poster={`${images}${posterSize}${movie.poster_path}`}
           detailsTitle={movie.title}
-          // detailsYear={movie.release_date.substring(0, 4)}
+          detailsYear={
+            movie.release_date ? movie.release_date.substring(0, 4) : ""
+          }
           detailsProduction={movieProduction === [] ? "" : movieProduction}
           detailsReleaseDate={movie.release_date}
           genresId={movie.genres}
@@ -86,6 +90,7 @@ const MovieDetailsPage = () => {
               onClick={() => dispatch(fetchPersonDetails(person.id))}
             >
               <Tile
+                key={person.name}
                 peopleList={true}
                 poster={
                   person.profile_path === null
@@ -104,6 +109,7 @@ const MovieDetailsPage = () => {
           title="Crew"
           body={crew.map((crewmate) => (
             <Tile
+              key={nanoid}
               peopleList={true}
               poster={
                 crewmate.profile_path === null

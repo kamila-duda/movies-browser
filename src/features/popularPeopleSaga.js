@@ -27,7 +27,6 @@ function* fetchPopularPeopleHandler({ payload }) {
 function* fetchPersonDetailsHandler() {
   try {
     const personId = store.getState().people.personId;
-    console.log(personId);
     const details = yield call(getPersonDetails, personId);
     yield put(fetchPersonDetailsSuccess(details));
   } catch (error) {

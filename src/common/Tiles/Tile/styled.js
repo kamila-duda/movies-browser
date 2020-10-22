@@ -14,22 +14,22 @@ export const StyledTile = styled.div`
   ${({ people }) =>
     people &&
     css`
-      justify-content:center;
-      align-items:center;
+      justify-content: center;
+      align-items: center;
     `}
 
   ${({ horizontal }) =>
     horizontal &&
     css`
-      max-width:100%;
+      max-width: 100%;
       display: grid;
       grid-template-columns: 312px 1fr;
-      grid-gap:40px;
-      align-items:center;
-      margin-bottom:49px;
+      grid-gap: 40px;
+      align-items: center;
+      margin-bottom: 49px;
     `}
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    display:flex;
+    display: flex;
     flex-direction: column;
   }
 `;
@@ -41,41 +41,54 @@ export const StyledTileSubHeader = styled.h3`
     detailsPage &&
     css`
       font-size: ${({ theme }) => theme.fontSize.xlarge};
-      color: ${({ theme }) => theme.color.black}; 
+      color: ${({ theme }) => theme.color.black};
     `}
 
-    ${({ details }) =>
+  ${({ details }) =>
     details &&
     css`
-      margin-top:0px;
-      margin-bottom:8px;
-      font-size: ${({ theme }) => theme.fontSize.medium}; 
+      margin-top: 0px;
+      margin-bottom: 8px;
+      font-size: ${({ theme }) => theme.fontSize.medium};
+    `}
+`;
+export const StyledTileHeader = styled.h2`
+  font-size: ${({ theme }) => theme.fontSize.xlarge};
+  font-weight: 500;
+  margin: 16px 0 0 0;
+  line-height: 1.3;
+
+  ${({ detailsPage }) =>
+    detailsPage &&
+    css`
+      font-weight: 600;
+      font-size: ${({ theme }) => theme.fontSize.xxlarge};
     `}
 `;
 export const TileInnerWrapper = styled.div`
   margin: 0;
   padding: 0;
- 
+
   ${({ people }) =>
     people &&
     css`
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     `}
 
   ${({ flex }) =>
     flex &&
     css`
-      max-width:100%;
+      max-width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
 
       @media (max-width: ${({ theme }) => theme.media.desktop}) {
-      flex-grow:1;
-  }
+        flex-grow: 1;
+      }
     `}
 `;
 export const StyledTilePoster = styled.img`
@@ -95,7 +108,13 @@ export const StyledTilePoster = styled.img`
     `}
 `;
 export const StyledDetails = styled.span`
-    margin-left:12px;
-    font-size: ${({ theme }) => theme.fontSize.medium};
-    color: ${({ theme }) => theme.color.black}; 
+  margin-left: 12px;
+  font-size: ${({ theme }) => theme.fontSize.medium};
+  color: ${({ theme }) => theme.color.black};
+`;
+export const StyledTileDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSize.large};
+  font-weight: 400;
+  margin: 16px 0 0 0;
+  line-height: 1.3;
 `;
