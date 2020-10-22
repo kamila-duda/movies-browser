@@ -58,12 +58,13 @@ const MovieDetailsPage = () => {
   };
   return (
     <>
-      <HeroBanner
+    {movie.backdrop_path !== null ? 
+      (<HeroBanner
         backdrop={`${images}${backdropSize}${movie.backdrop_path}`}
         movieTitle={movie.title}
         vote_average={movie.vote_average}
         vote={movie.vote_count}
-      />
+      />) : ""}
       <Container detailsPage={true}>
         <Tile
           horizontal={"horizontal"}
@@ -77,7 +78,7 @@ const MovieDetailsPage = () => {
           genresId={movie.genres}
           voteAverage={movie.vote_average}
           review={movie.vote_count}
-          description={movie.overview}
+          description={movie.overview ? movie.overview : "This movie has not overview."}
         />
 
         <Tiles
