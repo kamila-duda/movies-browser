@@ -1,33 +1,55 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
-import { useDispatch, useSelector } from "react-redux";
 import nonePoster from "assets/images/png/nonePoster.png";
-import { useParams } from "react-router-dom";
 import {
   fetchPersonDetails,
+  selectLoading,
   selectPerson,
   selectPersonCast,
   selectPersonCrew,
+  selectIsError
 } from "features/peopleSlice";
 import { fetchMovieDetails } from "features/moviesSlice";
 import { StyledLink } from "features/MovieListPage/styled";
 import { toMovieDetails } from "routes";
+import ConnectionErrorPage from "common/ConnectionErrorPage";
+import Spinner from "features/Spinner";
 
 const PersonDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const person = useSelector(selectPerson);
+  const loading = useSelector(selectLoading);
+  const isError = useSelector(selectIsError);
   const images = "http://image.tmdb.org/t/p/";
   const posterSize = "w500";
+  const personCast = useSelector(selectPersonCast);
+  const personCrew = useSelector(selectPersonCrew);
+
   useEffect(() => {
     if (id) {
       dispatch(fetchPersonDetails(id));
     }
   }, [dispatch, id]);
-  const personCast = useSelector(selectPersonCast);
-  const personCrew = useSelector(selectPersonCrew);
+
+  if (isError) {
+    return (
+      <Container>
+        <ConnectionErrorPage pageType="people" />
+      </Container>
+    )
+  };
+  if (loading) {
+    return (
+      <Container>
+        <Tiles title="Search results for person details" body={<Spinner />} />
+      </Container>
+    )
+  };
   return (
     <>
       <Container detailsPage={true}>
@@ -57,11 +79,10 @@ const PersonDetailsPage = () => {
                     : `${images}${posterSize}${movie.poster_path}`
                 }
                 header={movie.title}
-                subheader={`${movie.character} (${
-                  movie.release_date
-                    ? movie.release_date.substring(0, 4)
-                    : "year not found"
-                })`}
+                subheader={`${movie.character} (${movie.release_date
+                  ? movie.release_date.substring(0, 4)
+                  : "year not found"
+                  })`}
                 tags={movie.genre_ids}
                 voteAverage={movie.vote_average}
                 review={movie.vote_count}
@@ -93,8 +114,8 @@ const PersonDetailsPage = () => {
             ))}
           />
         ) : (
-          ""
-        )}
+            ""
+          )}
       </Container>
     </>
   );

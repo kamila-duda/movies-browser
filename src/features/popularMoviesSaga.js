@@ -13,12 +13,11 @@ import {
 } from "features/getDataApi";
 import {
   fetchPopularMovies,
-  fetchPopularMoviesError,
   fetchPopularMoviesSuccess,
   fetchGenres,
   fetchMovieDetails,
   fetchMovieDetailsSuccess,
-  fetchMovieDetailsError,
+  setError
 } from "./moviesSlice";
 import store from "store";
 
@@ -28,8 +27,7 @@ function* fetchPopularMoviesHandler({ payload }) {
     const movies = yield call(getPopularMovies, payload);
     yield put(fetchPopularMoviesSuccess(movies));
   } catch (error) {
-    yield put(fetchPopularMoviesError());
-    yield call(alert, "Upss, coś poszło nie tak");
+    yield put(setError());
   }
 }
 function* fetchGenresHandler() {
@@ -37,7 +35,7 @@ function* fetchGenresHandler() {
     const genres = yield call(getGenres);
     yield put(fetchGenres(genres));
   } catch (error) {
-    yield call(alert, "Upss, nie pobrano gatunków");
+    yield put(setError());
   }
 }
 function* fetchMovieDetailsHandler() {
@@ -46,8 +44,7 @@ function* fetchMovieDetailsHandler() {
     const details = yield call(getMovieDetails, movieId);
     yield put(fetchMovieDetailsSuccess(details));
   } catch (error) {
-    yield put(fetchMovieDetailsError());
-    yield call(alert, error);
+    yield put(setError());
   }
 }
 export function* watchFetchPopularMovies() {

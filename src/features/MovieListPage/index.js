@@ -10,6 +10,7 @@ import {
   selectCurrentPage,
   selectTotalPages,
   selectLoading,
+  selectIsError,
   selectMovies,
   increaseCurrentPage,
   decreaseCurrentPage,
@@ -22,6 +23,7 @@ import { StyledLink } from "./styled";
 import { toMovieDetails } from "routes";
 import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
+import ConnectionErrorPage from "common/ConnectionErrorPage";
 
 const MovieListPage = () => {
   const query = useQueryParameter(key);
@@ -31,57 +33,66 @@ const MovieListPage = () => {
   const images = "http://image.tmdb.org/t/p/";
   const movies = useSelector(selectMovies);
   const posterSize = "w500";
+  const title = "Popular movies";
+  const loading = useSelector(selectLoading);
+  const isError = useSelector(selectIsError);
+
   useEffect(() => {
     dispatch(fetchPopularMovies({ currentPage, query }));
   }, [dispatch, currentPage, query]);
 
-  const title = "Popular movies";
-  const loading = useSelector(selectLoading);
+  if (isError) {
+    return (
+      <Container>
+        <ConnectionErrorPage pageType="movies" />
+      </Container>
+    )
+  }
   return (
     <Container>
       {loading ? (
-        <Tiles title="Search results for ..." body={<Spinner />} />
+        <Tiles title="Search results for popular movies" body={<Spinner />} />
       ) : (
-        <Tiles
-          title={title}
-          body={movies.map((movie) => (
-            <StyledLink
-              key={movie.id}
-              to={toMovieDetails({ id: movie.id })}
-              onClick={() => dispatch(fetchMovieDetails(movie.id))}
-            >
-              <Tile
+          <Tiles
+            title={title}
+            body={movies.map((movie) => (
+              <StyledLink
                 key={movie.id}
-                poster={
-                  movie.poster_path === null
-                    ? nonePoster
-                    : `${images}${posterSize}${movie.poster_path}`
-                }
-                header={movie.title}
-                subheader={
-                  movie.release_date ? movie.release_date.substring(0, 4) : ""
-                }
-                tags={movie.genre_ids}
-                voteAverage={movie.vote_average}
-                review={movie.vote_count}
-              />
-            </StyledLink>
-          ))}
-        />
-      )}
+                to={toMovieDetails({ id: movie.id })}
+                onClick={() => dispatch(fetchMovieDetails(movie.id))}
+              >
+                <Tile
+                  key={movie.id}
+                  poster={
+                    movie.poster_path === null
+                      ? nonePoster
+                      : `${images}${posterSize}${movie.poster_path}`
+                  }
+                  header={movie.title}
+                  subheader={
+                    movie.release_date ? movie.release_date.substring(0, 4) : ""
+                  }
+                  tags={movie.genre_ids}
+                  voteAverage={movie.vote_average}
+                  review={movie.vote_count}
+                />
+              </StyledLink>
+            ))}
+          />
+        )}
 
       {loading ? (
         ""
       ) : (
-        <Pagination
-          currentPage={currentPage}
-          lastPage={lastPage}
-          setCurrentPageFirst={setCurrentPageFirst}
-          decreaseCurrentPage={decreaseCurrentPage}
-          increaseCurrentPage={increaseCurrentPage}
-          setCurrentPageLast={setCurrentPageLast}
-        />
-      )}
+          <Pagination
+            currentPage={currentPage}
+            lastPage={lastPage}
+            setCurrentPageFirst={setCurrentPageFirst}
+            decreaseCurrentPage={decreaseCurrentPage}
+            increaseCurrentPage={increaseCurrentPage}
+            setCurrentPageLast={setCurrentPageLast}
+          />
+        )}
     </Container>
   );
 };
