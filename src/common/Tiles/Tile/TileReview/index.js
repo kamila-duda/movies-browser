@@ -1,8 +1,10 @@
 import React from "react";
-import { StyledTileReviewRating } from "common/Tiles/Tile/TileReview/TileReviewRating/styled";
-import { StyledTileReviewStar } from "common/Tiles/Tile/TileReview/TileReviewStar/styled";
-import { StyledTileReviewUserRatings } from "common/Tiles/Tile/TileReview/TileReviewUserRatings/styled";
-import { StyledTileReview } from "common/Tiles/Tile/TileReview/styled";
+import {
+  StyledTileReview,
+  StyledTileReviewUserRatings,
+  StyledTileReviewRating,
+  StyledTileReviewStar,
+} from "common/Tiles/Tile/TileReview/styled";
 import StarIcon from "assets/images/svg/star.svg";
 
 const TileReview = ({ review, voteAverage, detailsPage }) => {
@@ -11,7 +13,7 @@ const TileReview = ({ review, voteAverage, detailsPage }) => {
       <StyledTileReviewStar
         detailsPage={detailsPage}
         src={StarIcon}
-        alt="test"
+        alt="star"
       />
       <StyledTileReviewRating detailsPage={detailsPage}>
         {voteAverage}/10

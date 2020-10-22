@@ -16,6 +16,7 @@ import noneProfile from "assets/images/png/noneProfile.png";
 import { useParams } from "react-router-dom";
 import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
+import { nanoid } from "@reduxjs/toolkit";
 
 const MovieDetailsPage = () => {
   const dispatch = useDispatch();
@@ -24,8 +25,6 @@ const MovieDetailsPage = () => {
   const images = "http://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const backdropSize = "original";
-  console.log(movie);
-  console.log(movie.genres);
   const cast = useSelector(selectCast);
   const crew = useSelector(selectCrew);
   const movieProduction = useSelector(selectMovieProduction);
@@ -34,9 +33,7 @@ const MovieDetailsPage = () => {
     if (id) {
       dispatch(fetchMovieDetails(id));
     }
-  }, [id]);
-  console.log(movie);
-  console.log(movie.genres);
+  }, [dispatch, id]);
   return (
     <>
       <HeroBanner
@@ -50,7 +47,9 @@ const MovieDetailsPage = () => {
           horizontal={"horizontal"}
           poster={`${images}${posterSize}${movie.poster_path}`}
           detailsTitle={movie.title}
-          // detailsYear={movie.release_date.substring(0, 4)}
+          detailsYear={
+            movie.release_date ? movie.release_date.substring(0, 4) : ""
+          }
           detailsProduction={movieProduction === [] ? "" : movieProduction}
           detailsReleaseDate={movie.release_date}
           genresId={movie.genres}
@@ -69,6 +68,7 @@ const MovieDetailsPage = () => {
               onClick={() => dispatch(fetchPersonDetails(person.id))}
             >
               <Tile
+                key={person.name}
                 peopleList={true}
                 poster={
                   person.profile_path === null
@@ -87,6 +87,7 @@ const MovieDetailsPage = () => {
           title="Crew"
           body={crew.map((crewmate) => (
             <Tile
+              key={nanoid}
               peopleList={true}
               poster={
                 crewmate.profile_path === null

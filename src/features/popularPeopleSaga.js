@@ -1,11 +1,4 @@
-import {
-  takeEvery,
-  call,
-  put,
-  delay,
-  takeLatest,
-  debounce,
-} from "redux-saga/effects";
+import { call, put, delay, takeLatest, debounce } from "redux-saga/effects";
 import { getPersonDetails, getPopularPeople } from "features/getDataApi";
 import {
   fetchPersonDetails,
@@ -30,7 +23,6 @@ function* fetchPopularPeopleHandler({ payload }) {
 function* fetchPersonDetailsHandler() {
   try {
     const personId = store.getState().people.personId;
-    console.log(personId);
     const details = yield call(getPersonDetails, personId);
     yield put(fetchPersonDetailsSuccess(details));
   } catch (error) {
