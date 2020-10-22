@@ -14,7 +14,6 @@ export const StyledTile = styled.div`
   ${({ people }) =>
     people &&
     css`
-      justify-content: center;
       align-items: center;
     `}
 
@@ -74,7 +73,7 @@ export const TileInnerWrapper = styled.div`
     css`
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
     `}
 
