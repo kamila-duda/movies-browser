@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import HeroBanner from "common/HeroBanner";
 import Container from "common/Container";
@@ -21,6 +21,8 @@ import { toPersonDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
 import { nanoid } from "@reduxjs/toolkit";
+import { useQueryParameter } from "features/Search/queryParameter";
+import { key } from "features/Search/searchQueryParameter";
 
 
 const MovieDetailsPage = () => {
@@ -41,7 +43,16 @@ const MovieDetailsPage = () => {
       dispatch(fetchMovieDetails(id));
     }
   }, [dispatch, id]);
-
+  const query = useQueryParameter(key);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const history = useHistory();
+  useEffect(() => {
+    if (query) {
+      history.push(`/movies?${searchParams.toString()}`);
+    }
+  }, [query, history, searchParams]);
+  
   if (isError) {
     return (
       <Container>
