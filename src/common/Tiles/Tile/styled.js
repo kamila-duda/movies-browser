@@ -19,6 +19,7 @@ export const StyledTile = styled.div`
       grid-template-columns: 312px 1fr;
       grid-gap: 40px;
       align-items: center;
+      margin-top: 20px;
       margin-bottom: 49px;
     `}
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
