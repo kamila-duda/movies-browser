@@ -20,5 +20,6 @@ export const StyledTileTag = styled.li`
   border-radius: 5px;
   @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     padding: 4px 8px;
+    margin: 0px 2px 2px 0px;
   }
 `;
