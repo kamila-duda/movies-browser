@@ -28,7 +28,7 @@ export const StyledNav = styled.div`
   @media (max-width: ${({ theme }) => theme.media.tablet}) {
     width: 60%;
   }
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     width: 100%;
     justify-content: space-between;
   }
@@ -37,7 +37,7 @@ export const StyledIcon = styled.img`
   height: 23px;
   width: 30px;
   margin: 0 10px;
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     width: 14px;
     height: 14px;
   }
@@ -52,7 +52,7 @@ export const StyledTitle = styled.h1`
   @media (max-width: ${({ theme }) => theme.media.tablet}) {
     font-size: 18px;
   }
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     font-size: 13px;
     flex-grow: 1;
   }
@@ -63,7 +63,7 @@ export const NavigationList = styled.ul`
   justify-content: center;
   margin: 0;
   width: max-content;
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     padding: 0;
   }
 `;
@@ -86,7 +86,7 @@ export const StyledNavLink = styled(NavLink).attrs(() => ({
     box-sizing: border-box;
     border-radius: 24px;
   }
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     font-size: 12px;
   }
 `;

@@ -4,7 +4,7 @@ export const StyledContainer = styled.main`
   max-width: 1368px;
   padding-top: 90px;
   margin: auto;
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     padding-top: 140px;
   }
 
@@ -13,7 +13,7 @@ export const StyledContainer = styled.main`
     css`
       padding-top: 64px;
 
-      @media (max-width: ${({ theme }) => theme.media.mobile}) {
+      @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
         padding-top: 16px;
       }
     `}

@@ -8,6 +8,9 @@ export const StyledTileTags = styled.ul`
   font-size: ${({ theme }) => theme.fontSize.small};
   margin: 16px 0px 0px 0px;
   padding: 0 0 20px 0;
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    font-size: ${({ theme }) => theme.fontSize.xxSmall};
+  }
 `;
 export const StyledTileTag = styled.li`
   font-weight: 400;
@@ -15,4 +18,7 @@ export const StyledTileTag = styled.li`
   margin: 0px 8px 8px 0px;
   background-color: ${({ theme }) => theme.color.mystic};
   border-radius: 5px;
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    padding: 4px 8px;
+  }
 `;

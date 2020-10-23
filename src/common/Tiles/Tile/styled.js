@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const StyledTile = styled.div`
-  max-width: 324px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 16px 16px 5px 16px;
@@ -22,10 +22,26 @@ export const StyledTile = styled.div`
       margin-top: 20px;
       margin-bottom: 49px;
     `}
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    display: flex;
-    flex-direction: column;
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+      margin: 0px;
+      width: 100%;
+      display: grid;
+      grid-gap: 16px;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
   }
+  ${({ people }) =>
+    people &&
+    css`
+      @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+      margin: 0px;
+      width: 100%;
+      display: grid;
+      grid-gap: 16px;
+      grid-template-columns: 1fr;
+      align-items: center;
+  }
+    `}
   
 `;
 export const StyledTileSubHeader = styled.h3`
@@ -51,6 +67,9 @@ export const StyledTileSubHeader = styled.h3`
     css`
       text-align: center;
     `}
+    @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    font-size: ${({ theme }) => theme.fontSize.xSmall};
+  }
 `;
 export const StyledTileHeader = styled.h2`
   font-size: ${({ theme }) => theme.fontSize.xlarge};
@@ -69,6 +88,9 @@ export const StyledTileHeader = styled.h2`
     css`
       text-align: center;
     `}
+    @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    font-size: ${({ theme }) => theme.fontSize.normal};
+  }
 `;
 export const TileInnerWrapper = styled.div`
   margin: 0;
@@ -101,14 +123,14 @@ export const StyledTilePoster = styled.img`
   max-width: 100%;
   object-fit: cover;
   height: 434px;
-  @media (max-width: ${({ theme }) => theme.media.smartfon}) {
-    height: 169px;
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    height: 200px;
   }
   ${({ people }) =>
     people &&
     css`
       height: 265px;
-      @media (max-width: ${({ theme }) => theme.media.smartfon}) {
+      @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
         height: 178px;
       }
     `}

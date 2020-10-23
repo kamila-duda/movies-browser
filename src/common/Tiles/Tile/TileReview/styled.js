@@ -5,6 +5,9 @@ export const StyledTileReview = styled.div`
   align-items: flex-end;
   margin: 0;
   flex-grow: 1;
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    align-items: center;
+  }
 `;
 export const StyledTileReviewUserRatings = styled.p`
   font-size: ${({ theme }) => theme.fontSize.normal};
@@ -19,6 +22,9 @@ export const StyledTileReviewUserRatings = styled.p`
       font-size: ${({ theme }) => theme.fontSize.small};
       color: ${({ theme }) => theme.color.black};
     `}
+    @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    font-size: ${({ theme }) => theme.fontSize.xxSmall};
+  }
 `;
 export const StyledTileReviewRating = styled.p`
   font-size: ${({ theme }) => theme.fontSize.normal};
@@ -31,6 +37,9 @@ export const StyledTileReviewRating = styled.p`
       font-weight: 500;
       font-size: ${({ theme }) => theme.fontSize.xlarge};
     `}
+    @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    font-size: ${({ theme }) => theme.fontSize.xxSmall};
+  }
 `;
 
 export const ReviewRatingScale = styled.span`
@@ -45,7 +54,7 @@ export const ReviewRatingScale = styled.span`
     `}
 `;
 export const StyledTileReviewStar = styled.img`
-  max-width: 100%;
+  width: 20px;
   object-fit: contain;
   margin-top: -2px;
   margin-right: 12px;
@@ -56,4 +65,8 @@ export const StyledTileReviewStar = styled.img`
     css`
       margin-top: 5px;
     `}
+    @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+      margin: -2px 5px 0 0;
+  width: 10%;
+  }
 `;
