@@ -37,20 +37,20 @@ const Tile = ({
     >
       <TileInnerWrapper>
         {poster ? (
-          <StyledTilePoster src={poster} />
+          <StyledTilePoster people={peopleList === true ? "people" : ""} src={poster} />
         ) : (
-          <StyledTilePoster src={NoPoster} />
+          <StyledTilePoster people={peopleList === true ? "people" : ""} src={NoPoster} />
         )}
       </TileInnerWrapper>
-      <TileInnerWrapper flex people={peopleList === true ? "people" : ""}>
-        {header ? <StyledTileHeader>{header}</StyledTileHeader> : ""}
+      <TileInnerWrapper flex >
+        {header ? <StyledTileHeader people={peopleList === true ? "people" : ""}>{header}</StyledTileHeader> : ""}
         {detailsTitle ? (
           <StyledTileHeader detailsPage>{detailsTitle}</StyledTileHeader>
         ) : (
           ""
         )}
         {subheader ? (
-          <StyledTileSubHeader>{subheader}</StyledTileSubHeader>
+          <StyledTileSubHeader people={peopleList === true ? "people" : ""}>{subheader}</StyledTileSubHeader>
         ) : (
           ""
         )}
