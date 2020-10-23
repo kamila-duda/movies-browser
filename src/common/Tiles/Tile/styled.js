@@ -11,12 +11,6 @@ export const StyledTile = styled.div`
   border-radius: 5px;
   box-shadow: 0px 4px 12px rgba(186, 199, 213, 0.5);
 
-  ${({ people }) =>
-    people &&
-    css`
-      align-items: center;
-    `}
-
   ${({ horizontal }) =>
     horizontal &&
     css`
@@ -31,6 +25,7 @@ export const StyledTile = styled.div`
     display: flex;
     flex-direction: column;
   }
+  
 `;
 export const StyledTileSubHeader = styled.h3`
   font-size: ${({ theme }) => theme.fontSize.normal};
@@ -50,6 +45,11 @@ export const StyledTileSubHeader = styled.h3`
       margin-bottom: 8px;
       font-size: ${({ theme }) => theme.fontSize.medium};
     `}
+    ${({ people }) =>
+    people &&
+    css`
+      text-align: center;
+    `}
 `;
 export const StyledTileHeader = styled.h2`
   font-size: ${({ theme }) => theme.fontSize.xlarge};
@@ -63,6 +63,11 @@ export const StyledTileHeader = styled.h2`
       font-weight: 600;
       font-size: ${({ theme }) => theme.fontSize.xxlarge};
     `}
+    ${({ people }) =>
+    people &&
+    css`
+      text-align: center;
+    `}
 `;
 export const TileInnerWrapper = styled.div`
   margin: 0;
@@ -74,7 +79,7 @@ export const TileInnerWrapper = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      align-items: center;
+      text-align: center;
     `}
 
   ${({ flex }) =>
@@ -84,6 +89,7 @@ export const TileInnerWrapper = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      flex-grow: 1;
 
       @media (max-width: ${({ theme }) => theme.media.desktop}) {
         flex-grow: 1;

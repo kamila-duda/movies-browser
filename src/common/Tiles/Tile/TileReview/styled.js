@@ -2,8 +2,9 @@ import styled, { css } from "styled-components";
 
 export const StyledTileReview = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   margin: 0;
+  flex-grow: 1;
 `;
 export const StyledTileReviewUserRatings = styled.p`
   font-size: ${({ theme }) => theme.fontSize.normal};
@@ -48,6 +49,7 @@ export const StyledTileReviewStar = styled.img`
   object-fit: contain;
   margin-top: -2px;
   margin-right: 12px;
+  margin-bottom: 16px;
 
   ${({ detailsPage }) =>
     detailsPage &&
