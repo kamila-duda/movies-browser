@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const StyledTile = styled.div`
-  max-width: 324px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 16px 16px 5px 16px;
@@ -11,12 +11,6 @@ export const StyledTile = styled.div`
   border-radius: 5px;
   box-shadow: 0px 4px 12px rgba(186, 199, 213, 0.5);
 
-  ${({ people }) =>
-    people &&
-    css`
-      align-items: center;
-    `}
-
   ${({ horizontal }) =>
     horizontal &&
     css`
@@ -25,12 +19,30 @@ export const StyledTile = styled.div`
       grid-template-columns: 312px 1fr;
       grid-gap: 40px;
       align-items: center;
+      margin-top: 20px;
       margin-bottom: 49px;
     `}
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    display: flex;
-    flex-direction: column;
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+      margin: 0px;
+      width: 100%;
+      display: grid;
+      grid-gap: 16px;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
   }
+  ${({ people }) =>
+    people &&
+    css`
+      @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+      margin: 0px;
+      width: 100%;
+      display: grid;
+      grid-gap: 16px;
+      grid-template-columns: 1fr;
+      align-items: center;
+  }
+    `}
+  
 `;
 export const StyledTileSubHeader = styled.h3`
   font-size: ${({ theme }) => theme.fontSize.normal};
@@ -50,6 +62,14 @@ export const StyledTileSubHeader = styled.h3`
       margin-bottom: 8px;
       font-size: ${({ theme }) => theme.fontSize.medium};
     `}
+    ${({ people }) =>
+    people &&
+    css`
+      text-align: center;
+    `}
+    @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    font-size: ${({ theme }) => theme.fontSize.xSmall};
+  }
 `;
 export const StyledTileHeader = styled.h2`
   font-size: ${({ theme }) => theme.fontSize.xlarge};
@@ -63,6 +83,14 @@ export const StyledTileHeader = styled.h2`
       font-weight: 600;
       font-size: ${({ theme }) => theme.fontSize.xxlarge};
     `}
+    ${({ people }) =>
+    people &&
+    css`
+      text-align: center;
+    `}
+    @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    font-size: ${({ theme }) => theme.fontSize.normal};
+  }
 `;
 export const TileInnerWrapper = styled.div`
   margin: 0;
@@ -74,7 +102,7 @@ export const TileInnerWrapper = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      align-items: center;
+      text-align: center;
     `}
 
   ${({ flex }) =>
@@ -84,6 +112,7 @@ export const TileInnerWrapper = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      flex-grow: 1;
 
       @media (max-width: ${({ theme }) => theme.media.desktop}) {
         flex-grow: 1;
@@ -94,14 +123,14 @@ export const StyledTilePoster = styled.img`
   max-width: 100%;
   object-fit: cover;
   height: 434px;
-  @media (max-width: ${({ theme }) => theme.media.smartfon}) {
-    height: 169px;
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    height: 200px;
   }
   ${({ people }) =>
     people &&
     css`
       height: 265px;
-      @media (max-width: ${({ theme }) => theme.media.smartfon}) {
+      @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
         height: 178px;
       }
     `}
