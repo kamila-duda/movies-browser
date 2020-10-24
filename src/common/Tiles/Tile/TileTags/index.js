@@ -9,19 +9,19 @@ const TileTags = ({ tags, genresId }) => {
     <>
       {tags ? (
         <StyledTileTags>
-          {tags.map((tag) => (
+          {tags.slice(0, 3).map((tag) => (
             <StyledTileTag key={tag}>
               {genres.find(({ id }) => id === tag).name}
             </StyledTileTag>
           ))}
         </StyledTileTags>
       ) : (
-        <StyledTileTags>
-          {genresId.map((genre) => (
-            <StyledTileTag key={genre["name"]}>{genre["name"]}</StyledTileTag>
-          ))}
-        </StyledTileTags>
-      )}
+          <StyledTileTags>
+            {genresId.map((genre) => (
+              <StyledTileTag key={genre["name"]}>{genre["name"]}</StyledTileTag>
+            ))}
+          </StyledTileTags>
+        )}
     </>
   );
 };
