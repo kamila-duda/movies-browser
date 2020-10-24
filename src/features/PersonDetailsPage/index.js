@@ -80,7 +80,7 @@ const PersonDetailsPage = () => {
         />
 
         <Tiles
-          peopleList={true}
+          peopleList={false}
           title="Movies - cast"
           body={personCast.map((movie) => (
             <StyledLink
@@ -111,7 +111,7 @@ const PersonDetailsPage = () => {
         />
         {personCrew.length > 0 ? (
           <Tiles
-            peopleList={true}
+            peopleList={false}
             title="Movies - crew"
             body={personCrew.map((movie) => (
               <StyledLink

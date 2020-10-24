@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const MovieBanner = styled.section`
   max-width: 100%;
   margin-top: 60px;
+  height: 100vh;
   padding: 10px;
   padding-top: 0px;
   padding-bottom: 0px;
@@ -19,6 +20,7 @@ export const MovieBanner = styled.section`
 
 export const Container = styled.div`
   margin-top: 0px;
+  max-width: 1368px;
   position: relative;
   padding-left: 20px;
   padding-right: 20px;
@@ -43,14 +45,15 @@ export const Container = styled.div`
 `;
 
 export const StyledImage = styled.img`
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 export const MovieHeader = styled.header`
   position: absolute;
-  left: -1%;
+  left: 30px;
   bottom: 0px;
-  margin-left: 10px;
   z-index: 10;
 `;
 

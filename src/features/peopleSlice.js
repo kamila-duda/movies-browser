@@ -42,7 +42,9 @@ export const peopleSlice = createSlice({
     fetchPersonDetailsSuccess: (state, { payload: details }) => {
       state.loading = false;
       state.person = details;
-      state.personCast = details.movie_credits.cast;
+      state.personCast = Array.from(details.movie_credits.cast).sort(
+        (a, b) => Date.parse(b.release_date) - Date.parse(a.release_date)
+      );
       if (details.movie_credits.crew.length > 0) {
         state.personCrew = details.movie_credits.crew;
       }

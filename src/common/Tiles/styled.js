@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const StyledTilesContainer = styled.div`
   display: grid;
   grid-gap: 24px;
-  grid-template-columns: repeat(4, minmax(324px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
   height: auto;
   padding: 15px;
@@ -16,7 +16,7 @@ export const StyledTilesContainer = styled.div`
   ${({ people }) =>
     people &&
     css`
-      grid-template-columns: repeat(6, minmax(208px, 1fr));
+      grid-template-columns: repeat(6,minmax(208px, 1fr));
       grid-gap: 20px;
 
       @media (max-width: ${({ theme }) => theme.media.tablet}) {

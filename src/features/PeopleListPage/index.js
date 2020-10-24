@@ -75,6 +75,7 @@ const PeopleListPage = () => {
                 onClick={() => dispatch(fetchPersonDetails(person.id))}
               >
                 <Tile
+                peopleList={peopleList}
                   key={person.name}
                   poster={
                     person.profile_path === null
