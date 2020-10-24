@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { ButtonWrapper, StyledButton, PageCounter, Quantity, StyledFontAwesomeIcon, PaginationText } from "./styled";
+import { toMoviesNextPage } from "routes";
 
 const Pagination = ({
   currentPage,
@@ -17,6 +18,7 @@ const Pagination = ({
       <StyledButton
         disabled={currentPage === 1 ? "disabled" : ""}
         onClick={() => dispatch(setCurrentPageFirst())}
+        to={toMoviesNextPage({ page: currentPage })}
       >
         <StyledFontAwesomeIcon
           disabled={currentPage === 1 ? "disabled" : ""}
@@ -32,6 +34,7 @@ const Pagination = ({
       <StyledButton
         disabled={currentPage === 1 ? "disabled" : ""}
         onClick={() => dispatch(decreaseCurrentPage())}
+        to={toMoviesNextPage({ page: currentPage })}
       >
         <StyledFontAwesomeIcon
           disabled={currentPage === 1 ? "disabled" : ""}
@@ -49,6 +52,7 @@ const Pagination = ({
       <StyledButton
         disabled={currentPage === lastPage ? "disabled" : ""}
         onClick={() => dispatch(increaseCurrentPage())}
+        to={toMoviesNextPage({ page: currentPage })}
       >
         <StyledFontAwesomeIcon
           icon={faAngleRight}
@@ -60,6 +64,7 @@ const Pagination = ({
         last
         disabled={currentPage === lastPage ? "disabled" : ""}
         onClick={() => dispatch(setCurrentPageLast(lastPage))}
+        to={toMoviesNextPage({ page: currentPage })}
       >
         <StyledFontAwesomeIcon
           icon={faAngleRight}
