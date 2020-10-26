@@ -83,7 +83,6 @@ const PersonDetailsPage = () => {
               : "This actor has not biography yet."
           }
         />
-
         <Tiles
           peopleList={false}
           title="Movies - cast"
