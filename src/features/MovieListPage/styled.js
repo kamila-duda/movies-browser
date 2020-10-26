@@ -5,4 +5,5 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   display: flex;
   color: ${({ theme }) => theme.color.black};
+  width: 100%;
 `;

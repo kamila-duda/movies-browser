@@ -23,7 +23,7 @@ export const StyledTilesContainer = styled.div`
         grid-template-columns: repeat(4, 1fr);
       }
       @media (max-width: ${({ theme }) => theme.media.mobile}) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 45%);
       }
     `}
 `;

@@ -15,6 +15,11 @@ export const StyledContainer = styled.main`
 
       @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
         padding-top: 16px;
+        ${({ peopleDetails }) =>
+          peopleDetails &&
+          css`
+            padding-top: 140px;
+          `}
       }
     `}
 `;

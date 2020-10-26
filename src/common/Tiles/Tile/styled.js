@@ -18,7 +18,6 @@ export const StyledTile = styled.div`
       display: grid;
       grid-template-columns: 312px 1fr;
       grid-gap: 40px;
-      align-items: center;
       margin-top: 20px;
       margin-bottom: 49px;
     `}
@@ -87,6 +86,7 @@ export const StyledTileHeader = styled.h2`
     people &&
     css`
       text-align: center;
+      word-break: break-word;
     `}
     @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     font-size: ${({ theme }) => theme.fontSize.normal};
@@ -120,8 +120,8 @@ export const TileInnerWrapper = styled.div`
     `}
 `;
 export const StyledTilePoster = styled.img`
-  max-width: 100%;
-  object-fit: cover;
+  width: 100%;
+  object-fit: contain;
   height: 434px;
   @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     height: 200px;

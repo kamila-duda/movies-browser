@@ -5,6 +5,7 @@ import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
 import nonePoster from "assets/images/png/nonePoster.png";
+import noneProfile from "assets/images/png/noneProfile.png";
 import {
   fetchPersonDetails,
   selectLoading,
@@ -65,10 +66,14 @@ const PersonDetailsPage = () => {
   }
   return (
     <>
-      <Container detailsPage={true}>
+      <Container detailsPage={true} peopleDetails={true}>
         <Tile
           horizontal={"horizontal"}
-          poster={`${images}${posterSize}${person.profile_path}`}
+          poster={
+            person.profile_path === null
+              ? noneProfile
+              : `${images}${posterSize}${person.profile_path}`
+          }
           detailsTitle={person.name}
           placeOfBirth={person.place_of_birth}
           birthday={person.birthday}

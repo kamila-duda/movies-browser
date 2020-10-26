@@ -23,6 +23,7 @@ import Spinner from "features/Spinner";
 import { nanoid } from "@reduxjs/toolkit";
 import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
+import nonePoster from "assets/images/png/nonePoster.png";
 
 
 const MovieDetailsPage = () => {
@@ -79,7 +80,9 @@ const MovieDetailsPage = () => {
       <Container detailsPage={true}>
         <Tile
           horizontal={"horizontal"}
-          poster={`${images}${posterSize}${movie.poster_path}`}
+          poster={movie.poster_path === null
+            ? nonePoster
+            : `${images}${posterSize}${movie.poster_path}`}
           detailsTitle={movie.title}
           detailsYear={
             movie.release_date ? movie.release_date.substring(0, 4) : ""
