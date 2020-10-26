@@ -166,6 +166,7 @@ export const StyledMobileDescription = styled.p`
 `;
 export const StyledMoreButton = styled.p`
   font-weight: 500;
+  cursor: pointer;
   color:${({ theme }) => theme.color.scienceBlue};
   @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     display: none;
@@ -173,5 +174,6 @@ export const StyledMoreButton = styled.p`
 `;
 export const StyledMoreButtonMobile = styled.p`
   font-weight: 500;
+  cursor: pointer;
   color:${({ theme }) => theme.color.scienceBlue};
 `;
