@@ -1,4 +1,62 @@
+<a href="https://kamila-duda.github.io/todo-list-react-redux/"><img src="https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/png/screen.PNG?raw=true" title="FVCproductions" alt="FVCproductions"></a>
+
+# Movies Browser
+
+> Popular movies and actors
+
+> Searching favorites movies and actors
+
+> Details for movie and actor
+
+View live demo: https://kamila-duda.github.io/todo-list-react-redux/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+
+
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Team](#team)
+* [Status](#status)
+* [Available Scripts](#available-scripts)
+
+## General info
+This is an application to view movies and actors. You can read biography and cast of your faviorites actor, description and cast of the movie, and also check which movies and actors are currently on the top.
+
+Created by egina-team as part of the YouCode course. Our team: 
+* [@Kamila Duda](https://github.com/kamila-duda)
+* [@Michał Janiec](https://github.com/JaniecMichal)
+* [@Kamil Łazarski](https://github.com/kamilLazarski)
+
+
+How application works:
+![gif of how application works](https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/app.gif?raw=true)
+
+Movie details page:
+![movie details page](https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/png/screenMovieDetails.PNG?raw=true)
+
+## Technologies
+* Html
+* Css
+* JavaScript
+* React.js
+* Redux
+* redux-saga
+* react-router-dom
+* @reduxjs/toolkit
+* styled-components
+
+## Team
+
+
+|  |  |  |
+| :---: |:---:| :---:|
+| <img src="https://avatars2.githubusercontent.com/u/63412323?s=200&u=58c3a8d5db4294c50cfd4a435e96f215e8a2410e&v=4?s=200" width="150" height="150"/>  | <img src="https://avatars2.githubusercontent.com/u/67117780?s=200&u=bd9c7280aea06a84b5eca77dee51fdbbe135d800&v=4&s=200" width="150" height="150"/>  | <img src="https://ca.slack-edge.com/T01394QLY9Y-U013CHKT64A-99d7c911bfbb-512?s=200" width="150" height="150"/> 
+|Kamila Duda |Michał Janiec | Kamil Łazarski
+| <a href="https://github.com/kamila-duda" target="_blank">`github.com/kamila-duda`</a> | <a href="https://github.com/JaniecMichal" target="_blank">`github.com/JaniecMichal`</a> | <a href="https://github.com/kamilLazarski" target="_blank">`github.com/kamilLazarski`</a> |
+
+## Status
+Project is: _not finished_.
 
 ## Available Scripts
 
@@ -11,11 +69,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
