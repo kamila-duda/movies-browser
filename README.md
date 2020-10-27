@@ -1,4 +1,4 @@
-<a href="https://kamila-duda.github.io/todo-list-react-redux/"><img src="https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/png/screen.PNG?raw=true" title="FVCproductions" alt="FVCproductions"></a>
+<a href="https://kamila-duda.github.io/movies-browser/" target="_blank"><img src="https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/png/screen.PNG?raw=true" title="Movies Browser" alt="app screen"></a>
 
 # Movies Browser
 
