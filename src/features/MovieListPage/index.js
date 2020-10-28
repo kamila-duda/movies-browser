@@ -22,7 +22,7 @@ import nonePoster from "assets/images/png/nonePoster.png";
 import Spinner from "features/Spinner";
 import { StyledLink } from "./styled";
 import { toMovieDetails } from "routes";
-import { useQueryParameter } from "features/Search/queryParameter";
+import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import SearchingErrorPage from "common/SearchingErrorPage";
@@ -39,9 +39,12 @@ const MovieListPage = () => {
   const title = "Popular movies";
   const loading = useSelector(selectLoading);
   const isError = useSelector(selectIsError);
+  const page = useQueryParameter("page");
+
   useEffect(() => {
-    dispatch(fetchPopularMovies({ currentPage, query }));
-  }, [dispatch, currentPage, query]);
+    dispatch(fetchPopularMovies({ currentPage: page, query }));
+  }, [dispatch, currentPage, page, query]);
+
   if (isError) {
     return (
       <Container>
@@ -49,7 +52,7 @@ const MovieListPage = () => {
       </Container>
     );
   };
-  if (results===0 && query) {
+  if (results === 0 && query) {
     return (
       <Container>
         <SearchingErrorPage query={query} />
@@ -58,49 +61,49 @@ const MovieListPage = () => {
   };
   return (
     <Container>
-      {loading ? (query? (<Tiles title={`Search results for ${query}`} body={<Spinner />} />):
+      {loading ? (query ? (<Tiles title={`Search results for ${query}`} body={<Spinner />} />) :
         <Tiles title="Search results for popular movies" body={<Spinner />} />
       ) : (
-        <Tiles
-          title={query? `Search results for "${query}" (${results})` : title}
-          body={movies.map((movie) => (
-            <StyledLink
-              key={movie.id}
-              to={toMovieDetails({ id: movie.id })}
-              onClick={() => dispatch(fetchMovieDetails(movie.id))}
-            >
-              <Tile
+          <Tiles
+            title={query ? `Search results for "${query}" (${results})` : title}
+            body={movies.map((movie) => (
+              <StyledLink
                 key={movie.id}
-                poster={
-                  movie.poster_path === null
-                    ? nonePoster
-                    : `${images}${posterSize}${movie.poster_path}`
-                }
-                header={movie.title}
-                subheader={
-                  movie.release_date ? movie.release_date.substring(0, 4) : ""
-                }
-                tags={movie.genre_ids}
-                voteAverage={movie.vote_average}
-                review={movie.vote_count}
-              />
-            </StyledLink>
-          ))}
-        />
-      )}
+                to={toMovieDetails({ id: movie.id })}
+                onClick={() => dispatch(fetchMovieDetails(movie.id))}
+              >
+                <Tile
+                  key={movie.id}
+                  poster={
+                    movie.poster_path === null
+                      ? nonePoster
+                      : `${images}${posterSize}${movie.poster_path}`
+                  }
+                  header={movie.title}
+                  subheader={
+                    movie.release_date ? movie.release_date.substring(0, 4) : ""
+                  }
+                  tags={movie.genre_ids}
+                  voteAverage={movie.vote_average}
+                  review={movie.vote_count}
+                />
+              </StyledLink>
+            ))}
+          />
+        )}
 
       {loading ? (
         ""
       ) : (
-        <Pagination
-          currentPage={currentPage}
-          lastPage={lastPage}
-          setCurrentPageFirst={setCurrentPageFirst}
-          decreaseCurrentPage={decreaseCurrentPage}
-          increaseCurrentPage={increaseCurrentPage}
-          setCurrentPageLast={setCurrentPageLast}
-        />
-      )}
+          <Pagination
+            currentPage={currentPage}
+            lastPage={lastPage}
+            setCurrentPageFirst={setCurrentPageFirst}
+            decreaseCurrentPage={decreaseCurrentPage}
+            increaseCurrentPage={increaseCurrentPage}
+            setCurrentPageLast={setCurrentPageLast}
+          />
+        )}
     </Container>
   );
 };
