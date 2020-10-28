@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyledTile,
   StyledTileSubHeader,
@@ -7,6 +7,10 @@ import {
   StyledTilePoster,
   StyledDetails,
   StyledTileDescription,
+  StyledMobileDescription,
+  StyledMoreButton,
+  StyledMoreButtonMobile,
+  StyledMobileWrapper,
 } from "common/Tiles/Tile/styled";
 import TileReview from "common/Tiles/Tile/TileReview";
 import NoPoster from "assets/images/svg/NoPoster.svg";
@@ -30,6 +34,8 @@ const Tile = ({
   birthday,
   genresId,
 }) => {
+  const [moreText, setMoreText] = useState(false);
+
   return (
     <StyledTile
       horizontal={horizontal}
@@ -37,20 +43,34 @@ const Tile = ({
     >
       <TileInnerWrapper>
         {poster ? (
-          <StyledTilePoster people={peopleList === true ? "people" : ""} src={poster} />
+          <StyledTilePoster
+            people={peopleList === true ? "people" : ""}
+            src={poster}
+          />
         ) : (
-          <StyledTilePoster people={peopleList === true ? "people" : ""} src={NoPoster} />
+          <StyledTilePoster
+            people={peopleList === true ? "people" : ""}
+            src={NoPoster}
+          />
         )}
       </TileInnerWrapper>
-      <TileInnerWrapper flex >
-        {header ? <StyledTileHeader people={peopleList === true ? "people" : ""}>{header}</StyledTileHeader> : ""}
+      <TileInnerWrapper flex>
+        {header ? (
+          <StyledTileHeader people={peopleList === true ? "people" : ""}>
+            {header}
+          </StyledTileHeader>
+        ) : (
+          ""
+        )}
         {detailsTitle ? (
           <StyledTileHeader detailsPage>{detailsTitle}</StyledTileHeader>
         ) : (
           ""
         )}
         {subheader ? (
-          <StyledTileSubHeader people={peopleList === true ? "people" : ""}>{subheader}</StyledTileSubHeader>
+          <StyledTileSubHeader people={peopleList === true ? "people" : ""}>
+            {subheader}
+          </StyledTileSubHeader>
         ) : (
           ""
         )}
@@ -99,11 +119,40 @@ const Tile = ({
           ""
         )}
         {description ? (
-          <StyledTileDescription>{description}</StyledTileDescription>
+          description.length > 400 ? (
+            <>
+              <StyledTileDescription>
+                {moreText ? description : `${description.substring(0, 400)}...`}
+              </StyledTileDescription>
+              <StyledMoreButton onClick={() => setMoreText(!moreText)}>
+                {moreText ? "Read less <<" : "Read more >>"}
+              </StyledMoreButton>
+            </>
+          ) : (
+            <StyledTileDescription>{description}</StyledTileDescription>
+          )
         ) : (
           ""
         )}
       </TileInnerWrapper>
+      <StyledMobileWrapper>
+      {description ? (
+          description.length > 400 ? (
+            <>
+              <StyledMobileDescription>
+                {moreText ? description : `${description.substring(0, 400)}...`}
+              </StyledMobileDescription>
+              <StyledMoreButtonMobile onClick={() => setMoreText(!moreText)}>
+                {moreText ? "Read less" : "Read more"}
+              </StyledMoreButtonMobile>
+            </>
+          ) : (
+            <StyledMobileDescription>{description}</StyledMobileDescription>
+          )
+        ) : (
+          ""
+        )}
+      </StyledMobileWrapper>
     </StyledTile>
   );
 };
