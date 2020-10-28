@@ -3,7 +3,7 @@ import Navigation from "common/Navbar";
 import MovieListPage from "features/MovieListPage";
 import PeopleListPage from "features/PeopleListPage";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
-import { toMoviesList, toMoviesNextPage, toPeopleList, toMovieDetails, toPersonDetails } from "./routes";
+import { toMoviesList, toPeopleList, toMovieDetails, toPersonDetails } from "./routes";
 import MovieDetailsPage from "features/MovieDetailsPage";
 import PersonDetailsPage from "features/PersonDetailsPage";
 
@@ -20,9 +20,6 @@ const App = () => {
           <PersonDetailsPage />
         </Route>
         <Route exact path={toMoviesList()}>
-          <MovieListPage />
-        </Route>
-        <Route exact path={toMoviesNextPage()}>
           <MovieListPage />
         </Route>
         <Route exact path={toPeopleList()}>
