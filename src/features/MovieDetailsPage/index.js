@@ -20,7 +20,7 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
-import { useQueryParameter } from "features/Search/queryParameter";
+import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
 
 
@@ -42,10 +42,12 @@ const MovieDetailsPage = () => {
       dispatch(fetchMovieDetails(id));
     }
   }, [dispatch, id]);
+
   const query = useQueryParameter(key);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const history = useHistory();
+
   useEffect(() => {
     if (query) {
       history.push(`/movies?${searchParams.toString()}`);
