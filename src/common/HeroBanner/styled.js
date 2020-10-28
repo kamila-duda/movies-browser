@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const MovieBanner = styled.section`
   max-width: 100%;
   margin-top: 60px;
-  height: 100vh;
   padding: 10px;
   padding-top: 0px;
   padding-bottom: 0px;
