@@ -93,7 +93,7 @@ const PersonDetailsPage = () => {
               onClick={() => dispatch(fetchMovieDetails(movie.id))}
             >
               <Tile
-                key={movie.id}
+                key={movie.title}
                 peopleList={false}
                 poster={
                   movie.poster_path === null
@@ -119,11 +119,12 @@ const PersonDetailsPage = () => {
             title="Movies - crew"
             body={personCrew.map((movie) => (
               <StyledLink
-                key={movie.id}
+                key={movie.biography}
                 to={toMovieDetails({ id: movie.id })}
                 onClick={() => dispatch(fetchMovieDetails(movie.id))}
               >
                 <Tile
+                  key={movie.imdb_id}
                   peopleList={true}
                   poster={
                     movie.poster_path === null

@@ -20,7 +20,6 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
-import { nanoid } from "@reduxjs/toolkit";
 import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import nonePoster from "assets/images/png/nonePoster.png";
@@ -124,7 +123,7 @@ const MovieDetailsPage = () => {
           title="Crew"
           body={crew.map((crewmate) => (
             <Tile
-              key={nanoid}
+              key={crewmate.name}
               peopleList={true}
               poster={
                 crewmate.profile_path === null
