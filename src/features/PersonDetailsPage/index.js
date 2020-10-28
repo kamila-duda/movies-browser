@@ -21,6 +21,7 @@ import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
 import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
+import UpButton from "common/UpButton";
 
 const PersonDetailsPage = () => {
   const { id } = useParams();
@@ -67,6 +68,7 @@ const PersonDetailsPage = () => {
   return (
     <>
       <Container detailsPage={true} peopleDetails={true}>
+      <UpButton/>
         <Tile
           horizontal={"horizontal"}
           poster={
