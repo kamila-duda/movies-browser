@@ -18,7 +18,7 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toMovieDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
-import { useQueryParameter } from "features/Search/queryParameter";
+import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
 
 const PersonDetailsPage = () => {
