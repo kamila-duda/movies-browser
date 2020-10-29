@@ -44,6 +44,9 @@ const PeopleListPage = () => {
 
   useEffect(() => {
     dispatch(fetchPopularPeople({ currentPage: page, query }));
+    if (page === null) {
+      dispatch(setCurrentPageFirst());
+    }
   }, [dispatch, currentPage, query, page]);
 
   if (isError) {

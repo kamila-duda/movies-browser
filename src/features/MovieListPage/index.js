@@ -43,6 +43,9 @@ const MovieListPage = () => {
 
   useEffect(() => {
     dispatch(fetchPopularMovies({ currentPage: page, query }));
+    if (page === null) {
+      dispatch(setCurrentPageFirst());
+    }
   }, [dispatch, currentPage, page, query]);
 
   if (isError) {
