@@ -26,6 +26,7 @@ import ConnectionErrorPage from "common/ConnectionErrorPage";
 import noneProfile from "assets/images/png/noneProfile.png";
 import SearchingErrorPage from "common/SearchingErrorPage";
 import { selectResults } from "features/peopleSlice";
+import UpButton from "common/UpButton";
 
 const PeopleListPage = () => {
   const query = useQueryParameter(key);
@@ -62,6 +63,7 @@ const PeopleListPage = () => {
 
   return (
     <Container>
+      <UpButton/>
       {loading ? (query? (<Tiles title={`Search results for ${query}`} body={<Spinner />} />) : 
       <Tiles title="Search results for popular people" body={<Spinner />} />
       ) : (

@@ -26,6 +26,7 @@ import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import SearchingErrorPage from "common/SearchingErrorPage";
+import UpButton from "common/UpButton";
 
 const MovieListPage = () => {
   const query = useQueryParameter(key);
@@ -58,6 +59,7 @@ const MovieListPage = () => {
   };
   return (
     <Container>
+      <UpButton/>
       {loading ? (query? (<Tiles title={`Search results for ${query}`} body={<Spinner />} />):
         <Tiles title="Search results for popular movies" body={<Spinner />} />
       ) : (

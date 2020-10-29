@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import HeroBanner from "common/HeroBanner";
@@ -23,6 +23,7 @@ import Spinner from "features/Spinner";
 import { useQueryParameter } from "features/Search/queryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import nonePoster from "assets/images/png/nonePoster.png";
+import UpButton from "common/UpButton";
 
 
 const MovieDetailsPage = () => {
@@ -37,7 +38,7 @@ const MovieDetailsPage = () => {
   const cast = useSelector(selectCast);
   const crew = useSelector(selectCrew);
   const movieProduction = useSelector(selectMovieProduction);
-
+  
   useEffect(() => {
     if (id) {
       dispatch(fetchMovieDetails(id));
@@ -77,6 +78,7 @@ const MovieDetailsPage = () => {
         vote={movie.vote_count}
       />) : ""}
       <Container detailsPage={true}>
+        <UpButton/>
         <Tile
           horizontal={"horizontal"}
           poster={movie.poster_path === null
@@ -95,6 +97,7 @@ const MovieDetailsPage = () => {
         />
 
         <Tiles
+      
           peopleList={true}
           title="Cast"
           body={cast.map((person) => (
