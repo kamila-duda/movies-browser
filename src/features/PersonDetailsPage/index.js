@@ -84,12 +84,12 @@ const PersonDetailsPage = () => {
           title="Movies - cast"
           body={personCast.map((movie) => (
             <StyledLink
-              key={movie.id}
+              key={`${movie.id} as ${movie.character}`}
               to={toMovieDetails({ id: movie.id })}
               onClick={() => dispatch(fetchMovieDetails(movie.id))}
             >
               <Tile
-                key={movie.id}
+                key={`${movie.id} as ${movie.character}`}
                 peopleList={false}
                 poster={
                   movie.poster_path === null
@@ -97,11 +97,10 @@ const PersonDetailsPage = () => {
                     : `${images}${posterSize}${movie.poster_path}`
                 }
                 header={movie.title}
-                subheader={`${movie.character} (${
-                  movie.release_date
-                    ? movie.release_date.substring(0, 4)
-                    : "year not found"
-                })`}
+                subheader={`${movie.character} (${movie.release_date
+                  ? movie.release_date.substring(0, 4)
+                  : "year not found"
+                  })`}
                 tags={movie.genre_ids}
                 voteAverage={movie.vote_average}
                 review={movie.vote_count}
@@ -115,7 +114,7 @@ const PersonDetailsPage = () => {
             title="Movies - crew"
             body={personCrew.map((movie) => (
               <StyledLink
-                key={movie.id}
+                key={`${movie.id} as ${movie.job}`}
                 to={toMovieDetails({ id: movie.id })}
                 onClick={() => dispatch(fetchMovieDetails(movie.id))}
               >
@@ -133,8 +132,8 @@ const PersonDetailsPage = () => {
             ))}
           />
         ) : (
-          ""
-        )}
+            ""
+          )}
       </Container>
     </>
   );
