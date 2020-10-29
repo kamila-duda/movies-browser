@@ -9,7 +9,7 @@ const TileTags = ({ tags, genresId }) => {
     <>
       {tags ? (
         <StyledTileTags>
-          {tags.slice(0, 3).map((tag) => (
+          {tags.map((tag) => (
             <StyledTileTag key={tag}>
               {genres.find(({ id }) => id === tag).name}
             </StyledTileTag>
