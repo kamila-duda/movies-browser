@@ -15,7 +15,7 @@ import {
 } from "./peopleSlice";
 import store from "store";
 
-function* fetchPopularPeopleHandler({ payload }) {
+function* fetchPopularPeopleHandler({ payload = 1 }) {
   try {
     yield delay(500);
     const people = yield call(getPopularPeople, payload);
