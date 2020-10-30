@@ -8,7 +8,11 @@ const UpButton = () => {
   const offsetTop = () => {
     window.pageYOffset > 1000 ? setHide(false) : setHide(true);
   };
-  window.addEventListener("scroll", offsetTop);
+
+  useEffect(() => {
+    window.addEventListener("scroll", offsetTop);
+    return () => window.removeEventListener("scroll", offsetTop);
+  }, []);
 
   return (
     <StyledFontAwesomeIcon
