@@ -20,7 +20,7 @@ import {
 import { selectLoading } from "features/peopleSlice";
 import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
-import { useQueryParameter } from "features/Search/queryParameter";
+import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import noneProfile from "assets/images/png/noneProfile.png";
@@ -41,10 +41,14 @@ const PeopleListPage = () => {
   const currentPage = useSelector(selectCurrentPage);
   const lastPage = useSelector(selectTotalPages);
   const peopleList = true;
+  const page = useQueryParameter("page");
 
   useEffect(() => {
-    dispatch(fetchPopularPeople({ currentPage, query }));
-  }, [dispatch, currentPage, query]);
+    dispatch(fetchPopularPeople({ currentPage: page, query }));
+    if (page === null) {
+      dispatch(setCurrentPageFirst());
+    }
+  }, [dispatch, currentPage, query, page]);
 
   if (isError) {
     return (
@@ -53,7 +57,7 @@ const PeopleListPage = () => {
       </Container>
     )
   };
-  if (results===0 && query) {
+  if (results === 0 && query) {
     return (
       <Container>
         <SearchingErrorPage query={query} />
@@ -69,7 +73,7 @@ const PeopleListPage = () => {
       ) : (
           <Tiles
             peopleList={peopleList}
-            title={query? `Search results for "${query}" (${results})` : title}
+            title={query ? `Search results for "${query}" (${results})` : title}
             body={people.map((person) => (
               <StyledLink
                 key={person.id}
@@ -77,7 +81,7 @@ const PeopleListPage = () => {
                 onClick={() => dispatch(fetchPersonDetails(person.id))}
               >
                 <Tile
-                peopleList={peopleList}
+                  peopleList={peopleList}
                   key={person.name}
                   poster={
                     person.profile_path === null

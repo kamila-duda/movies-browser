@@ -20,7 +20,7 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
-import { useQueryParameter } from "features/Search/queryParameter";
+import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import nonePoster from "assets/images/png/nonePoster.png";
 import UpButton from "common/UpButton";
@@ -44,16 +44,18 @@ const MovieDetailsPage = () => {
       dispatch(fetchMovieDetails(id));
     }
   }, [dispatch, id]);
+
   const query = useQueryParameter(key);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const history = useHistory();
+
   useEffect(() => {
     if (query) {
       history.push(`/movies?${searchParams.toString()}`);
     }
   }, [query, history, searchParams]);
-  
+
   if (isError) {
     return (
       <Container>
@@ -70,13 +72,13 @@ const MovieDetailsPage = () => {
   };
   return (
     <>
-    {movie.backdrop_path !== null ? 
-      (<HeroBanner
-        backdrop={`${images}${backdropSize}${movie.backdrop_path}`}
-        movieTitle={movie.title}
-        vote_average={movie.vote_average}
-        vote={movie.vote_count}
-      />) : ""}
+      {movie.backdrop_path !== null ?
+        (<HeroBanner
+          backdrop={`${images}${backdropSize}${movie.backdrop_path}`}
+          movieTitle={movie.title}
+          vote_average={movie.vote_average}
+          vote={movie.vote_count}
+        />) : ""}
       <Container detailsPage={true}>
         <UpButton/>
         <Tile
@@ -126,7 +128,7 @@ const MovieDetailsPage = () => {
           title="Crew"
           body={crew.map((crewmate) => (
             <Tile
-              key={crewmate.name}
+              key={`${crewmate.name} as ${crewmate.job}`}
               peopleList={true}
               poster={
                 crewmate.profile_path === null
