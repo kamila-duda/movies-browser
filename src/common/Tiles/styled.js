@@ -16,14 +16,14 @@ export const StyledTilesContainer = styled.div`
   ${({ people }) =>
     people &&
     css`
-      grid-template-columns: repeat(6,minmax(208px, 1fr));
+      grid-template-columns: repeat(6, 1fr);
       grid-gap: 20px;
 
       @media (max-width: ${({ theme }) => theme.media.tablet}) {
         grid-template-columns: repeat(4, 1fr);
       }
       @media (max-width: ${({ theme }) => theme.media.mobile}) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 45%);
       }
     `}
 `;

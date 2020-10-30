@@ -5,6 +5,7 @@ import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
 import nonePoster from "assets/images/png/nonePoster.png";
+import noneProfile from "assets/images/png/noneProfile.png";
 import {
   fetchPersonDetails,
   selectLoading,
@@ -20,6 +21,7 @@ import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
 import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
+import UpButton from "common/UpButton";
 
 const PersonDetailsPage = () => {
   const { id } = useParams();
@@ -65,10 +67,15 @@ const PersonDetailsPage = () => {
   }
   return (
     <>
-      <Container detailsPage={true}>
+      <Container detailsPage={true} peopleDetails={true}>
+      <UpButton/>
         <Tile
           horizontal={"horizontal"}
-          poster={`${images}${posterSize}${person.profile_path}`}
+          poster={
+            person.profile_path === null
+              ? noneProfile
+              : `${images}${posterSize}${person.profile_path}`
+          }
           detailsTitle={person.name}
           placeOfBirth={person.place_of_birth}
           birthday={person.birthday}
@@ -78,7 +85,6 @@ const PersonDetailsPage = () => {
               : "This actor has not biography yet."
           }
         />
-
         <Tiles
           peopleList={false}
           title="Movies - cast"
@@ -119,6 +125,7 @@ const PersonDetailsPage = () => {
                 onClick={() => dispatch(fetchMovieDetails(movie.id))}
               >
                 <Tile
+                  key={movie.imdb_id}
                   peopleList={true}
                   poster={
                     movie.poster_path === null

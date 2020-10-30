@@ -25,7 +25,7 @@ const Navigation = () => {
       <StyledNavWrapper>
         <StyledNav>
           <StyledIcon src={camera} />
-          <StyledTitle>Movie Browser</StyledTitle>
+          <StyledTitle>Movies Browser</StyledTitle>
           <NavigationList>
             <NavigationListItem>
               <StyledNavLink
