@@ -17,6 +17,7 @@ export const theme = {
     mystic: "#E4E6F0",//szare tło tagów
     waterloo: "#7E839A",//pasek search, szary opis w kafelkach
     stormGray: "#74788B",//szary opis w dużym kaflu
+    red: "#FF6347",
     gray: "#E4E6F0",
     darkedGray: "#7E839A",
     lightBlue: "#D6E4FF",

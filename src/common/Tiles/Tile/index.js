@@ -11,10 +11,14 @@ import {
   StyledMoreButton,
   StyledMoreButtonMobile,
   StyledMobileWrapper,
+  StyledLink,
 } from "common/Tiles/Tile/styled";
 import TileReview from "common/Tiles/Tile/TileReview";
 import NoPoster from "assets/images/svg/NoPoster.svg";
 import TileTags from "./TileTags";
+import { toMovieDetails } from "routes";
+import { fetchMovieDetails } from "features/moviesSlice";
+import { useDispatch } from "react-redux";
 
 const Tile = ({
   poster,
@@ -33,9 +37,11 @@ const Tile = ({
   placeOfBirth,
   birthday,
   genresId,
+  movieId,
 }) => {
   const [moreText, setMoreText] = useState(false);
 
+  const dispatch = useDispatch();
   return (
     <StyledTile
       horizontal={horizontal}
@@ -43,22 +49,58 @@ const Tile = ({
     >
       <TileInnerWrapper>
         {poster ? (
-          <StyledTilePoster
-            people={peopleList === true ? "people" : ""}
-            src={poster}
-          />
-        ) : (
+          peopleList ? (
+            <StyledTilePoster
+              people={peopleList === true ? "people" : ""}
+              src={poster}
+            />
+          ) : (
+            <StyledLink
+              key={movieId}
+              to={toMovieDetails({ id: movieId })}
+              onClick={() => dispatch(fetchMovieDetails(movieId))}
+            >
+              <StyledTilePoster
+                people={peopleList === true ? "people" : ""}
+                src={poster}
+              />
+            </StyledLink>
+          )
+        ) : peopleList ? (
           <StyledTilePoster
             people={peopleList === true ? "people" : ""}
             src={NoPoster}
           />
+        ) : (
+          <StyledLink
+            key={movieId}
+            to={toMovieDetails({ id: movieId })}
+            onClick={() => dispatch(fetchMovieDetails(movieId))}
+          >
+            <StyledTilePoster
+              people={peopleList === true ? "people" : ""}
+              src={NoPoster}
+            />
+          </StyledLink>
         )}
       </TileInnerWrapper>
       <TileInnerWrapper flex>
         {header ? (
-          <StyledTileHeader people={peopleList === true ? "people" : ""}>
-            {header}
-          </StyledTileHeader>
+          peopleList ? (
+            <StyledTileHeader people={peopleList === true ? "people" : ""}>
+              {header}
+            </StyledTileHeader>
+          ) : (
+            <StyledLink
+              key={movieId}
+              to={toMovieDetails({ id: movieId })}
+              onClick={() => dispatch(fetchMovieDetails(movieId))}
+            >
+              <StyledTileHeader people={peopleList === true ? "people" : ""}>
+                {header}
+              </StyledTileHeader>
+            </StyledLink>
+          )
         ) : (
           ""
         )}
@@ -114,7 +156,11 @@ const Tile = ({
         {tags ? <TileTags tags={tags} /> : ""}
         {genresId ? <TileTags genresId={genresId} /> : ""}
         {review || voteAverage ? (
-          <TileReview review={review} voteAverage={voteAverage} />
+          <TileReview
+            review={review}
+            voteAverage={voteAverage}
+            movieId={movieId}
+          />
         ) : (
           ""
         )}
@@ -136,7 +182,7 @@ const Tile = ({
         )}
       </TileInnerWrapper>
       <StyledMobileWrapper>
-      {description ? (
+        {description ? (
           description.length > 400 ? (
             <>
               <StyledMobileDescription>
