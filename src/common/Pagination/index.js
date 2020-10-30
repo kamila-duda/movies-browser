@@ -2,7 +2,15 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { ButtonWrapper, StyledButton, PageCounter, Quantity, StyledFontAwesomeIcon, PaginationText } from "./styled";
+import { useQueryParameter, useReplaceQueryParameter } from "hooks/useQueryParameter";
+import {
+  ButtonWrapper,
+  StyledButton,
+  PageCounter,
+  Quantity,
+  StyledFontAwesomeIcon,
+  PaginationText,
+} from "./styled";
 
 const Pagination = ({
   currentPage,
@@ -10,64 +18,87 @@ const Pagination = ({
   setCurrentPageFirst,
   decreaseCurrentPage,
   increaseCurrentPage,
-  setCurrentPageLast }) => {
+  setCurrentPageLast,
+}) => {
   const dispatch = useDispatch();
+  const replaceQueryParameter = useReplaceQueryParameter();
+  const page = useQueryParameter("page");
+
+  const onPageChange = (page) => {
+    replaceQueryParameter({
+      key: "page",
+      value: page.toString(),
+    });
+  };
+
   return (
     <ButtonWrapper>
       <StyledButton
-        disabled={currentPage === 1 ? "disabled" : ""}
-        onClick={() => dispatch(setCurrentPageFirst())}
+        disabled={+page === 1 ? "disabled" : ""}
+        onClick={() => {
+          dispatch(setCurrentPageFirst())
+          onPageChange(1);
+        }}
       >
         <StyledFontAwesomeIcon
-          disabled={currentPage === 1 ? "disabled" : ""}
+          disabled={+page === 1 ? "disabled" : ""}
           icon={faAngleLeft}
         />
         <StyledFontAwesomeIcon
-          disabled={currentPage === 1 ? "disabled" : ""}
+          disabled={+page === 1 ? "disabled" : ""}
           formobile={"formobile"}
           icon={faAngleLeft}
         />
         <PaginationText>First</PaginationText>
       </StyledButton>
       <StyledButton
-        disabled={currentPage === 1 ? "disabled" : ""}
-        onClick={() => dispatch(decreaseCurrentPage())}
+        disabled={+page === 1 ? "disabled" : ""}
+        onClick={() => {
+          dispatch(decreaseCurrentPage())
+          onPageChange(currentPage - 1);
+        }}
       >
         <StyledFontAwesomeIcon
-          disabled={currentPage === 1 ? "disabled" : ""}
+          disabled={+page === 1 ? "disabled" : ""}
           icon={faAngleLeft}
         />
         <PaginationText>Previous</PaginationText>
-
       </StyledButton>
       <PageCounter>
         Page
-                <Quantity>{currentPage}</Quantity>
+                <Quantity>{page === null ? currentPage : page}</Quantity>
                 of
                 <Quantity>{lastPage}</Quantity>
       </PageCounter>
       <StyledButton
-        disabled={currentPage === lastPage ? "disabled" : ""}
-        onClick={() => dispatch(increaseCurrentPage())}
+        disabled={+page === lastPage ? "disabled" : ""}
+        onClick={() => {
+          dispatch(increaseCurrentPage())
+          onPageChange(currentPage + 1);
+        }}
       >
         <StyledFontAwesomeIcon
           icon={faAngleRight}
-          disabled={currentPage === lastPage ? "disabled" : ""}
+          disabled={+page === lastPage ? "disabled" : ""}
         />
         <PaginationText>Next</PaginationText>
       </StyledButton>
       <StyledButton
         last
-        disabled={currentPage === lastPage ? "disabled" : ""}
-        onClick={() => dispatch(setCurrentPageLast(lastPage))}
+        disabled={+page === lastPage ? "disabled" : ""}
+        onClick={() => {
+          dispatch(setCurrentPageLast(lastPage))
+          onPageChange(lastPage);
+        }}
+
       >
         <StyledFontAwesomeIcon
           icon={faAngleRight}
-          disabled={currentPage === lastPage ? "disabled" : ""}
+          disabled={+page === lastPage ? "disabled" : ""}
         />
         <StyledFontAwesomeIcon
           formobile={"formobile"}
-          disabled={currentPage === lastPage ? "disabled" : ""}
+          disabled={+page === lastPage ? "disabled" : ""}
           icon={faAngleRight}
         />
         <PaginationText>Last</PaginationText>

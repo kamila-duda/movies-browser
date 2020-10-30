@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import HeroBanner from "common/HeroBanner";
@@ -20,9 +20,10 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toPersonDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
-import { useQueryParameter } from "features/Search/queryParameter";
+import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import nonePoster from "assets/images/png/nonePoster.png";
+import UpButton from "common/UpButton";
 
 
 const MovieDetailsPage = () => {
@@ -37,22 +38,24 @@ const MovieDetailsPage = () => {
   const cast = useSelector(selectCast);
   const crew = useSelector(selectCrew);
   const movieProduction = useSelector(selectMovieProduction);
-
+  
   useEffect(() => {
     if (id) {
       dispatch(fetchMovieDetails(id));
     }
   }, [dispatch, id]);
+
   const query = useQueryParameter(key);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const history = useHistory();
+
   useEffect(() => {
     if (query) {
       history.push(`/movies?${searchParams.toString()}`);
     }
   }, [query, history, searchParams]);
-  
+
   if (isError) {
     return (
       <Container>
@@ -69,14 +72,15 @@ const MovieDetailsPage = () => {
   };
   return (
     <>
-    {movie.backdrop_path !== null ? 
-      (<HeroBanner
-        backdrop={`${images}${backdropSize}${movie.backdrop_path}`}
-        movieTitle={movie.title}
-        vote_average={movie.vote_average}
-        vote={movie.vote_count}
-      />) : ""}
+      {movie.backdrop_path !== null ?
+        (<HeroBanner
+          backdrop={`${images}${backdropSize}${movie.backdrop_path}`}
+          movieTitle={movie.title}
+          vote_average={movie.vote_average}
+          vote={movie.vote_count}
+        />) : ""}
       <Container detailsPage={true}>
+        <UpButton/>
         <Tile
           horizontal={"horizontal"}
           poster={movie.poster_path === null
@@ -95,6 +99,7 @@ const MovieDetailsPage = () => {
         />
 
         <Tiles
+      
           peopleList={true}
           title="Cast"
           body={cast.map((person) => (
@@ -123,7 +128,7 @@ const MovieDetailsPage = () => {
           title="Crew"
           body={crew.map((crewmate) => (
             <Tile
-              key={crewmate.name}
+              key={`${crewmate.name} as ${crewmate.job}`}
               peopleList={true}
               poster={
                 crewmate.profile_path === null

@@ -16,12 +16,12 @@ const TileTags = ({ tags, genresId }) => {
           ))}
         </StyledTileTags>
       ) : (
-        <StyledTileTags>
-          {genresId.map((genre) => (
-            <StyledTileTag key={genre["name"]}>{genre["name"]}</StyledTileTag>
-          ))}
-        </StyledTileTags>
-      )}
+          <StyledTileTags>
+            {genresId.map((genre) => (
+              <StyledTileTag key={genre["name"]}>{genre["name"]}</StyledTileTag>
+            ))}
+          </StyledTileTags>
+        )}
     </>
   );
 };

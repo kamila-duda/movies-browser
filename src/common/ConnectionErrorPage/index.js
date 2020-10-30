@@ -10,7 +10,7 @@ import { fetchPopularPeople } from "features/peopleSlice";
 
 const ConnectionErrorPage = ({ pageType }) => {
     const dispatch = useDispatch();
-    console.log(pageType);
+
     return (
         <Wrapper>
             <StyledImage src={Picture} alt="ConnectionErrorImage" />

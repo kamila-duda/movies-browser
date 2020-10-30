@@ -5,7 +5,7 @@ export const useQueryParameter = (key) => {
   return new URLSearchParams(location.search).get(key);
 };
 
-export const useReplaceQueryParameter = () => {
+export const useReplaceQueryParameter = (resetPage = false) => {
   const history = useHistory();
   const location = useLocation();
 
@@ -16,6 +16,13 @@ export const useReplaceQueryParameter = () => {
     } else {
       searchParams.set(key, value);
     }
-    history.push(`${location.pathname}?${searchParams.toString()}`);
+
+    if (resetPage && searchParams.get(key)) {
+      history.push(`${location.pathname}?${key}=${searchParams.get(key).toString()}`)
+    } else {
+      searchParams ? history.push(`${location.pathname}?${searchParams.toString()}`) : history.push(`${location.pathname}`);
+    }
+
+
   };
 };

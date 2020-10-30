@@ -21,7 +21,7 @@ import {
 } from "./moviesSlice";
 import store from "store";
 
-function* fetchPopularMoviesHandler({ payload }) {
+function* fetchPopularMoviesHandler({ payload = 1 }) {
   try {
     yield delay(500);
     const movies = yield call(getPopularMovies, payload);

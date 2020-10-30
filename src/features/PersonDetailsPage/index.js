@@ -19,8 +19,9 @@ import { StyledLink } from "features/MovieListPage/styled";
 import { toMovieDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
-import { useQueryParameter } from "features/Search/queryParameter";
+import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
+import UpButton from "common/UpButton";
 
 const PersonDetailsPage = () => {
   const { id } = useParams();
@@ -67,6 +68,7 @@ const PersonDetailsPage = () => {
   return (
     <>
       <Container detailsPage={true} peopleDetails={true}>
+      <UpButton/>
         <Tile
           horizontal={"horizontal"}
           poster={
@@ -88,12 +90,12 @@ const PersonDetailsPage = () => {
           title="Movies - cast"
           body={personCast.map((movie) => (
             <StyledLink
-              key={movie.id}
+              key={`${movie.id} as ${movie.character}`}
               to={toMovieDetails({ id: movie.id })}
               onClick={() => dispatch(fetchMovieDetails(movie.id))}
             >
               <Tile
-                key={movie.title}
+                key={`${movie.id} as ${movie.character}`}
                 peopleList={false}
                 poster={
                   movie.poster_path === null
@@ -101,11 +103,10 @@ const PersonDetailsPage = () => {
                     : `${images}${posterSize}${movie.poster_path}`
                 }
                 header={movie.title}
-                subheader={`${movie.character} (${
-                  movie.release_date
-                    ? movie.release_date.substring(0, 4)
-                    : "year not found"
-                })`}
+                subheader={`${movie.character} (${movie.release_date
+                  ? movie.release_date.substring(0, 4)
+                  : "year not found"
+                  })`}
                 tags={movie.genre_ids}
                 voteAverage={movie.vote_average}
                 review={movie.vote_count}
@@ -119,7 +120,7 @@ const PersonDetailsPage = () => {
             title="Movies - crew"
             body={personCrew.map((movie) => (
               <StyledLink
-                key={movie.biography}
+                key={`${movie.id} as ${movie.job}`}
                 to={toMovieDetails({ id: movie.id })}
                 onClick={() => dispatch(fetchMovieDetails(movie.id))}
               >
@@ -138,8 +139,8 @@ const PersonDetailsPage = () => {
             ))}
           />
         ) : (
-          ""
-        )}
+            ""
+          )}
       </Container>
     </>
   );
