@@ -29,6 +29,7 @@ import SearchingErrorPage from "common/SearchingErrorPage";
 import UpButton from "common/UpButton";
 import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
+import NoFavoriteMoviePage from "common/NoFavoriteMoviePage";
 
 const FavoriteMovies = () => {
   const query = useQueryParameter(key);
@@ -57,6 +58,13 @@ const FavoriteMovies = () => {
     return (
       <Container>
         <SearchingErrorPage query={query} />
+      </Container>
+    );
+  }
+  if (favoriteMovie.length===0) {
+    return (
+      <Container>
+        <NoFavoriteMoviePage/>
       </Container>
     );
   }
