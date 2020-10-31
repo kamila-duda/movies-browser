@@ -140,7 +140,7 @@ const FavoriteMovies = () => {
 
       {loading ? (
         ""
-      ) : (
+      ) : (query?
         <Pagination
           currentPage={currentPage}
           lastPage={lastPage}
@@ -149,7 +149,7 @@ const FavoriteMovies = () => {
           increaseCurrentPage={increaseCurrentPage}
           setCurrentPageLast={setCurrentPageLast}
         />
-      )}
+      : "")}
     </Container>
   );
 };
