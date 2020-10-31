@@ -47,7 +47,7 @@ const Navigation = () => {
               </StyledNavLink>
             </NavigationListItem>
             <NavigationListItem>
-              <StyledNavLink favorite to={toFavoriteMovies()}>
+              <StyledNavLink favorite="favorite" to={toFavoriteMovies()}>
                 <StyledFontAwesomeIcon icon={fasFaHeart} />
                 <StyledNumberContainer>
                   {favoriteMovies.length>99? "99+": favoriteMovies.length}
