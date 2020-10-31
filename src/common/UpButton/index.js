@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
 import { StyledFontAwesomeIcon } from "./styled";
 

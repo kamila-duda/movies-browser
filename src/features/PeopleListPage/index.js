@@ -55,57 +55,61 @@ const PeopleListPage = () => {
       <Container>
         <ConnectionErrorPage pageType="people" />
       </Container>
-    )
-  };
+    );
+  }
   if (results === 0 && query) {
     return (
       <Container>
         <SearchingErrorPage query={query} />
       </Container>
     );
-  };
+  }
 
   return (
     <Container>
-      <UpButton/>
-      {loading ? (query? (<Tiles title={`Search results for ${query}`} body={<Spinner />} />) : 
-      <Tiles title="Search results for popular people" body={<Spinner />} />
+      <UpButton />
+      {loading ? (
+        query ? (
+          <Tiles title={`Search results for ${query}`} body={<Spinner />} />
+        ) : (
+          <Tiles title="Search results for popular people" body={<Spinner />} />
+        )
       ) : (
-          <Tiles
-            peopleList={peopleList}
-            title={query ? `Search results for "${query}" (${results})` : title}
-            body={people.map((person) => (
-              <StyledLink
-                key={person.id}
-                to={toPersonDetails({ id: person.id })}
-                onClick={() => dispatch(fetchPersonDetails(person.id))}
-              >
-                <Tile
-                  peopleList={peopleList}
-                  key={person.name}
-                  poster={
-                    person.profile_path === null
-                      ? noneProfile
-                      : `${images}${posterSize}${person.profile_path}`
-                  }
-                  header={person.name}
-                />
-              </StyledLink>
-            ))}
-          />
-        )}
+        <Tiles
+          peopleList={peopleList}
+          title={query ? `Search results for "${query}" (${results})` : title}
+          body={people.map((person) => (
+            <StyledLink
+              key={person.id}
+              to={toPersonDetails({ id: person.id })}
+              onClick={() => dispatch(fetchPersonDetails(person.id))}
+            >
+              <Tile
+                peopleList={peopleList}
+                key={person.name}
+                poster={
+                  person.profile_path === null
+                    ? noneProfile
+                    : `${images}${posterSize}${person.profile_path}`
+                }
+                header={person.name}
+              />
+            </StyledLink>
+          ))}
+        />
+      )}
       {loading ? (
         ""
       ) : (
-          <Pagination
-            currentPage={currentPage}
-            lastPage={lastPage}
-            setCurrentPageFirst={setCurrentPageFirst}
-            decreaseCurrentPage={decreaseCurrentPage}
-            increaseCurrentPage={increaseCurrentPage}
-            setCurrentPageLast={setCurrentPageLast}
-          />
-        )}
+        <Pagination
+          currentPage={currentPage}
+          lastPage={lastPage}
+          setCurrentPageFirst={setCurrentPageFirst}
+          decreaseCurrentPage={decreaseCurrentPage}
+          increaseCurrentPage={increaseCurrentPage}
+          setCurrentPageLast={setCurrentPageLast}
+        />
+      )}
     </Container>
   );
 };

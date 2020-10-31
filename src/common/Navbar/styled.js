@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const StyledNavbar = styled.nav`
   width: 100%;
@@ -69,9 +70,11 @@ export const NavigationList = styled.ul`
 `;
 export const NavigationListItem = styled.li`
   flex-grow: 0;
-  margin: 10px;
+  margin: 15px 5px;
+  @media (max-width: ${({ theme }) => theme.media.extraMobileSmall}) {
+    margin: 15px 0px;
+  }
 `;
-
 export const StyledNavLink = styled(NavLink).attrs(() => ({
   activeClassName: "active",
 }))`
@@ -86,7 +89,22 @@ export const StyledNavLink = styled(NavLink).attrs(() => ({
     box-sizing: border-box;
     border-radius: 24px;
   }
+  ${({ favorite }) =>
+    favorite &&
+    css`
+      position: relative;
+      padding: 10px 20px;
+    `}
   @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     font-size: 12px;
   }
+`;
+export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+  color: ${({ theme }) => theme.color.red};
+`;
+export const StyledNumberContainer = styled.div`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 10px;
 `;
