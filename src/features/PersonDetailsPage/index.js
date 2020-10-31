@@ -101,7 +101,7 @@ const PersonDetailsPage = () => {
           peopleList={false}
           title="Movies - cast"
           body={personCast.map((movie) => (
-            <StyledDiv>
+            <StyledDiv key={movie.title}>
               <Tile
                 movieId={movie.id}
                 key={`${movie.id} as ${movie.character}`}

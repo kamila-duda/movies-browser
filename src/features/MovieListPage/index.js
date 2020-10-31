@@ -80,7 +80,7 @@ const MovieListPage = () => {
         <Tiles
           title={query ? `Search results for "${query}" (${results})` : title}
           body={movies.map((movie) => (
-            <StyledDiv>
+            <StyledDiv key={movie.title}>
               <Tile
                 movieId={movie.id}
                 key={movie.id}
