@@ -21,4 +21,7 @@ export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
   z-index: 10;
   color: ${({ theme }) => theme.color.red};
+  @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
+    font-size: 20px;
+  }
 `;

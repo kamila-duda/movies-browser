@@ -71,6 +71,9 @@ export const NavigationList = styled.ul`
 export const NavigationListItem = styled.li`
   flex-grow: 0;
   margin: 15px 5px;
+  @media (max-width: ${({ theme }) => theme.media.extraMobileSmall}) {
+    margin: 15px 0px;
+  }
 `;
 export const StyledNavLink = styled(NavLink).attrs(() => ({
   activeClassName: "active",
@@ -97,10 +100,11 @@ export const StyledNavLink = styled(NavLink).attrs(() => ({
   }
 `;
 export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
-  z-index: 10;
+  color: ${({ theme }) => theme.color.red};
 `;
 export const StyledNumberContainer = styled.div`
   position: absolute;
   right: 10px;
-  bottom: 5px;
+  bottom: 10px;
+  font-size: 10px;
 `;

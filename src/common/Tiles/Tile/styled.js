@@ -87,7 +87,7 @@ export const StyledTileHeader = styled.h2`
     people &&
     css`
       text-align: center;
-      word-break: break-word;
+      overflow-wrap: anywhere;
     `}
     @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     font-size: ${({ theme }) => theme.fontSize.normal};

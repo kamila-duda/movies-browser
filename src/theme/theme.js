@@ -28,6 +28,7 @@ export const theme = {
     black: "#000000",
   },
   media: {
+    extraMobileSmall: "340px",
     extraMobile: "575.98px",
     mobile: "767.98px",
     tablet: '991.98px',
