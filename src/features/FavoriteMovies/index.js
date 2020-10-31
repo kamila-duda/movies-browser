@@ -83,7 +83,7 @@ const FavoriteMovies = () => {
           body={
             query
               ? movies.map((movie) => (
-                  <StyledDiv>
+                  <StyledDiv key={movie.title}>
                     <Tile
                       movieId={movie.id}
                       key={movie.id}
