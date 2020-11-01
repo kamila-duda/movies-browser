@@ -61,6 +61,11 @@ export const MovieTitle = styled.h1`
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSize.xxxLarge};
 
+  @media (max-width: ${({ theme }) => theme.media.tablet}) {
+    margin-bottom: 10px;
+    font-size: 30px;
+  }
+
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     font-size: ${({ theme }) => theme.fontSize.xlarge};
     margin-bottom: 4px;
@@ -75,7 +80,7 @@ export const RatingHeader = styled.header`
 
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     flex-direction: row;
-    align-items: center;
+    height: 50px;
     font-size: ${({ theme }) => theme.fontSize.xxSmall};
     margin-bottom: 4px;
   }
@@ -83,8 +88,7 @@ export const RatingHeader = styled.header`
 
 export const StyledStarImage = styled.img`
   height: 40px;
-
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+  @media (max-width: ${({ theme }) => theme.media.tablet}) {
     height: 16px;
   }
 `;
@@ -94,7 +98,9 @@ export const Rating = styled.span`
   margin-right: 8px;
   font-weight: 500;
   font-size: ${({ theme }) => theme.fontSize.xxlarge};
-
+  @media (max-width: ${({ theme }) => theme.media.tablet}) {
+    font-size: ${({ theme }) => theme.fontSize.normal};
+  }
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     margin-left: 4px;
     margin-right: 4px;
