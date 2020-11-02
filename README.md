@@ -30,7 +30,7 @@ Created by egina-team as part of the YouCode course. Our team:
 
 
 How application works:
-![gif of how application works](https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/app.gif?raw=true)
+![gif of how application works](https://github.com/kamila-duda/movies-browser/blob/main/src/assets/app.gif?raw=true)
 
 Movie details page:
 ![movie details page](https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/png/screenMovieDetails.PNG?raw=true)
