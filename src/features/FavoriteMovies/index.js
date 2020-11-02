@@ -61,13 +61,6 @@ const FavoriteMovies = () => {
       </Container>
     );
   }
-  if (favoriteMovie.length===0) {
-    return (
-      <Container>
-        <NoFavoriteMoviePage/>
-      </Container>
-    );
-  }
   return (
     <Container>
       <UpButton />
@@ -81,74 +74,78 @@ const FavoriteMovies = () => {
         <Tiles
           title={query ? `Search results for "${query}" (${results})` : title}
           body={
-            query
-              ? movies.map((movie) => (
-                  <StyledDiv key={movie.title}>
-                    <Tile
-                      movieId={movie.id}
-                      key={movie.id}
-                      poster={
-                        movie.poster_path === null
-                          ? nonePoster
-                          : `${images}${posterSize}${movie.poster_path}`
-                      }
-                      header={movie.title}
-                      subheader={
-                        movie.release_date
-                          ? movie.release_date.substring(0, 4)
-                          : ""
-                      }
-                      tags={movie.genre_ids}
-                      voteAverage={movie.vote_average}
-                      review={movie.vote_count}
-                    />
-                    <StyledFontAwesomeIcon
-                      onClick={() => dispatch(toggleFavoriteMovies(movie))}
-                      icon={
-                        favoriteMovie.find((fav) => fav.id === movie.id)
-                          ? fasFaHeart
-                          : farFaHeart
-                      }
-                    />
-                  </StyledDiv>
-                ))
-              : favoriteMovie.map((movie) => (
-                  <StyledDiv>
-                    <Tile
-                      movieId={movie.id}
-                      key={movie.id}
-                      poster={
-                        movie.poster_path === null
-                          ? nonePoster
-                          : `${images}${posterSize}${movie.poster_path}`
-                      }
-                      header={movie.title}
-                      subheader={
-                        movie.release_date
-                          ? movie.release_date.substring(0, 4)
-                          : ""
-                      }
-                      tags={movie.genre_ids}
-                      voteAverage={movie.vote_average}
-                      review={movie.vote_count}
-                    />
-                    <StyledFontAwesomeIcon
-                      onClick={() => dispatch(toggleFavoriteMovies(movie))}
-                      icon={
-                        favoriteMovie.find((fav) => fav.id === movie.id)
-                          ? fasFaHeart
-                          : farFaHeart
-                      }
-                    />
-                  </StyledDiv>
-                ))
+            query ? (
+              movies.map((movie) => (
+                <StyledDiv key={movie.title}>
+                  <Tile
+                    movieId={movie.id}
+                    key={movie.id}
+                    poster={
+                      movie.poster_path === null
+                        ? nonePoster
+                        : `${images}${posterSize}${movie.poster_path}`
+                    }
+                    header={movie.title}
+                    subheader={
+                      movie.release_date
+                        ? movie.release_date.substring(0, 4)
+                        : ""
+                    }
+                    tags={movie.genre_ids}
+                    voteAverage={movie.vote_average}
+                    review={movie.vote_count}
+                  />
+                  <StyledFontAwesomeIcon
+                    onClick={() => dispatch(toggleFavoriteMovies(movie))}
+                    icon={
+                      favoriteMovie.find((fav) => fav.id === movie.id)
+                        ? fasFaHeart
+                        : farFaHeart
+                    }
+                  />
+                </StyledDiv>
+              ))
+            ) : favoriteMovie.length === 0 ? (
+              <NoFavoriteMoviePage />
+            ) : (
+              favoriteMovie.map((movie) => (
+                <StyledDiv>
+                  <Tile
+                    movieId={movie.id}
+                    key={movie.id}
+                    poster={
+                      movie.poster_path === null
+                        ? nonePoster
+                        : `${images}${posterSize}${movie.poster_path}`
+                    }
+                    header={movie.title}
+                    subheader={
+                      movie.release_date
+                        ? movie.release_date.substring(0, 4)
+                        : ""
+                    }
+                    tags={movie.genre_ids}
+                    voteAverage={movie.vote_average}
+                    review={movie.vote_count}
+                  />
+                  <StyledFontAwesomeIcon
+                    onClick={() => dispatch(toggleFavoriteMovies(movie))}
+                    icon={
+                      favoriteMovie.find((fav) => fav.id === movie.id)
+                        ? fasFaHeart
+                        : farFaHeart
+                    }
+                  />
+                </StyledDiv>
+              ))
+            )
           }
         />
       )}
 
       {loading ? (
         ""
-      ) : (query?
+      ) : query ? (
         <Pagination
           currentPage={currentPage}
           lastPage={lastPage}
@@ -157,7 +154,9 @@ const FavoriteMovies = () => {
           increaseCurrentPage={increaseCurrentPage}
           setCurrentPageLast={setCurrentPageLast}
         />
-      : "")}
+      ) : (
+        ""
+      )}
     </Container>
   );
 };
