@@ -6,6 +6,7 @@ export const Wrapper = styled.section`
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    grid-column: 1 / -1;
 `;
 
 export const HeaderTitle = styled.h1`
