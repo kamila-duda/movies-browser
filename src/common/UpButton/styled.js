@@ -7,6 +7,7 @@ export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   bottom: 40px;
   font-size: 80px;
   font-weight: 600;
+  z-index: 100;
   cursor: pointer;
   color: ${({ theme }) => theme.color.blue};
   animation: up 2s infinite linear;
