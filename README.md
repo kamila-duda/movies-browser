@@ -21,7 +21,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * [Available Scripts](#available-scripts)
 
 ## General info
-This is an application to view movies and actors. You can read biography and cast of your faviorites actor, description and cast of the movie, and also check which movies and actors are currently on the top.
+This is an application to view movies and actors. You can read biography and cast of your faviorites actor, description and cast of the movie, and also check which movies and actors are currently on the top. You can add a movie to your favorites and it will be saved in your browser (LocalStorage). 
+All data come from API: https://www.themoviedb.org/documentation/api
 
 Created by egina-team as part of the YouCode course. Our team: 
 * [@Kamila Duda](https://github.com/kamila-duda)
@@ -30,7 +31,7 @@ Created by egina-team as part of the YouCode course. Our team:
 
 
 How application works:
-![gif of how application works](https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/app.gif?raw=true)
+![gif of how application works](https://github.com/kamila-duda/movies-browser/blob/main/src/assets/app.gif?raw=true)
 
 Movie details page:
 ![movie details page](https://github.com/kamila-duda/movies-browser/blob/main/src/assets/images/png/screenMovieDetails.PNG?raw=true)
@@ -45,6 +46,7 @@ Movie details page:
 * react-router-dom
 * @reduxjs/toolkit
 * styled-components
+* localStorage
 
 ## Team
 
