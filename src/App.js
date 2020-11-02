@@ -7,6 +7,7 @@ import { toMoviesList, toPeopleList, toMovieDetails, toPersonDetails, toFavorite
 import MovieDetailsPage from "features/MovieDetailsPage";
 import PersonDetailsPage from "features/PersonDetailsPage";
 import FavoriteMovies from "features/FavoriteMovies";
+import Footer from "common/Footer";
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Redirect to={toMoviesList()} />
         </Route>
       </Switch>
+      <Footer/>
     </HashRouter>
   );
 };
