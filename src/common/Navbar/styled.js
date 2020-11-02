@@ -23,12 +23,9 @@ export const StyledNavWrapper = styled.div`
   flex-wrap: wrap;
 `;
 export const StyledNav = styled.div`
-  width: 40%;
+ 
   display: flex;
   align-items: center;
-  @media (max-width: ${({ theme }) => theme.media.tablet}) {
-    width: 60%;
-  }
   @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     width: 100%;
     justify-content: space-between;
