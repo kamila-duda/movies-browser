@@ -17,12 +17,15 @@ const Search = () => {
   const dispatch = useDispatch();
   const searchMovies = location.pathname.includes("movies");
 
-  const debouncedReplaceQuery = useCallback(_.debounce((target) => {
-    replaceQueryParameter({
-      key: key,
-      value: target.value.trim() !== "" ? target.value : "",
-    });
-  }, 300), []);
+  const debouncedReplaceQuery = (target) => {
+    setTimeout(() => {
+      replaceQueryParameter({
+        key: key,
+        value: target.value.trim() !== "" ? target.value : "",
+      });
+    }, 1000
+    )
+  }
 
   const onInputChange = ({ target }) => {
     setSearchQuery(target.value);
