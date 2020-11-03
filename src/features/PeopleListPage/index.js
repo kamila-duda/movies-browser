@@ -32,7 +32,7 @@ const PeopleListPage = () => {
   const query = useQueryParameter(key);
   const people = useSelector(selectPeople);
   const dispatch = useDispatch();
-  const images = "http://image.tmdb.org/t/p/";
+  const images = "https://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const title = "Popular people";
   const results = useSelector(selectResults);

@@ -39,7 +39,7 @@ const PersonDetailsPage = () => {
   const person = useSelector(selectPerson);
   const loading = useSelector(selectLoading);
   const isError = useSelector(selectIsError);
-  const images = "http://image.tmdb.org/t/p/";
+  const images = "https://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const personCast = useSelector(selectPersonCast);
   const personCrew = useSelector(selectPersonCrew);

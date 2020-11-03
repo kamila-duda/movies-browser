@@ -35,7 +35,7 @@ const MovieListPage = () => {
   const dispatch = useDispatch();
   const currentPage = useSelector(selectCurrentPage);
   const lastPage = useSelector(selectTotalPages);
-  const images = "http://image.tmdb.org/t/p/";
+  const images = "https://image.tmdb.org/t/p/";
   const movies = useSelector(selectMovies);
   const results = useSelector(selectResults);
   const posterSize = "w500";

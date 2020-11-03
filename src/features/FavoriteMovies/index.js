@@ -36,7 +36,7 @@ const FavoriteMovies = () => {
   const dispatch = useDispatch();
   const currentPage = useSelector(selectCurrentPage);
   const lastPage = useSelector(selectTotalPages);
-  const images = "http://image.tmdb.org/t/p/";
+  const images = "https://image.tmdb.org/t/p/";
   const favoriteMovie = useSelector(selectFavoriteMovie);
   const movies = useSelector(selectMovies);
   const results = useSelector(selectResults);
