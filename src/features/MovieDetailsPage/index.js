@@ -38,7 +38,7 @@ const MovieDetailsPage = () => {
   const cast = useSelector(selectCast);
   const crew = useSelector(selectCrew);
   const movieProduction = useSelector(selectMovieProduction);
-  
+
   useEffect(() => {
     if (id) {
       dispatch(fetchMovieDetails(id));
@@ -80,7 +80,7 @@ const MovieDetailsPage = () => {
           vote={movie.vote_count}
         />) : ""}
       <Container detailsPage={true}>
-        <UpButton/>
+        <UpButton />
         <Tile
           horizontal={"horizontal"}
           poster={movie.poster_path === null
@@ -99,7 +99,7 @@ const MovieDetailsPage = () => {
         />
 
         <Tiles
-      
+
           peopleList={true}
           title="Cast"
           body={cast.map((person) => (

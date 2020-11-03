@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import _ from "lodash";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
@@ -30,6 +31,7 @@ import UpButton from "common/UpButton";
 import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
 
+
 const MovieListPage = () => {
   const query = useQueryParameter(key);
   const dispatch = useDispatch();
@@ -43,6 +45,8 @@ const MovieListPage = () => {
   const loading = useSelector(selectLoading);
   const isError = useSelector(selectIsError);
   const page = useQueryParameter("page");
+
+  const debouncedSearchTitle = _.debounce((() => `Search results for ${query}`), 300);
 
   useEffect(() => {
     dispatch(fetchPopularMovies({ currentPage: page, query }));
@@ -70,12 +74,8 @@ const MovieListPage = () => {
   return (
     <Container>
       <UpButton />
-      {loading ? (
-        query ? (
-          <Tiles title={`Search results for ${query}`} body={<Spinner />} />
-        ) : (
-          <Tiles title="Search results for popular movies" body={<Spinner />} />
-        )
+      {loading ? (query ? (<Tiles title={debouncedSearchTitle()} body={<Spinner />} />) :
+        <Tiles title="Search results for popular movies" body={<Spinner />} />
       ) : (
         <Tiles
           title={query ? `Search results for "${query}" (${results})` : title}

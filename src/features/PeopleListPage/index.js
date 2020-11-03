@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import _ from "lodash";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
@@ -42,6 +43,7 @@ const PeopleListPage = () => {
   const lastPage = useSelector(selectTotalPages);
   const peopleList = true;
   const page = useQueryParameter("page");
+  const debouncedSearchTitle = _.debounce((() => `Search results for ${query}`), 300);
 
   useEffect(() => {
     dispatch(fetchPopularPeople({ currentPage: page, query }));
@@ -68,12 +70,8 @@ const PeopleListPage = () => {
   return (
     <Container>
       <UpButton />
-      {loading ? (
-        query ? (
-          <Tiles title={`Search results for ${query}`} body={<Spinner />} />
-        ) : (
-          <Tiles title="Search results for popular people" body={<Spinner />} />
-        )
+      {loading ? (query ? (<Tiles title={debouncedSearchTitle()} body={<Spinner />} />) :
+        <Tiles title="Search results for popular people" body={<Spinner />} />
       ) : (
         <Tiles
           peopleList={peopleList}
