@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledTile = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -85,7 +87,7 @@ export const StyledTileHeader = styled.h2`
     people &&
     css`
       text-align: center;
-      word-break: break-word;
+      overflow-wrap: anywhere;
     `}
     @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     font-size: ${({ theme }) => theme.fontSize.normal};
@@ -167,7 +169,7 @@ export const StyledMobileDescription = styled.p`
 export const StyledMoreButton = styled.p`
   font-weight: 500;
   cursor: pointer;
-  color:${({ theme }) => theme.color.scienceBlue};
+  color: ${({ theme }) => theme.color.scienceBlue};
   @media (max-width: ${({ theme }) => theme.media.extraMobile}) {
     display: none;
   }
@@ -175,5 +177,12 @@ export const StyledMoreButton = styled.p`
 export const StyledMoreButtonMobile = styled.p`
   font-weight: 500;
   cursor: pointer;
-  color:${({ theme }) => theme.color.scienceBlue};
+  color: ${({ theme }) => theme.color.scienceBlue};
+`;
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  position: relative;
+  color: ${({ theme }) => theme.color.black};
+  width: 100%;
 `;

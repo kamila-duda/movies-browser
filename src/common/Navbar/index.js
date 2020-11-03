@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { toMoviesList, toPeopleList } from "routes";
+import { useDispatch, useSelector } from "react-redux";
+import { toFavoriteMovies, toMoviesList, toPeopleList } from "routes";
 import {
   NavigationList,
   NavigationListItem,
@@ -10,15 +10,18 @@ import {
   StyledNavWrapper,
   StyledNav,
   StyledTitle,
+  StyledFontAwesomeIcon,
+  StyledNumberContainer,
 } from "./styled";
 import camera from "assets/images/svg/Video.svg";
 import Search from "features/Search";
-import { fetchPopularMovies } from "features/moviesSlice";
+import { fetchPopularMovies, selectFavoriteMovie } from "features/moviesSlice";
 import { fetchPopularPeople } from "features/peopleSlice";
-
+import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const favoriteMovies = useSelector(selectFavoriteMovie);
 
   return (
     <StyledNavbar>
@@ -41,6 +44,14 @@ const Navigation = () => {
                 onClick={() => dispatch(fetchPopularPeople())}
               >
                 People
+              </StyledNavLink>
+            </NavigationListItem>
+            <NavigationListItem>
+              <StyledNavLink favorite="favorite" to={toFavoriteMovies()}>
+                <StyledFontAwesomeIcon icon={fasFaHeart} />
+                <StyledNumberContainer>
+                  {favoriteMovies.length>99? "99+": favoriteMovies.length}
+                </StyledNumberContainer>
               </StyledNavLink>
             </NavigationListItem>
           </NavigationList>

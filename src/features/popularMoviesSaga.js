@@ -5,6 +5,7 @@ import {
   delay,
   takeLatest,
   debounce,
+  select,
 } from "redux-saga/effects";
 import {
   getPopularMovies,
@@ -17,9 +18,12 @@ import {
   fetchGenres,
   fetchMovieDetails,
   fetchMovieDetailsSuccess,
-  setError
+  setError,
+  toggleFavoriteMovies,
+  selectFavoriteMovie
 } from "./moviesSlice";
 import store from "store";
+import { saveMovieInLocalStorage } from "./moviesLocalStorage";
 
 function* fetchPopularMoviesHandler({ payload = 1 }) {
   try {
@@ -47,8 +51,13 @@ function* fetchMovieDetailsHandler() {
     yield put(setError());
   }
 }
+function * saveMovieInLocalStorageHandler() {
+  const favoriteMovie = yield select(selectFavoriteMovie);
+  yield call(saveMovieInLocalStorage, favoriteMovie);
+}
 export function* watchFetchPopularMovies() {
   yield debounce(500, fetchPopularMovies.type, fetchPopularMoviesHandler);
   yield takeEvery(fetchPopularMovies.type, fetchGenresHandler);
   yield takeLatest(fetchMovieDetails.type, fetchMovieDetailsHandler);
+  yield takeEvery(toggleFavoriteMovies.type, saveMovieInLocalStorageHandler);
 }

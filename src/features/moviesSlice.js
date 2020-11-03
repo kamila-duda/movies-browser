@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { genres } from "./../genre";
+import { getMoviesFromLocalStorage } from "./moviesLocalStorage";
 export const moviesSlice = createSlice({
   name: "movies",
   initialState: {
     movies: [],
     movie: {},
     movieId: null,
+    favoriteMovies: getMoviesFromLocalStorage(),
     movieProduction: "",
     genres: genres,
     cast: [],
@@ -24,7 +26,7 @@ export const moviesSlice = createSlice({
       state.movies = movies;
       state.loading = false;
       state.isError = false;
-      state.results = movies.total_results
+      state.results = movies.total_results;
     },
     fetchGenres: (state, { payload: genres }) => {
       state.genres = genres.genres;
@@ -60,6 +62,16 @@ export const moviesSlice = createSlice({
       state.isError = true;
       state.loading = false;
     },
+    toggleFavoriteMovies: (state, { payload: movie }) => {
+      const index = state.favoriteMovies.findIndex(
+        (fav) => fav.id === movie.id
+      );
+      if (index > -1) {
+        state.favoriteMovies.splice(index, 1);
+      } else {
+        state.favoriteMovies.push(movie);
+      }
+    },
   },
 });
 
@@ -75,6 +87,7 @@ export const {
   fetchMovieDetails,
   fetchMovieDetailsSuccess,
   setError,
+  toggleFavoriteMovies,
 } = moviesSlice.actions;
 
 const selectMoviesState = (state) => state.movies;
@@ -93,5 +106,7 @@ export const selectCast = (state) => selectMoviesState(state).cast;
 export const selectCrew = (state) => selectMoviesState(state).crew;
 export const selectCurrentPage = (state) =>
   selectMoviesState(state).currentPage;
+export const selectFavoriteMovie = (state) =>
+  selectMoviesState(state).favoriteMovies;
 
 export default moviesSlice.reducer;

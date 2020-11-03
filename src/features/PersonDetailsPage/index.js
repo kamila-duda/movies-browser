@@ -14,14 +14,24 @@ import {
   selectPersonCrew,
   selectIsError,
 } from "features/peopleSlice";
-import { fetchMovieDetails } from "features/moviesSlice";
-import { StyledLink } from "features/MovieListPage/styled";
+import {
+  fetchMovieDetails,
+  selectFavoriteMovie,
+  toggleFavoriteMovies,
+} from "features/moviesSlice";
+import {
+  StyledDiv,
+  StyledFontAwesomeIcon,
+  StyledLink,
+} from "features/MovieListPage/styled";
 import { toMovieDetails } from "routes";
 import ConnectionErrorPage from "common/ConnectionErrorPage";
 import Spinner from "features/Spinner";
 import { useQueryParameter } from "hooks/useQueryParameter";
 import { key } from "features/Search/searchQueryParameter";
 import UpButton from "common/UpButton";
+import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
 
 const PersonDetailsPage = () => {
   const { id } = useParams();
@@ -29,7 +39,7 @@ const PersonDetailsPage = () => {
   const person = useSelector(selectPerson);
   const loading = useSelector(selectLoading);
   const isError = useSelector(selectIsError);
-  const images = "http://image.tmdb.org/t/p/";
+  const images = "https://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const personCast = useSelector(selectPersonCast);
   const personCrew = useSelector(selectPersonCrew);
@@ -51,6 +61,8 @@ const PersonDetailsPage = () => {
     }
   }, [query, history, searchParams]);
 
+  const favoriteMovie = useSelector(selectFavoriteMovie);
+
   if (isError) {
     return (
       <Container>
@@ -68,7 +80,7 @@ const PersonDetailsPage = () => {
   return (
     <>
       <Container detailsPage={true} peopleDetails={true}>
-      <UpButton/>
+        <UpButton />
         <Tile
           horizontal={"horizontal"}
           poster={
@@ -89,12 +101,9 @@ const PersonDetailsPage = () => {
           peopleList={false}
           title="Movies - cast"
           body={personCast.map((movie) => (
-            <StyledLink
-              key={`${movie.id} as ${movie.character}`}
-              to={toMovieDetails({ id: movie.id })}
-              onClick={() => dispatch(fetchMovieDetails(movie.id))}
-            >
+            <StyledDiv key={movie.title}>
               <Tile
+                movieId={movie.id}
                 key={`${movie.id} as ${movie.character}`}
                 peopleList={false}
                 poster={
@@ -103,15 +112,24 @@ const PersonDetailsPage = () => {
                     : `${images}${posterSize}${movie.poster_path}`
                 }
                 header={movie.title}
-                subheader={`${movie.character} (${movie.release_date
-                  ? movie.release_date.substring(0, 4)
-                  : "year not found"
-                  })`}
+                subheader={`${movie.character} (${
+                  movie.release_date
+                    ? movie.release_date.substring(0, 4)
+                    : "year not found"
+                })`}
                 tags={movie.genre_ids}
                 voteAverage={movie.vote_average}
                 review={movie.vote_count}
               />
-            </StyledLink>
+              <StyledFontAwesomeIcon
+                onClick={() => dispatch(toggleFavoriteMovies(movie))}
+                icon={
+                  favoriteMovie.find((fav) => fav.id === movie.id)
+                    ? fasFaHeart
+                    : farFaHeart
+                }
+              />
+            </StyledDiv>
           ))}
         />
         {personCrew.length > 0 ? (
@@ -139,8 +157,8 @@ const PersonDetailsPage = () => {
             ))}
           />
         ) : (
-            ""
-          )}
+          ""
+        )}
       </Container>
     </>
   );

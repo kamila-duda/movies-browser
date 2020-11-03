@@ -1,9 +1,11 @@
 import React from "react";
 import spinner from "assets/images/svg/spinner.svg";
-import { StyledSpinner } from "./styled";
+import { StyledWrapper, StyledSpinner } from "./styled";
 
 const Spinner = () => {
-  return <StyledSpinner src={spinner} alt="loading" />;
+  return <StyledWrapper>
+    <StyledSpinner src={spinner} alt="loading" />
+  </StyledWrapper>;
 };
 
 export default Spinner;

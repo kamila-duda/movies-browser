@@ -32,7 +32,7 @@ const MovieDetailsPage = () => {
   const movie = useSelector(selectMovie);
   const loading = useSelector(selectLoading);
   const isError = useSelector(selectIsError);
-  const images = "http://image.tmdb.org/t/p/";
+  const images = "https://image.tmdb.org/t/p/";
   const posterSize = "w500";
   const backdropSize = "original";
   const cast = useSelector(selectCast);
