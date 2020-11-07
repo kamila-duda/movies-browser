@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import _ from "lodash";
@@ -16,6 +16,8 @@ const Search = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const searchMovies = location.pathname.includes("movies");
+
+  useEffect(() => { setSearchQuery("") }, [searchMovies]);
 
   const debouncedReplaceQuery = (target) => {
     setTimeout(() => {
