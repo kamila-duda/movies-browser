@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import _ from "lodash";
+import { debounce } from "lodash";
 import Container from "common/Container";
 import Tiles from "common/Tiles";
 import Tile from "common/Tiles/Tile";
@@ -46,7 +46,7 @@ const MovieListPage = () => {
   const isError = useSelector(selectIsError);
   const page = useQueryParameter("page");
 
-  const debouncedSearchTitle = _.debounce((() => `Search results for ${query}`), 300);
+  const debouncedSearchTitle = debounce((() => `Search results for ${query}`), 300);
 
   useEffect(() => {
     dispatch(fetchPopularMovies({ currentPage: page, query }));
@@ -77,51 +77,51 @@ const MovieListPage = () => {
       {loading ? (query ? (<Tiles title={debouncedSearchTitle()} body={<Spinner />} />) :
         <Tiles title="Search results for popular movies" body={<Spinner />} />
       ) : (
-        <Tiles
-          title={query ? `Search results for "${query}" (${results})` : title}
-          body={movies.map((movie) => (
-            <StyledDiv key={movie.title}>
-              <Tile
-                movieId={movie.id}
-                key={movie.id}
-                poster={
-                  movie.poster_path === null
-                    ? nonePoster
-                    : `${images}${posterSize}${movie.poster_path}`
-                }
-                header={movie.title}
-                subheader={
-                  movie.release_date ? movie.release_date.substring(0, 4) : ""
-                }
-                tags={movie.genre_ids}
-                voteAverage={movie.vote_average}
-                review={movie.vote_count}
-              />
-              <StyledFontAwesomeIcon
-                onClick={() => dispatch(toggleFavoriteMovies(movie))}
-                icon={
-                  favoriteMovie.find((fav) => fav.id === movie.id)
-                    ? fasFaHeart
-                    : farFaHeart
-                }
-              />
-            </StyledDiv>
-          ))}
-        />
-      )}
+          <Tiles
+            title={query ? `Search results for "${query}" (${results})` : title}
+            body={movies.map((movie) => (
+              <StyledDiv key={movie.title}>
+                <Tile
+                  movieId={movie.id}
+                  key={movie.id}
+                  poster={
+                    movie.poster_path === null
+                      ? nonePoster
+                      : `${images}${posterSize}${movie.poster_path}`
+                  }
+                  header={movie.title}
+                  subheader={
+                    movie.release_date ? movie.release_date.substring(0, 4) : ""
+                  }
+                  tags={movie.genre_ids}
+                  voteAverage={movie.vote_average}
+                  review={movie.vote_count}
+                />
+                <StyledFontAwesomeIcon
+                  onClick={() => dispatch(toggleFavoriteMovies(movie))}
+                  icon={
+                    favoriteMovie.find((fav) => fav.id === movie.id)
+                      ? fasFaHeart
+                      : farFaHeart
+                  }
+                />
+              </StyledDiv>
+            ))}
+          />
+        )}
 
       {loading ? (
         ""
       ) : (
-        <Pagination
-          currentPage={currentPage}
-          lastPage={lastPage}
-          setCurrentPageFirst={setCurrentPageFirst}
-          decreaseCurrentPage={decreaseCurrentPage}
-          increaseCurrentPage={increaseCurrentPage}
-          setCurrentPageLast={setCurrentPageLast}
-        />
-      )}
+          <Pagination
+            currentPage={currentPage}
+            lastPage={lastPage}
+            setCurrentPageFirst={setCurrentPageFirst}
+            decreaseCurrentPage={decreaseCurrentPage}
+            increaseCurrentPage={increaseCurrentPage}
+            setCurrentPageLast={setCurrentPageLast}
+          />
+        )}
     </Container>
   );
 };

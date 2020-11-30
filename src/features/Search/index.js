@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import _ from "lodash";
+import { debounce } from "lodash";
 import search from "assets/images/svg/Search.svg";
 import { key } from "./searchQueryParameter";
 import { useQueryParameter, useReplaceQueryParameter } from "hooks/useQueryParameter";
@@ -19,15 +19,10 @@ const Search = () => {
 
   useEffect(() => { setSearchQuery("") }, [searchMovies]);
 
-  const debouncedReplaceQuery = (target) => {
-    setTimeout(() => {
-      replaceQueryParameter({
-        key: key,
-        value: target.value.trim() !== "" ? target.value : "",
-      });
-    }, 1000
-    )
-  }
+  const debouncedReplaceQuery = debounce((target) => replaceQueryParameter({
+    key: key,
+    value: target.value.trim() !== "" ? target.value : "",
+  }), 500)
 
   const onInputChange = ({ target }) => {
     setSearchQuery(target.value);
