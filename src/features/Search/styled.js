@@ -19,6 +19,7 @@ export const StyledIcon = styled.img`
   margin: 0 15px;
 `;
 export const StyledInput = styled.input`
+  outline:none;
   background-color: none;
   border: none;
   font-size: 16px;
