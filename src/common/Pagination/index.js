@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useQueryParameter, useReplaceQueryParameter } from "hooks/useQueryParameter";
@@ -15,12 +14,7 @@ import {
 const Pagination = ({
   currentPage,
   lastPage,
-  setCurrentPageFirst,
-  decreaseCurrentPage,
-  increaseCurrentPage,
-  setCurrentPageLast,
 }) => {
-  const dispatch = useDispatch();
   const replaceQueryParameter = useReplaceQueryParameter();
   const page = useQueryParameter("page");
 
@@ -36,7 +30,6 @@ const Pagination = ({
       <StyledButton
         disabled={+page === 1 ? "disabled" : ""}
         onClick={() => {
-          dispatch(setCurrentPageFirst())
           onPageChange(1);
         }}
       >
@@ -54,8 +47,7 @@ const Pagination = ({
       <StyledButton
         disabled={+page === 1 ? "disabled" : ""}
         onClick={() => {
-          dispatch(decreaseCurrentPage())
-          onPageChange(currentPage - 1);
+          onPageChange(+page - 1);
         }}
       >
         <StyledFontAwesomeIcon
@@ -66,15 +58,14 @@ const Pagination = ({
       </StyledButton>
       <PageCounter>
         Page
-                <Quantity>{page === null ? currentPage : page}</Quantity>
+                <Quantity>{page === null ? 1 : page}</Quantity>
                 of
                 <Quantity>{lastPage}</Quantity>
       </PageCounter>
       <StyledButton
         disabled={+page === lastPage ? "disabled" : ""}
         onClick={() => {
-          dispatch(increaseCurrentPage())
-          onPageChange(currentPage + 1);
+          onPageChange(page === null ? 1 + 1 : +page + 1);
         }}
       >
         <StyledFontAwesomeIcon
@@ -87,7 +78,6 @@ const Pagination = ({
         last
         disabled={+page === lastPage ? "disabled" : ""}
         onClick={() => {
-          dispatch(setCurrentPageLast(lastPage))
           onPageChange(lastPage);
         }}
 
