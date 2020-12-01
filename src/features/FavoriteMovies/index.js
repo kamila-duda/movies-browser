@@ -6,15 +6,10 @@ import Tile from "common/Tiles/Tile";
 import Pagination from "common/Pagination";
 import {
   fetchPopularMovies,
-  selectCurrentPage,
   selectTotalPages,
   selectLoading,
   selectIsError,
   selectFavoriteMovie,
-  increaseCurrentPage,
-  decreaseCurrentPage,
-  setCurrentPageFirst,
-  setCurrentPageLast,
   selectResults,
   toggleFavoriteMovies,
   selectMovies,
@@ -34,7 +29,6 @@ import NoFavoriteMoviePage from "common/NoFavoriteMoviePage";
 const FavoriteMovies = () => {
   const query = useQueryParameter(key);
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage);
   const lastPage = useSelector(selectTotalPages);
   const images = "https://image.tmdb.org/t/p/";
   const favoriteMovie = useSelector(selectFavoriteMovie);
@@ -44,9 +38,11 @@ const FavoriteMovies = () => {
   const title = "Your favorite movies";
   const loading = useSelector(selectLoading);
   const isError = useSelector(selectIsError);
+  const page = useQueryParameter("page");
+
   useEffect(() => {
-    dispatch(fetchPopularMovies({ currentPage, query }));
-  }, [dispatch, currentPage, query]);
+    dispatch(fetchPopularMovies({ page, query }));
+  }, [dispatch, page, query]);
   if (isError) {
     return (
       <Container>
@@ -147,12 +143,8 @@ const FavoriteMovies = () => {
         ""
       ) : query ? (
         <Pagination
-          currentPage={currentPage}
+          currentPage={page}
           lastPage={lastPage}
-          setCurrentPageFirst={setCurrentPageFirst}
-          decreaseCurrentPage={decreaseCurrentPage}
-          increaseCurrentPage={increaseCurrentPage}
-          setCurrentPageLast={setCurrentPageLast}
         />
       ) : (
         ""

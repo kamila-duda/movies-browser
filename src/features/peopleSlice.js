@@ -6,7 +6,6 @@ export const peopleSlice = createSlice({
     people: [],
     loading: true,
     isError: false,
-    currentPage: 1,
     person: [],
     personId: null,
     personCast: [],
@@ -22,18 +21,6 @@ export const peopleSlice = createSlice({
       state.loading = false;
       state.isError = false;
       state.results = people.total_results;
-    },
-    increaseCurrentPage: (state) => {
-      state.currentPage = ++state.currentPage;
-    },
-    decreaseCurrentPage: (state) => {
-      state.currentPage = --state.currentPage;
-    },
-    setCurrentPageFirst: (state) => {
-      state.currentPage = 1;
-    },
-    setCurrentPageLast: (state, { payload: lastPage }) => {
-      state.currentPage = lastPage;
     },
     fetchPersonDetails: (state, { payload: personId }) => {
       state.personId = personId;
@@ -60,10 +47,6 @@ export const peopleSlice = createSlice({
 export const {
   fetchPopularPeople,
   fetchPopularPeopleSuccess,
-  increaseCurrentPage,
-  decreaseCurrentPage,
-  setCurrentPageFirst,
-  setCurrentPageLast,
   fetchPersonDetails,
   fetchPersonDetailsSuccess,
   setCurrentPage,
@@ -77,8 +60,6 @@ export const selectLoading = (state) => selectPeopleState(state).loading;
 export const selectIsError = (state) => selectPeopleState(state).isError;
 export const selectTotalPages = (state) =>
   selectPeopleState(state).people.total_pages;
-export const selectCurrentPage = (state) =>
-  selectPeopleState(state).currentPage;
 export const selectPerson = (state) => selectPeopleState(state).person;
 export const selectPersonCast = (state) => selectPeopleState(state).personCast;
 export const selectPersonCrew = (state) => selectPeopleState(state).personCrew;

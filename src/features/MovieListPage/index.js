@@ -7,15 +7,10 @@ import Tile from "common/Tiles/Tile";
 import Pagination from "common/Pagination";
 import {
   fetchPopularMovies,
-  selectCurrentPage,
   selectTotalPages,
   selectLoading,
   selectIsError,
   selectMovies,
-  increaseCurrentPage,
-  decreaseCurrentPage,
-  setCurrentPageFirst,
-  setCurrentPageLast,
   selectResults,
   toggleFavoriteMovies,
   selectFavoriteMovie,
@@ -35,7 +30,6 @@ import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
 const MovieListPage = () => {
   const query = useQueryParameter(key);
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage);
   const lastPage = useSelector(selectTotalPages);
   const images = "https://image.tmdb.org/t/p/";
   const movies = useSelector(selectMovies);
@@ -51,9 +45,9 @@ const MovieListPage = () => {
   useEffect(() => {
     dispatch(fetchPopularMovies({ currentPage: page, query }));
     if (page === null) {
-      dispatch(setCurrentPageFirst());
+      dispatch(fetchPopularMovies({ currentPage: 1, query }));
     }
-  }, [dispatch, currentPage, page, query]);
+  }, [dispatch, page, query]);
 
   const favoriteMovie = useSelector(selectFavoriteMovie);
 
@@ -114,12 +108,8 @@ const MovieListPage = () => {
         ""
       ) : (
           <Pagination
-            currentPage={currentPage}
+            currentPage={page}
             lastPage={lastPage}
-            setCurrentPageFirst={setCurrentPageFirst}
-            decreaseCurrentPage={decreaseCurrentPage}
-            increaseCurrentPage={increaseCurrentPage}
-            setCurrentPageLast={setCurrentPageLast}
           />
         )}
     </Container>

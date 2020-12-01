@@ -8,13 +8,8 @@ import Pagination from "common/Pagination";
 import Spinner from "features/Spinner";
 import {
   fetchPopularPeople,
-  selectCurrentPage,
   selectPeople,
   selectTotalPages,
-  increaseCurrentPage,
-  decreaseCurrentPage,
-  setCurrentPageFirst,
-  setCurrentPageLast,
   fetchPersonDetails,
   selectIsError,
 } from "features/peopleSlice";
@@ -39,7 +34,6 @@ const PeopleListPage = () => {
   const results = useSelector(selectResults);
   const loading = useSelector(selectLoading);
   const isError = useSelector(selectIsError);
-  const currentPage = useSelector(selectCurrentPage);
   const lastPage = useSelector(selectTotalPages);
   const peopleList = true;
   const page = useQueryParameter("page");
@@ -48,9 +42,9 @@ const PeopleListPage = () => {
   useEffect(() => {
     dispatch(fetchPopularPeople({ currentPage: page, query }));
     if (page === null) {
-      dispatch(setCurrentPageFirst());
+      dispatch(fetchPopularPeople({ currentPage: 1, query }));
     }
-  }, [dispatch, currentPage, query, page]);
+  }, [dispatch, query, page]);
 
   if (isError) {
     return (
@@ -100,12 +94,8 @@ const PeopleListPage = () => {
         ""
       ) : (
           <Pagination
-            currentPage={currentPage}
+            currentPage={page}
             lastPage={lastPage}
-            setCurrentPageFirst={setCurrentPageFirst}
-            decreaseCurrentPage={decreaseCurrentPage}
-            increaseCurrentPage={increaseCurrentPage}
-            setCurrentPageLast={setCurrentPageLast}
           />
         )}
     </Container>

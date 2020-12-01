@@ -14,7 +14,6 @@ export const moviesSlice = createSlice({
     crew: [],
     loading: true,
     isError: false,
-    currentPage: 1,
   },
   reducers: {
     fetchPopularMovies: (state) => {
@@ -30,18 +29,6 @@ export const moviesSlice = createSlice({
     },
     fetchGenres: (state, { payload: genres }) => {
       state.genres = genres.genres;
-    },
-    increaseCurrentPage: (state) => {
-      state.currentPage = ++state.currentPage;
-    },
-    decreaseCurrentPage: (state) => {
-      state.currentPage = --state.currentPage;
-    },
-    setCurrentPageFirst: (state) => {
-      state.currentPage = 1;
-    },
-    setCurrentPageLast: (state, { payload: lastPage }) => {
-      state.currentPage = lastPage;
     },
     fetchMovieDetails: (state, { payload: movieId }) => {
       state.movieId = movieId;
@@ -104,8 +91,6 @@ export const selectMovieProduction = (state) =>
   selectMoviesState(state).movieProduction;
 export const selectCast = (state) => selectMoviesState(state).cast;
 export const selectCrew = (state) => selectMoviesState(state).crew;
-export const selectCurrentPage = (state) =>
-  selectMoviesState(state).currentPage;
 export const selectFavoriteMovie = (state) =>
   selectMoviesState(state).favoriteMovies;
 
