@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { genres } from "./../genre";
 import { getMoviesFromLocalStorage } from "./moviesLocalStorage";
+
 export const moviesSlice = createSlice({
   name: "movies",
   initialState: {

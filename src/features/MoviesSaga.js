@@ -20,7 +20,7 @@ import {
   fetchMovieDetailsSuccess,
   setError,
   toggleFavoriteMovies,
-  selectFavoriteMovie
+  selectFavoriteMovie,
 } from "./moviesSlice";
 import store from "store";
 import { saveMovieInLocalStorage } from "./moviesLocalStorage";
@@ -51,7 +51,7 @@ function* fetchMovieDetailsHandler() {
     yield put(setError());
   }
 }
-function * saveMovieInLocalStorageHandler() {
+function* saveMovieInLocalStorageHandler() {
   const favoriteMovie = yield select(selectFavoriteMovie);
   yield call(saveMovieInLocalStorage, favoriteMovie);
 }

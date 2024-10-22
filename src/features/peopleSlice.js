@@ -30,13 +30,14 @@ export const peopleSlice = createSlice({
       state.loading = false;
       state.person = details;
       state.personCast = Array.from(details.movie_credits.cast).sort(
-        (a, b) => (b.release_date? Date.parse(b.release_date) : 0) - (a.release_date? Date.parse(a.release_date) : 0)
+        (a, b) =>
+          (b.release_date ? Date.parse(b.release_date) : 0) -
+          (a.release_date ? Date.parse(a.release_date) : 0)
       );
       if (details.movie_credits.crew.length > 0) {
         state.personCrew = details.movie_credits.crew;
       }
     },
-
     setError: (state) => {
       state.isError = true;
       state.loading = false;

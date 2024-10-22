@@ -11,6 +11,7 @@ export const getConfigurationData = async () => {
     }
 
     const configurationFile = await response.json();
+    console.log("test", configurationFile);
     return configurationFile;
   } catch (error) {
     console.error("ups");
@@ -31,6 +32,7 @@ export const getPopularMovies = async ({ currentPage, query }) => {
     }
 
     const movies = await response.json();
+    console.log("mowie", movies);
     return movies;
   } catch (error) {
     console.error("ups");
@@ -47,6 +49,7 @@ export const getGenres = async () => {
     }
 
     const genres = await response.json();
+    console.log("genres", genres);
     return genres;
   } catch (error) {
     console.error("ups");
@@ -66,6 +69,7 @@ export const getPopularPeople = async ({ currentPage, query }) => {
     }
 
     const people = await response.json();
+
     return people;
   } catch (error) {
     console.error("ups");
@@ -80,6 +84,7 @@ export const getMovieDetails = async (movieId) => {
       throw new Error(response.statusText);
     }
     const details = await response.json();
+    console.log("details", details);
     return details;
   } catch (error) {
     console.error("ups");
